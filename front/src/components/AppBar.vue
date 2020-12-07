@@ -12,13 +12,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn>
+      <div class="d-flex align-center">
+        <v-btn>
           <span class="btn">Se connecter</span>
-      </v-btn>
+        </v-btn>
 
-      <v-btn>
+        <v-btn>
           <span class="btn">Inscription</span>
-      </v-btn>
+        </v-btn>
+      </div>
     </v-app-bar>
 </template>
 
