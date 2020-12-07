@@ -42,6 +42,9 @@ public class Account {
     public Account(){
     }
 
+    public Account(String email){
+        this.email = email;
+    }
     public long getId() {
         return id;
     }

@@ -1,9 +1,6 @@
 package projet.m2.back.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Square {
@@ -16,7 +13,8 @@ public class Square {
     private String streetName;
     private String color;
     private int cost;
-
+    @ManyToOne
+    private Board board;
 
 
     public Square(long id, String streetName, String color, int cost) {

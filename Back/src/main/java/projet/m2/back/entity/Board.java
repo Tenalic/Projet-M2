@@ -14,7 +14,7 @@ public class Board {
 
     private int nbSquare;
 
-    @OneToMany
+    @OneToMany(mappedBy = "board")
     private Collection<Square> board;
 
     public Board(long id, int nbSquare, Collection<Square> board) {
