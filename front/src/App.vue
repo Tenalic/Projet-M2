@@ -1,3 +1,4 @@
+
 <template>
   <v-app>
     <v-app-bar
@@ -40,6 +41,9 @@
     <v-main>
       <HelloWorld/>
     </v-main>
+
+    <Footer />
+
   </v-app>
 </template>
 
@@ -50,7 +54,8 @@ export default {
   name: 'App',
 
   components: {
-    HelloWorld
+    HelloWorld,
+    Footer: () => import('@/components/Footer')
   },
 
   data: () => ({
@@ -58,3 +63,9 @@ export default {
   })
 }
 </script>
+
+<style>
+* {
+  text-transform: none;
+}
+</style>
