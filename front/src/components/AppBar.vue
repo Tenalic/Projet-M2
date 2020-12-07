@@ -5,7 +5,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <v-btn color="primary" to="/" elevation = 0>
+        <v-btn color="primary" elevation = 0 to="/" >
         <span class="btn"> Accueil</span>
         </v-btn>
       </div>
@@ -13,7 +13,7 @@
       <v-spacer></v-spacer>
 
       <div class="d-flex align-center">
-        <v-btn color = "primary" elevation = 0>
+        <v-btn color = "primary" elevation = 0 to="/about">
           <span class="btn">Se connecter</span>
         </v-btn>
 
