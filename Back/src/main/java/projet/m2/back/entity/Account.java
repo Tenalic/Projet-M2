@@ -1,9 +1,16 @@
 package projet.m2.back.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Collection;
 
+@Entity
 public class Account {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String lastname;
     private String firstname;
@@ -28,6 +35,9 @@ public class Account {
         this.credit = credit;
         this.board = board;
         this.gift = gift;
+    }
+
+    public Account(){
     }
 
     public long getId() {
