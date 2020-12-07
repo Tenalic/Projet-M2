@@ -1,6 +1,7 @@
 package projet.m2.back.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -11,14 +12,13 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
     private int nbSquare;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany
+    @JoinColumn(name = "boardId", referencedColumnName = "id")
     private Collection<Square> board;
 
-    public Board(long id, int nbSquare, Collection<Square> board) {
-        this.id = id;
+    public Board(int nbSquare, Collection<Square> board) {
         this.nbSquare = nbSquare;
         this.board = board;
     }

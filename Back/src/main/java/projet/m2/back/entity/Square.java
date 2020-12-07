@@ -8,13 +8,12 @@ public class Square {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    private int index;
+    private int squareIndex;
     private String streetName;
     private String color;
     private int cost;
-    @ManyToOne
-    private Board board;
+
+
 
 
     public Square(long id, String streetName, String color, int cost) {
@@ -53,11 +52,11 @@ public class Square {
     }
 
     public int getIndex() {
-        return index;
+        return squareIndex;
     }
 
     public void setIndex(int index) {
-        this.index = index;
+        this.squareIndex = index;
     }
 
     public String getStreetName() {
@@ -67,4 +66,5 @@ public class Square {
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
+
 }
