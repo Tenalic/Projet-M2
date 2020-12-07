@@ -1,25 +1,34 @@
 package projet.m2.back.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Square {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
+
+    private int index;
+    private String streetName;
     private String color;
     private int cost;
-    private boolean bought;
 
 
 
-    public Square(long id, String name, String color, int cost, boolean bought) {
+    public Square(long id, String streetName, String color, int cost) {
         this.id = id;
-        this.name = name;
+        this.streetName = streetName;
         this.color = color;
         this.cost = cost;
-        this.bought = bought;
     }
 
+    public Square() {
 
-
+    }
 
     public long getId() {
         return id;
@@ -27,14 +36,6 @@ public class Square {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getColor() {
@@ -53,11 +54,19 @@ public class Square {
         this.cost = cost;
     }
 
-    public boolean isBought() {
-        return bought;
+    public int getIndex() {
+        return index;
     }
 
-    public void setBought(boolean bought) {
-        this.bought = bought;
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 }

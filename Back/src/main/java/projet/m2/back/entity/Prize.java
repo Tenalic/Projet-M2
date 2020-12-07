@@ -1,13 +1,27 @@
 package projet.m2.back.entity;
 
-public class Gift {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Prize {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String reward;
 
-    public Gift(long id, String reward) {
+    public Prize(long id, String reward) {
         this.id = id;
         this.reward = reward;
+    }
+
+    public Prize() {
+
     }
 
     public long getId() {

@@ -1,9 +1,8 @@
 package projet.m2.back.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -20,11 +19,14 @@ public class Account {
     private int nbDice;
     private int credit;
 
-    private Collection<Square> board;
-    private Collection<Gift> gift;
+    @ElementCollection
+    private Collection<Integer> indexSquarePurchased;
+
+    @OneToMany
+    private Collection<Prize> prize;
 
     public Account(long id, String lastname, String firstname, String nickname, String email, String password,
-                   int nbDice, int credit, Collection<Square> board, Collection<Gift> gift) {
+                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<Prize> prize) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -33,8 +35,8 @@ public class Account {
         this.password = password;
         this.nbDice = nbDice;
         this.credit = credit;
-        this.board = board;
-        this.gift = gift;
+        this.indexSquarePurchased = indexSquarePurchased;
+        this.prize = prize;
     }
 
     public Account(){
@@ -104,19 +106,19 @@ public class Account {
         this.credit = credit;
     }
 
-    public Collection<Square> getBoard() {
-        return board;
+    public Collection<Integer> getIndexSquarePurchased() {
+        return indexSquarePurchased;
     }
 
-    public void setBoard(Collection<Square> board) {
-        this.board = board;
+    public void setIndexSquarePurchased(Collection<Integer> indexSquarePurchased) {
+        this.indexSquarePurchased = indexSquarePurchased;
     }
 
-    public Collection<Gift> getGift() {
-        return gift;
+    public Collection<Prize> getPrize() {
+        return prize;
     }
 
-    public void setGift(Collection<Gift> gift) {
-        this.gift = gift;
+    public void setPrize(Collection<Prize> prize) {
+        this.prize = prize;
     }
 }
