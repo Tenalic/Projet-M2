@@ -1,4 +1,5 @@
 <template>
+<v-container>
     <v-app-bar
       app
       color="primary"
@@ -11,25 +12,64 @@
       </div>
 
       <v-spacer></v-spacer>
-
       <div class="d-flex align-center">
-        <v-btn color="primary" elevation = 0>
+        <!-- ENTRER UN CODE -->
+        <v-btn color="primary"
+        elevation = 0>
             <span class="btn">Entrer un code</span>
         </v-btn>
 
-        <v-btn color = "primary" elevation = 0 to="/about">
-          <span class="btn">Se connecter</span>
-        </v-btn>
+        <!-- UTILISATEUR CONNECTE -->
+        <div v-if="isUserAuthenticated == true">
+          <v-btn color="primary"
+          elevation = 0
+          @click="drawer = !drawer">
+            <span class="btn">{{ getUsername }}</span>
+          </v-btn>
+        </div>
 
-        <v-btn color = "primary" elevation = 0>
-          <span class="btn">Inscription</span>
-        </v-btn>
+        <!-- UTILISATEUR NON CONNECTE -->
+        <div v-else>
+          <!-- SE CONNECTER -->
+          <v-btn color = "primary"
+          elevation = 0
+          to="/about">
+            <span class="btn">Se connecter</span>
+          </v-btn>
+          <!-- INSCRIPTION -->
+          <v-btn color = "primary"
+          elevation = 0>
+            <span class="btn">Inscription</span>
+          </v-btn>
+        </div>
       </div>
     </v-app-bar>
+    <v-navigation-drawer app v-model="drawer" class="secondary" right>
+    </v-navigation-drawer>
+</v-container>
 </template>
 
 <script>
 export default {
-  name: 'AppBar'
+  name: 'AppBar',
+  data () {
+    return {
+      drawer: false
+    }
+  },
+  computed: {
+    // Retourne si l'utilisateur est connecté
+    isUserAuthenticated () {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      )
+    },
+    getUsername () {
+      return (
+        this.$store.getters.user
+      )
+    }
+  }
 }
 </script>
