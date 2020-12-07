@@ -13,6 +13,10 @@
       <v-spacer></v-spacer>
 
       <div class="d-flex align-center">
+        <v-btn color="primary" elevation = 0>
+            <span class="btn">Entrer un code</span>
+        </v-btn>
+
         <v-btn color = "primary" elevation = 0 to="/about">
           <span class="btn">Se connecter</span>
         </v-btn>
