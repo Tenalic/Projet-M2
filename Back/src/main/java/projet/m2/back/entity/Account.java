@@ -4,17 +4,17 @@ import java.util.Collection;
 
 public class Account {
 
-    long id;
-    String lastname;
-    String firstname;
-    String nickname;
-    String email;
-    String password;
-    int nbDice;
-    int credit;
+    private long id;
+    private String lastname;
+    private String firstname;
+    private String nickname;
+    private String email;
+    private String password;
+    private int nbDice;
+    private int credit;
 
-    Collection<Square> board;
-    Collection<Gift> gift;
+    private Collection<Square> board;
+    private Collection<Gift> gift;
 
     public Account(long id, String lastname, String firstname, String nickname, String email, String password,
                    int nbDice, int credit, Collection<Square> board, Collection<Gift> gift) {

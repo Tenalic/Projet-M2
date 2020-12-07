@@ -2,8 +2,8 @@ package projet.m2.back.entity;
 
 public class Gift {
 
-    long id;
-    String reward;
+    private long id;
+    private String reward;
 
     public Gift(long id, String reward) {
         this.id = id;

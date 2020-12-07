@@ -2,11 +2,11 @@ package projet.m2.back.entity;
 
 public class Square {
 
-    long id;
-    String name;
-    String color;
-    int cost;
-    boolean bought;
+    private long id;
+    private String name;
+    private String color;
+    private int cost;
+    private boolean bought;
 
 
 
