@@ -17,8 +17,8 @@ public class Main {
     @Bean
     public CommandLineRunner demo(AccountRepository repo){
         return (args -> {
-            Account a = new Account("test");
-            repo.save(a);
+//            Account a = new Account("test");
+//            repo.save(a);
             System.out.println( repo.findAccountByEmail("test"));
         });
     }
