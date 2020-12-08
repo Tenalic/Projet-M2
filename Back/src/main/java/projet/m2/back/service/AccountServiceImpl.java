@@ -15,10 +15,16 @@ public class AccountServiceImpl implements IaccountService{
     private AccountRepository accountRepository;
 
     @Override
-    public Account connexion(String email, String password) {
+    public Account connection(String email, String password) {
         Account account = accountRepository.findAccountByEmail(email);
+        //TODO DEBUG
+        System.out.println(password);
+        //TODO DEBUG
+        System.out.println(account);
         if(account != null){
-            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), password);
+            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), account.getPassword());
+            //TODO DEBUG
+            System.out.println(result);
             if(result.verified){
                 return account;
             }
