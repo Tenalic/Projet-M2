@@ -33,8 +33,15 @@
         <v-card-title>
           {{ account.nickname }}
         </v-card-title>
+      <v-card-subtitle>
+        Argent : {{account.credit}}€
+      </v-card-subtitle>
       </v-card>
     </v-row>
+    <v-btn @click="rollTheDices">
+      <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
+      Lancez vos dés
+    </v-btn>
   </v-container>
 </template>
 
@@ -46,146 +53,147 @@ export default {
       // Utilisateur
       account: {
         nickname: 'Nono',
-        credit: '1000',
+        credit: 1000,
+        nbDice: 2,
         board: [
           {
-            id: '0',
+            id: 0,
             streetName: 'Avenue des Champs-Elysées',
             color: 'white',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '1',
+            id: 1,
             streetName: 'Rue de la Paix',
             color: 'red',
-            cost: '100',
+            cost: 100,
             bought: false
           },
           {
-            id: '2',
+            id: 2,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '3',
+            id: 3,
             streetName: 'Avenue des Champs-Elysées',
             color: 'green',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '4',
+            id: 4,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '5',
+            id: 5,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '6',
+            id: 6,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '7',
+            id: 7,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '8',
+            id: 8,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '9',
+            id: 9,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '10',
+            id: 10,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '11',
+            id: 11,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '12',
+            id: 12,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '13',
+            id: 13,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '14',
+            id: 14,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '15',
+            id: 15,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '16',
+            id: 16,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '17',
+            id: 17,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '18',
+            id: 18,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           },
           {
-            id: '19',
+            id: 19,
             streetName: 'Avenue des Champs-Elysées',
             color: 'blue',
-            cost: '50',
+            cost: 50,
             bought: false
           }
         ]
@@ -198,7 +206,16 @@ export default {
         [null, null, null, null, null, null],
         [null, null, null, null, null, null],
         [null, null, null, null, null, null]
-      ]
+      ],
+      // Résultat du lancé de dés
+      diceToss: 0,
+      // Pion
+      piece: {
+        icon: 'fas fa-chess-pawn',
+        x: 5,
+        y: 5,
+        index: 0
+      }
     }
   },
   beforeMount () {
@@ -230,6 +247,30 @@ export default {
         i += 1
       }
       console.log(this.displayBoard)
+    },
+    // Lance les 2 dés
+    rollTheDices () {
+      this.diceToss = Math.floor(Math.random() * (12 - 2 + 1) + 2)
+      this.advance()
+    },
+    advance () {
+      if (this.piece.index < 19) this.piece.index++
+      else {
+        this.piece.index = 0
+      }
+      this.diceToss--
+      if (this.diceToss !== 0) {
+        this.advance()
+      }
+    }
+  },
+  watch: {
+    playerIndex () {
+    }
+  },
+  computed: {
+    playerIndex () {
+      return this.piece.index
     }
   }
 }
