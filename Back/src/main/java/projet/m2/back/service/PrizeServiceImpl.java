@@ -15,7 +15,7 @@ public class PrizeServiceImpl implements IprizeService{
 
     @Transactional
     public void createPrize(String reward) {
-        //repo.save(new Prize(reward));
+        repo.save(new Prize(reward));
     }
 
     @Override
