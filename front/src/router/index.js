@@ -22,6 +22,11 @@ const routes = [
     component: GameView
   },
   {
+    path: '/game',
+    name: 'GameView',
+    component: GameView
+  },
+  {
     path: '/about',
     name: 'About',
     component: About
