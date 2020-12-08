@@ -9,7 +9,7 @@ import projet.m2.back.repository.CodeRepository;
 import java.util.logging.Logger;
 
 @Service
-public class CodeServiceImpl implements IcodeService {
+public class CodeServiceImpl implements ICodeService {
 
     Logger logger = Logger.getLogger("log");
 
@@ -17,7 +17,7 @@ public class CodeServiceImpl implements IcodeService {
     CodeRepository repoCode;
 
     @Autowired
-    IaccountService accountService;
+    IAccountService accountService;
 
     @Override
     public int useCode(final long idAccount, final String code) {

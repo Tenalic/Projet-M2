@@ -1,6 +1,6 @@
 package projet.m2.back.service;
 
-public interface IcodeService {
+public interface ICodeService {
 
     /**
      * @param idAccount : id du compte ou l'on souhaite appliqué le code

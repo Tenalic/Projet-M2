@@ -2,7 +2,7 @@ package projet.m2.back.service;
 
 import projet.m2.back.entity.Account;
 
-public interface IaccountService {
+public interface IAccountService {
     Account connection(final String email, final String password);
 
     Account creationAccount(final String email, final String lastname, final String firstname, final String nickname, final String password);

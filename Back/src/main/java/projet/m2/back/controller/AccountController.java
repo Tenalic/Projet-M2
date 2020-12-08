@@ -1,7 +1,5 @@
 package projet.m2.back.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projet.m2.back.entity.Account;
-import projet.m2.back.service.IaccountService;
+import projet.m2.back.service.IAccountService;
 import org.json.simple.JSONObject;
 
-import javax.persistence.Column;
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -22,7 +18,7 @@ import java.util.Base64;
 public class AccountController {
 
     @Autowired
-    private IaccountService iaccountService;
+    private IAccountService iaccountService;
 
     @GetMapping("/account")
     public JSONObject info(@RequestHeader(value = "IdAccount") long idAccount) {

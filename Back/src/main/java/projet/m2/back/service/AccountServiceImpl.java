@@ -9,7 +9,7 @@ import projet.m2.back.repository.AccountRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class AccountServiceImpl implements IaccountService {
+public class AccountServiceImpl implements IAccountService {
 
     @Autowired
     private AccountRepository accountRepository;

@@ -1,19 +1,10 @@
 package projet.m2.back;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import projet.m2.back.entity.Account;
-import projet.m2.back.entity.Prize;
-import projet.m2.back.repository.AccountRepository;
-import projet.m2.back.repository.PrizeRepository;
-import projet.m2.back.service.IaccountService;
-import projet.m2.back.service.IprizeService;
-import projet.m2.back.service.PrizeServiceImpl;
-
-import java.util.List;
+import projet.m2.back.service.IAccountService;
 
 @SpringBootApplication
 public class Main {
@@ -23,7 +14,7 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner demo(IaccountService service){
+    public CommandLineRunner demo(IAccountService service){
         return (args -> {
 //            Account a = new Account("test");
 //            repo.save(a);
