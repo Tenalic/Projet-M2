@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import projet.m2.back.constant.Constant;
+import projet.m2.back.entity.Board;
 import projet.m2.back.service.interfaces.IAccountService;
 import projet.m2.back.service.interfaces.IBoardService;
 
@@ -21,9 +23,14 @@ public class Main {
     @Bean
     public CommandLineRunner demo(IAccountService service) {
         return (args -> {
+            //iBoardService.createBord();
+            Board board = iBoardService.getBoardByName(Constant.boardName);
+
+            System.out.println("test");
+
 //            Account a = new Account("test");
 //            repo.save(a);
-            iBoardService.createBord();
+            //iBoardService.createBord();
             //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
             //service.creationAccount(email, lastname, firstname, nickname, password);
 

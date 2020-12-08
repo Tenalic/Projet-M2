@@ -8,6 +8,7 @@ import projet.m2.back.entity.Board;
 import projet.m2.back.entity.Square;
 import projet.m2.back.repository.BoardRepository;
 import projet.m2.back.service.interfaces.IBoardService;
+import projet.m2.back.service.interfaces.ISquareService;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -17,6 +18,9 @@ public class BoardServiceImpl implements IBoardService {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    ISquareService squareService;
 
     @Override
     public Board getBoardByName(final String name) {
@@ -56,16 +60,33 @@ public class BoardServiceImpl implements IBoardService {
         listeCouleur.add("brown");
         int j = 0;
         ArrayList<Square> listeSquare = new ArrayList<Square>();
+        Square square = null;
         for (int i = 0; i < 20; i++) {
             if (i == 0 || i == 5 || i == 10 || i == 15) {
-                listeSquare.add(new Square(i, "street" + i, "white", 60));
+                square = squareService.createSquare(new Square(i, "street" + i, "white", 60));
+                if (square != null) {
+                    listeSquare.add(square);
+                } else {
+                    System.out.println("Erreur lors de la création du square : " + i);
+                }
             } else {
                 if (j < 8) {
-                    listeSquare.add(new Square(i, "street" + i, listeCouleur.get(j), 50));
+                    square = squareService.createSquare(new Square(i, "street" + i, listeCouleur.get(j), 50));
+                    if (square != null) {
+                        listeSquare.add(square);
+                    } else {
+                        System.out.println("Erreur lors de la création du square : " + i);
+                    }
                     j++;
                 } else {
                     j = 0;
-                    listeSquare.add(new Square(i, "street" + i, listeCouleur.get(j), 50));
+                    square = squareService.createSquare(new Square(i, "street" + i, listeCouleur.get(j), 50));
+                    if (square != null) {
+                        listeSquare.add(square);
+                        j++;
+                    } else {
+                        System.out.println("Erreur lors de la création du square : " + i);
+                    }
                 }
             }
         }
