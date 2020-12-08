@@ -8,7 +8,7 @@ import projet.m2.back.repository.PrizeRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class PrizeService implements IprizeService{
+public class PrizeServiceImpl implements IprizeService{
 
     @Autowired
     PrizeRepository repo;
