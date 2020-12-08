@@ -7,4 +7,6 @@ public interface IPrizeService {
     void createPrize(String reward);
 
     Iterable<Prize> getAllPrize();
+
+    Integer gain();
 }
