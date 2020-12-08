@@ -11,8 +11,7 @@ public class CodeController {
     private IcodeService codeService;
 
     @PostMapping("/code/use/{code}")
-    public String useCode(@RequestHeader(value = "IdAccount") String idAccount, @PathVariable String code) {
-        codeService.useCode(idAccount, code);
-        return "bonjour";
+    public int useCode(@RequestHeader(value = "IdAccount") String idAccount, @PathVariable String code) {
+        return codeService.useCode(idAccount, code);
     }
 }

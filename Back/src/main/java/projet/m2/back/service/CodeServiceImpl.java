@@ -28,10 +28,10 @@ public class CodeServiceImpl implements IcodeService {
             Code codeBDD = repoCode.findByCode(codeLong);
             if (!codeBDD.isUsed()) {
                 codeBDD.setUsed(true);
-                //gerer gagner aléatoirement un prix
                 long idAccountLong = Long.parseLong(idAccount);
                 Account account = accountService.getInfo(idAccountLong);
                 if (account != null) {
+                    //TODO gerer gagner aléatoirement un prix
                     account.setNbDice(account.getNbDice() + 1);
                     repoCode.updateCode(codeBDD);
                     accountService.updateAccount(account);
