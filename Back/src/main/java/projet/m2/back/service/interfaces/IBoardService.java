@@ -10,4 +10,6 @@ public interface IBoardService {
     Board getBoardById(final long id);
 
     Account moveOnBoard(Account account, int move);
+
+    Board createBord();
 }

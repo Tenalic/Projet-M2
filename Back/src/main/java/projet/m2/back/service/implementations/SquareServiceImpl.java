@@ -6,6 +6,8 @@ import projet.m2.back.entity.Square;
 import projet.m2.back.repository.SquareRepository;
 import projet.m2.back.service.interfaces.ISquareService;
 
+import javax.transaction.Transactional;
+
 @Service
 public class SquareServiceImpl implements ISquareService {
     @Autowired
@@ -17,4 +19,10 @@ public class SquareServiceImpl implements ISquareService {
     }
 
     public Square getSquare(int indexSquare) {return squareRepository.findSquareBySquareIndex(indexSquare);}
+
+    @Transactional
+    @Override
+    public Square createSquare(Square square) {
+        return squareRepository.save(square);
+    }
 }
