@@ -9,17 +9,23 @@ import projet.m2.back.repository.AccountRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class AccountServiceImpl implements IaccountService {
+public class AccountServiceImpl implements IaccountService{
 
     @Autowired
     private AccountRepository accountRepository;
 
     @Override
-    public Account connexion(String email, String password) {
+    public Account connection(String email, String password) {
         Account account = accountRepository.findAccountByEmail(email);
-        if (account != null) {
-            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), password);
-            if (result.verified) {
+        //TODO DEBUG
+        System.out.println(password);
+        //TODO DEBUG
+        System.out.println(account);
+        if(account != null){
+            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), account.getPassword());
+            //TODO DEBUG
+            System.out.println(result);
+            if(result.verified){
                 return account;
             }
         }
