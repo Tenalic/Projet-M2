@@ -9,17 +9,23 @@ import projet.m2.back.repository.AccountRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class AccountServiceImpl implements IaccountService{
+public class AccountServiceImpl implements IaccountService {
 
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private IUtils utils;
+
+    @Autowired
+    private IBoardService boardService;
+
     @Override
     public Account connection(String email, String password) {
         Account account = accountRepository.findAccountByEmail(email);
-        if(account != null){
+        if (account != null) {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), account.getPassword());
-            if(result.verified){
+            if (result.verified) {
                 return account;
             }
         }
@@ -59,7 +65,29 @@ public class AccountServiceImpl implements IaccountService{
         accountRepository.deleteAccountById(id);
     }
 
-    public boolean accountExistsById(long id){
+    public boolean accountExistsById(long id) {
         return accountRepository.existsAccountById(id);
+    }
+
+    @Override
+    public int throwDice(long id) {
+        int backCode;
+        Account account = accountRepository.findAccountById(id);
+        if (account != null) {
+            if (account.getNbDice() >= 2) {
+                account.setNbDice(account.getNbDice() - 2);
+                account = boardService.moveOnBoard(account, utils.rand(1, 6));
+                if(account != null) {
+                    backCode = account.getIndexSquare();
+                } else {
+                    backCode = -3;
+                }
+            } else {
+                backCode = -2;
+            }
+        } else {
+            backCode = -1;
+        }
+        return backCode;
     }
 }

@@ -23,6 +23,7 @@ public class Account {
     private String password;
     private int nbDice;
     private int credit;
+    private int indexSquare;
 
     @ElementCollection
     private Collection<Integer> indexSquarePurchased;
@@ -44,10 +45,25 @@ public class Account {
         this.prize = prize;
     }
 
-    public Account(){
+    public Account(long id, String lastname, String firstname, String nickname, String email, String password,
+                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<Prize> prize, int indexSquare) {
+        this.id = id;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.nbDice = nbDice;
+        this.credit = credit;
+        this.indexSquarePurchased = indexSquarePurchased;
+        this.prize = prize;
+        this.indexSquare = indexSquare;
     }
 
-    public Account(String lastname, String firstname, String nickname, String email, String password){
+    public Account() {
+    }
+
+    public Account(String lastname, String firstname, String nickname, String email, String password) {
         this.firstname = firstname;
         this.nickname = nickname;
         this.email = email;
@@ -59,9 +75,10 @@ public class Account {
         prize = new ArrayList<>();
     }
 
-    public Account(String email){
+    public Account(String email) {
         this.email = email;
     }
+
     public long getId() {
         return id;
     }
@@ -140,6 +157,14 @@ public class Account {
 
     public void setPrize(Collection<Prize> prize) {
         this.prize = prize;
+    }
+
+    public int getIndexSquare() {
+        return indexSquare;
+    }
+
+    public void setIndexSquare(int indexSquare) {
+        this.indexSquare = indexSquare;
     }
 
     @Override

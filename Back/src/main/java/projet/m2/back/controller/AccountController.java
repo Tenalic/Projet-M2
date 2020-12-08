@@ -1,4 +1,5 @@
 package projet.m2.back.controller;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.xdevapi.JsonArray;
 import org.json.simple.parser.JSONParser;
@@ -33,22 +34,20 @@ public class AccountController {
         jsonInfo.put("Prize", a.getPrize());
         jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
 
-      return jsonInfo;
+        return jsonInfo;
     }
 
     @DeleteMapping("/account")
     public JSONObject deleteAccount(@RequestHeader(value = "IdAccount") long id) {
         JSONObject myJSON = new JSONObject();
-        if(!iaccountService.accountExistsById(id)){
+        if (!iaccountService.accountExistsById(id)) {
             myJSON.put("message", "Error: Account does not exist");
-        }
-        else {
+        } else {
             iaccountService.deleteAccount(id);
             System.out.println(iaccountService.accountExistsById(id));
-            if(iaccountService.accountExistsById(id)){
+            if (iaccountService.accountExistsById(id)) {
                 myJSON.put("message", "Error: Account not deleted");
-            }
-            else{
+            } else {
                 myJSON.put("message", "Account deleted successfully");
             }
         }
@@ -65,7 +64,7 @@ public class AccountController {
                     String undecodeBase64String = new String(decodedValue, StandardCharsets.UTF_8.toString());
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
-                    if(account != null){
+                    if (account != null) {
                         return ResponseEntity.status(200).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
@@ -84,15 +83,15 @@ public class AccountController {
             JSONParser parser = new JSONParser();
             try {
                 JSONObject accountJson = (JSONObject) parser.parse(accountBody);
-                String lastname = (String)accountJson.get("lastname");
-                String firstname = (String)accountJson.get("firstname");
-                String nickname = (String)accountJson.get("nickname");
-                String email = (String)accountJson.get("email");
-                String password = (String)accountJson.get("password");
+                String lastname = (String) accountJson.get("lastname");
+                String firstname = (String) accountJson.get("firstname");
+                String nickname = (String) accountJson.get("nickname");
+                String email = (String) accountJson.get("email");
+                String password = (String) accountJson.get("password");
                 Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
-                if(account != null){
+                if (account != null) {
                     return ResponseEntity.status(200).body(account);
-                }else{
+                } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
                     return ResponseEntity.status(200).body(jsonError);
@@ -105,4 +104,10 @@ public class AccountController {
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
         return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
     }
+
+    @PostMapping("/account/dice")
+    public void throwDice(@RequestHeader(value = "IdCompte") long id) {
+        iaccountService.throwDice(id);
+    }
+
 }

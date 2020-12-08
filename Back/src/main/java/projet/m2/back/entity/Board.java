@@ -14,6 +14,9 @@ public class Board {
 
     private int nbSquare;
 
+    @Column(unique = true)
+    private String name;
+
     @OneToMany
     @JoinColumn(name = "boardId", referencedColumnName = "id")
     private Collection<Square> board;
@@ -22,6 +25,13 @@ public class Board {
         this.nbSquare = nbSquare;
         this.board = board;
     }
+
+    public Board(int nbSquare, Collection<Square> board, String name) {
+        this.nbSquare = nbSquare;
+        this.board = board;
+        this.name = name;
+    }
+
 
     public Board() {
 
@@ -49,5 +59,13 @@ public class Board {
 
     public void setBoard(Collection<Square> board) {
         this.board = board;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

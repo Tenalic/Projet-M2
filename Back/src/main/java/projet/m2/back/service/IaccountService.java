@@ -16,4 +16,10 @@ public interface IaccountService {
     void deleteAccount(long id);
 
     boolean accountExistsById(long id);
+
+    /**
+     * @param id : id du compte
+     * @return : -1 : Compte non trouvé, -2 : nombre de dé insuffisant, -3 : board non trouvé
+     */
+    int throwDice(final long id);
 }
