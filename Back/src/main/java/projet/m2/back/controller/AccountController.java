@@ -20,7 +20,7 @@ public class AccountController {
     @Autowired
     private IaccountService iaccountService;
 
-    @GetMapping("/account/")
+    @GetMapping("/account")
     public JSONObject info(@RequestHeader(value = "IdAccount") long idAccount) {
         Account a = iaccountService.getInfo(idAccount);
         JSONObject jsonInfo = new JSONObject();
@@ -52,11 +52,19 @@ public class AccountController {
                 }
             }
         }
-        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("{ \"error\": \"autorization error\" }");
+        JSONObject jsonError = new JSONObject();
+        jsonError.put("error", "autorization error");
+        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
     }
 
     @PostMapping("/account/create")
     public ResponseEntity createAccount(@RequestBody Account account) {
-        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("{ \"error\": \"autorization error\" }");
+        if(account != null){
+            //TODO DEBUG
+            System.out.println(account);
+        }
+        JSONObject jsonError = new JSONObject();
+        jsonError.put("error", "autorization error");
+        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
     }
 }

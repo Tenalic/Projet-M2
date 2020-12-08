@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -54,6 +55,8 @@ public class Account {
         this.nbDice = 0;
         this.credit = 0;
         this.lastname = lastname;
+        indexSquarePurchased = new ArrayList<>();
+        prize = new ArrayList<>();
     }
 
     public Account(String email){
@@ -137,5 +140,21 @@ public class Account {
 
     public void setPrize(Collection<Prize> prize) {
         this.prize = prize;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nbDice=" + nbDice +
+                ", credit=" + credit +
+                ", indexSquarePurchased=" + indexSquarePurchased +
+                ", prize=" + prize +
+                '}';
     }
 }
