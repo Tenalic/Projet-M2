@@ -1,6 +1,8 @@
 package projet.m2.back.controller;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.xdevapi.JsonArray;
-import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import projet.m2.back.entity.Account;
 import projet.m2.back.service.IaccountService;
 import org.json.simple.JSONObject;
 
+import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -71,18 +74,35 @@ public class AccountController {
             }
         }
         JSONObject jsonError = new JSONObject();
-        jsonError.put("error", "autorization error");
+        jsonError.put("message", "Error: autorization error");
         return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
     }
 
     @PostMapping("/account/create")
-    public ResponseEntity createAccount(@RequestBody Account account) {
-        if(account != null){
-            //TODO DEBUG
-            System.out.println(account);
+    public ResponseEntity createAccount(@RequestBody String accountBody) {
+        if (accountBody != null) {
+            JSONParser parser = new JSONParser();
+            try {
+                JSONObject accountJson = (JSONObject) parser.parse(accountBody);
+                String lastname = (String)accountJson.get("lastname");
+                String firstname = (String)accountJson.get("firstname");
+                String nickname = (String)accountJson.get("nickname");
+                String email = (String)accountJson.get("email");
+                String password = (String)accountJson.get("password");
+                Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
+                if(account != null){
+                    return ResponseEntity.status(200).body(account);
+                }else{
+                    JSONObject jsonError = new JSONObject();
+                    jsonError.put("message", "Error: erreur de création du compte");
+                    return ResponseEntity.status(200).body(jsonError);
+                }
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
         }
         JSONObject jsonError = new JSONObject();
-        jsonError.put("error", "autorization error");
+        jsonError.put("message", "Error: Une erreur inattendue est survenue.");
         return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
     }
 }
