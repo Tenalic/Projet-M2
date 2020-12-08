@@ -33,6 +33,7 @@ public class AccountServiceImpl implements IaccountService{
             String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
             Account a = new Account(lastname, firstname, nickname, email, hashedPassword);
             accountRepository.save(a);
+            return a;
         }
         return null;
     }
