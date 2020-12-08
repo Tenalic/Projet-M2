@@ -10,4 +10,6 @@ public interface ICodeService {
     int useCode(final long idAccount, final String code);
 
     int changeUsed(final long id, final boolean used);
+
+    void createDatasetCode();
 }

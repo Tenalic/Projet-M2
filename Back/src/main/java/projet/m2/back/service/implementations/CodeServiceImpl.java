@@ -9,6 +9,9 @@ import projet.m2.back.service.interfaces.IAccountService;
 import projet.m2.back.service.interfaces.ICodeService;
 import projet.m2.back.service.interfaces.IPrizeService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 @Service
@@ -72,5 +75,20 @@ public class CodeServiceImpl implements ICodeService {
     public int changeUsed(final long id, final boolean used) {
         repoCode.changeUsed(id, used);
         return 0;
+    }
+
+    public void createDatasetCode(){
+        Random r = new Random();
+        List<Long>codeAlreadyCreated = new ArrayList<>();
+        long code;
+        for (int i = 0; i < 200; i++){
+            do {
+                 code = r.nextInt((9999999 - 100000) + 1)+ 100000;
+            }while (codeAlreadyCreated.contains(code));
+            codeAlreadyCreated.add(code);
+            Code c = new Code(code, false);
+            repoCode.save(c);
+
+        }
     }
 }

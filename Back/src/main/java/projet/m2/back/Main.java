@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import projet.m2.back.constant.Constant;
 import projet.m2.back.entity.Board;
+import projet.m2.back.service.implementations.CodeServiceImpl;
 import projet.m2.back.service.interfaces.IAccountService;
 import projet.m2.back.service.interfaces.IBoardService;
+import projet.m2.back.service.interfaces.ICodeService;
 
 @SpringBootApplication
 public class Main {
@@ -16,26 +18,32 @@ public class Main {
     @Autowired
     IBoardService iBoardService;
 
+    @Autowired
+    ICodeService iCodeService;
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner demo(IAccountService service) {
-//        return (args -> {
-//            //iBoardService.createBord();
-//             Board board = iBoardService.getBoardByName(Constant.boardName);
-//
-//           System.out.println("test");
-//
-////            Account a = new Account("test");
-////            repo.save(a);
-//            //iBoardService.createBord();
-//            //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
-//            //service.creationAccount(email, lastname, firstname, nickname, password);
-//
-//        });
-//    }
+    @Bean
+    public CommandLineRunner demo(IAccountService service) {
+        return (args -> {
+            //iBoardService.createBord();
+             Board board = iBoardService.getBoardByName(Constant.boardName);
+
+            //  iCodeService.createDatasetCode(); //NE PAS DECOMMENTER MERCI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+           System.out.println("test");
+
+//            Account a = new Account("test");
+//            repo.save(a);
+            //iBoardService.createBord();
+            //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
+            //service.creationAccount(email, lastname, firstname, nickname, password);
+
+        });
+    }
 
 //    @Bean
 //    public CommandLineRunner demo2(){
