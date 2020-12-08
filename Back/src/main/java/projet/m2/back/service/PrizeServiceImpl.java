@@ -8,14 +8,14 @@ import projet.m2.back.repository.PrizeRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class PrizeService implements IprizeService{
+public class PrizeServiceImpl implements IprizeService{
 
     @Autowired
     PrizeRepository repo;
 
     @Transactional
     public void createPrize(String reward) {
-        repo.save(new Prize("test"));
+        repo.save(new Prize(reward));
     }
 
     @Override

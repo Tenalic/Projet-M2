@@ -1,5 +1,6 @@
 package projet.m2.back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Account {
     private String nickname;
     @Column(unique = true)
     private String email;
+    @JsonIgnore
     private String password;
     private int nbDice;
     private int credit;
@@ -42,6 +44,16 @@ public class Account {
     }
 
     public Account(){
+    }
+
+    public Account(String lastname, String firstname, String nickname, String email, String password){
+        this.firstname = firstname;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.nbDice = 0;
+        this.credit = 0;
+        this.lastname = lastname;
     }
 
     public Account(String email){
