@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import GameView from '../views/GameView.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
       title: 'Bienvenue sur Monopolight :)'
     }
 
+  },
+  {
+    path: '/game',
+    name: 'GameView',
+    component: GameView
   },
   {
     path: '/about',
