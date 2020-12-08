@@ -13,18 +13,15 @@ public class Square {
     private String color;
     private int cost;
 
+    public Square() {
 
+    }
 
-
-    public Square(long id, String streetName, String color, int cost) {
-        this.id = id;
+    public Square(int squareIndex, String streetName, String color, int cost) {
+        this.squareIndex = squareIndex;
         this.streetName = streetName;
         this.color = color;
         this.cost = cost;
-    }
-
-    public Square() {
-
     }
 
     public long getId() {
