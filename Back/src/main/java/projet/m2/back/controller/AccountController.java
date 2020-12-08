@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projet.m2.back.entity.Account;
+import projet.m2.back.entity.Prize;
 import projet.m2.back.service.interfaces.IAccountService;
 import org.json.simple.JSONObject;
 
@@ -104,6 +105,24 @@ public class AccountController {
     @PostMapping("/account/dice")
     public void throwDice(@RequestHeader(value = "IdCompte") long id) {
         iaccountService.throwDice(id);
+    }
+
+    @PostMapping("/account/buy")
+    public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id){
+            boolean buy = iaccountService.buySquare(id);
+
+            JSONObject responseJSON = new JSONObject();
+            if(buy){
+                Account a = iaccountService.getInfo(id);
+                Prize prizeWin = iaccountService.checkSquareColorWinner(id);
+                if(prizeWin != null){
+                    responseJSON.put("prizeWin", prizeWin);
+                    responseJSON.put("prize", a.getPrize());
+                }
+                responseJSON.put("indexSquarePurchased", a.getIndexSquarePurchased());
+                responseJSON.put("credit", a.getCredit());
+            }
+            return ResponseEntity.status(200).body(responseJSON);
     }
 
 }
