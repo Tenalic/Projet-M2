@@ -9,7 +9,6 @@ public class Code {
     private Long id;
     @Column(unique = true)
     private Long code;
-    private int value;
     private boolean used;
 
     public Code() {
@@ -17,7 +16,6 @@ public class Code {
 
     public Code(Long code, int value, boolean used){
         this.code = code;
-        this.value = value;
         this.used = used;
     }
 
@@ -37,14 +35,6 @@ public class Code {
         this.code = code;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public boolean isUsed() {
         return used;
     }
@@ -58,7 +48,6 @@ public class Code {
         return "Code{" +
                 "id=" + id +
                 ", code=" + code +
-                ", value=" + value +
                 ", used=" + used +
                 '}';
     }
