@@ -13,11 +13,11 @@
       <v-spacer></v-spacer>
 
       <div class="d-flex align-center">
-        <v-btn color = "primary" elevation = 0 to="/about">
+        <v-btn color = "primary" elevation = 0 to="Login">
           <span class="btn">Se connecter</span>
         </v-btn>
 
-        <v-btn color = "primary" elevation = 0>
+        <v-btn color = "primary" elevation = 0 to="Signup">
           <span class="btn">Inscription</span>
         </v-btn>
       </div>
