@@ -12,4 +12,8 @@ public interface IaccountService {
     int changeNbDice(final long id, final int nbDice);
 
     int updateAccount(Account account);
+
+    void deleteAccount(long id);
+
+    boolean accountExistsById(long id);
 }

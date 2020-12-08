@@ -47,8 +47,18 @@ public class AccountServiceImpl implements IaccountService{
     }
 
     @Override
+    @Transactional
     public int updateAccount(final Account account) {
         accountRepository.updateAccount(account);
         return 0;
+    }
+
+    @Transactional
+    public void deleteAccount(long id) {
+        accountRepository.deleteAccountById(id);
+    }
+
+    public boolean accountExistsById(long id){
+        return accountRepository.existsAccountById(id);
     }
 }
