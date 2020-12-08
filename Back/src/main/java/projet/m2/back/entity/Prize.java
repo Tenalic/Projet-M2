@@ -7,25 +7,21 @@ import javax.persistence.Id;
 
 @Entity
 public class Prize {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String reward;
 
-    public Prize(long id, String reward) {
-        this.id = id;
-        this.reward = reward;
+    public Prize() {
     }
 
     public Prize(String reward){
         this.reward = reward;
     }
 
-    public Prize() {
-
+    public Prize(long id, String reward) {
+        this.id = id;
+        this.reward = reward;
     }
 
     public long getId() {
@@ -42,5 +38,13 @@ public class Prize {
 
     public void setReward(String reward) {
         this.reward = reward;
+    }
+
+    @Override
+    public String toString() {
+        return "Prize{" +
+                "id=" + id +
+                ", reward='" + reward + '\'' +
+                '}';
     }
 }
