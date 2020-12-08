@@ -8,12 +8,15 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home,
-    meta: {
-      title: 'Bienvenue sur Monopolight :)'
-    }
-
+    name: 'Home',
+    component: Home
+    // children: [
+    // ]
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/Profile')
   },
   {
     path: '/about',
