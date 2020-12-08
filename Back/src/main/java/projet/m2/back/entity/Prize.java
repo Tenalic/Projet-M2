@@ -20,6 +20,10 @@ public class Prize {
         this.reward = reward;
     }
 
+    public Prize(String reward){
+        this.reward = reward;
+    }
+
     public Prize() {
 
     }

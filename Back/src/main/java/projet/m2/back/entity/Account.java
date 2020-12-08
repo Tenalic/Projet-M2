@@ -13,7 +13,9 @@ public class Account {
     private long id;
     private String lastname;
     private String firstname;
+    @Column(unique = true)
     private String nickname;
+    @Column(unique = true)
     private String email;
     private String password;
     private int nbDice;

@@ -32,15 +32,15 @@ public class Main {
         });
     }
 
-    @Bean
-    public CommandLineRunner demo2(){
-        return (args -> {
-            service.createPrize("test");
-            Iterable<Prize> listePrize = service.getAllPrize();
-            for(Prize p : listePrize) {
-                System.out.println(p.getReward());
-            }
-        });
-    }
+//    @Bean
+//    public CommandLineRunner demo2(){
+//        return (args -> {
+//            service.createPrize("test");
+//            Iterable<Prize> listePrize = service.getAllPrize();
+//            for(Prize p : listePrize) {
+//                System.out.println(p.getReward());
+//            }
+//        });
+//    }
 
 }
