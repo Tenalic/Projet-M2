@@ -1,19 +1,24 @@
 package projet.m2.back.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Code {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     private Long code;
     private int value;
     private boolean used;
 
     public Code() {
+    }
+
+    public Code(Long code, int value, boolean used){
+        this.code = code;
+        this.value = value;
+        this.used = used;
     }
 
     public Long getId() {
