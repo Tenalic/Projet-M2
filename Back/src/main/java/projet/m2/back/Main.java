@@ -9,26 +9,32 @@ import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Prize;
 import projet.m2.back.repository.AccountRepository;
 import projet.m2.back.repository.PrizeRepository;
-import projet.m2.back.service.PrizeService;
+import projet.m2.back.service.IaccountService;
+import projet.m2.back.service.IprizeService;
+import projet.m2.back.service.PrizeServiceImpl;
 
 import java.util.List;
 
 @SpringBootApplication
 public class Main {
 
-    @Autowired
-    private PrizeService service;
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
 
     @Bean
-    public CommandLineRunner demo(AccountRepository repo){
+    public CommandLineRunner demo(IaccountService service){
         return (args -> {
 //            Account a = new Account("test");
 //            repo.save(a);
-            System.out.println( repo.findAccountByEmail("test"));
+            String email = "test@test.fr";
+            String password = "test";
+            String lastname = "test";
+            String firstname = "test";
+            String nickname = "test";
+            //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
+            //service.creationAccount(email, lastname, firstname, nickname, password);
+
         });
     }
 
