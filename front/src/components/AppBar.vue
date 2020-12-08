@@ -22,8 +22,7 @@
         <!-- UTILISATEUR CONNECTE -->
         <div v-if="isUserAuthenticated == true">
           <v-btn color="primary"
-          elevation = 0
-          @click="drawer = !drawer">
+          elevation = 0>
             <span class="btn">{{ getUsername }}</span>
           </v-btn>
         </div>
@@ -44,19 +43,12 @@
         </div>
       </div>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" class="secondary" right>
-    </v-navigation-drawer>
 </v-container>
 </template>
 
 <script>
 export default {
   name: 'AppBar',
-  data () {
-    return {
-      drawer: false
-    }
-  },
   computed: {
     // Retourne si l'utilisateur est connecté
     isUserAuthenticated () {
