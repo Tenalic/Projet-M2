@@ -27,7 +27,7 @@ public class AccountController {
         JSONObject jsonInfo = new JSONObject();
 
         jsonInfo.put("NbDice", a.getNbDice());
-        jsonInfo.put("Credit", a.getNbDice());
+        jsonInfo.put("Credit", a.getCredit());
         jsonInfo.put("Prize", a.getPrize());
         jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
 

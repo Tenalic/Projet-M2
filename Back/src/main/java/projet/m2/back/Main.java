@@ -20,22 +20,22 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean
-    public CommandLineRunner demo(IAccountService service) {
-        return (args -> {
-            //iBoardService.createBord();
-             Board board = iBoardService.getBoardByName(Constant.boardName);
-
-           System.out.println("test");
-
-//            Account a = new Account("test");
-//            repo.save(a);
-            //iBoardService.createBord();
-            //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
-            //service.creationAccount(email, lastname, firstname, nickname, password);
-
-        });
-    }
+//    @Bean
+//    public CommandLineRunner demo(IAccountService service) {
+//        return (args -> {
+//            //iBoardService.createBord();
+//             Board board = iBoardService.getBoardByName(Constant.boardName);
+//
+//           System.out.println("test");
+//
+////            Account a = new Account("test");
+////            repo.save(a);
+//            //iBoardService.createBord();
+//            //Account a = new Account( lastname,  firstname,  nickname,  email,  password);
+//            //service.creationAccount(email, lastname, firstname, nickname, password);
+//
+//        });
+//    }
 
 //    @Bean
 //    public CommandLineRunner demo2(){
