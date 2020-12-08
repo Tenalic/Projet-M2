@@ -8,6 +8,7 @@ import projet.m2.back.entity.Account;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
     public Account findAccountByEmail(String email);
+    public Account findAccountById(long id);
     @Query("select a.password From Account a")
     public String findPasswordAccountByEmail(String email);
     public boolean existsAccountByEmailOrNickname(String email, String nickname);

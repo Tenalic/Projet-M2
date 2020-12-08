@@ -36,4 +36,9 @@ public class AccountServiceImpl implements IaccountService{
         }
         return null;
     }
+
+
+    public Account getInfo(long id){
+        return accountRepository.findAccountById(id);
+    }
 }
