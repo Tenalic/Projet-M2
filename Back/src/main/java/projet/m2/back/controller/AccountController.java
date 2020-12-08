@@ -33,6 +33,24 @@ public class AccountController {
       return jsonInfo;
     }
 
+    @DeleteMapping("/account")
+    public JSONObject deleteAccount(@RequestHeader(value = "IdAccount") long id) {
+        JSONObject myJSON = new JSONObject();
+        if(!iaccountService.accountExistsById(id)){
+            myJSON.put("message", "Error: Account does not exist");
+        }
+        else {
+            iaccountService.deleteAccount(id);
+            System.out.println(iaccountService.accountExistsById(id));
+            if(iaccountService.accountExistsById(id)){
+                myJSON.put("message", "Error: Account not deleted");
+            }
+            else{
+                myJSON.put("message", "Account deleted successfully");
+            }
+        }
+        return myJSON;
+    }
 
     @PostMapping("/account/connection")
     public ResponseEntity connection(@RequestHeader(name = "Authorization") String authorization) {
