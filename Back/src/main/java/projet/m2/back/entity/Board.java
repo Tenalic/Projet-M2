@@ -1,5 +1,8 @@
 package projet.m2.back.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +20,9 @@ public class Board {
     @Column(unique = true)
     private String name;
 
+
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "boardId", referencedColumnName = "id")
     private Collection<Square> board;
 

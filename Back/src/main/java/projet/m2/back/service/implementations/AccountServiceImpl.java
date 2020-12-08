@@ -105,7 +105,11 @@ public class AccountServiceImpl implements IAccountService {
     public boolean buySquare(long idAccount){
         Account a = accountRepository.findAccountById(idAccount);
         int indexSquareBase = a.getIndexSquare();
-        if(!a.getIndexSquarePurchased().contains(indexSquareBase)){
+        if(!a.getIndexSquarePurchased().contains(indexSquareBase) &&
+                (indexSquareBase != 0 &&
+                        indexSquareBase != 5 &&
+                        indexSquareBase != 10 &&
+                        indexSquareBase != 15)){
             int costSquare = squareService.getCost(indexSquareBase);
             if(a.getCredit() >= costSquare){
                 a.getIndexSquarePurchased().add(indexSquareBase);
