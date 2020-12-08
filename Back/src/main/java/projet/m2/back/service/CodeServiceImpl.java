@@ -6,8 +6,6 @@ import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Code;
 import projet.m2.back.repository.CodeRepository;
 
-import java.text.ParseException;
-
 @Service
 public class CodeServiceImpl implements IcodeService {
 
@@ -18,12 +16,12 @@ public class CodeServiceImpl implements IcodeService {
     IaccountService accountService;
 
     /**
-     * @param idAccount
-     * @param code
-     * @return 0 : ok, 1 : , 2 : code deja utilisé, 3 : erreur lors du parse, 4 : compte non trouvé
+     * @param idAccount : id du compte ou l'on souhaite appliqué le code
+     * @param code : code du code
+     * @return 0 : ok, 1 : compte non trouvé, 2 : code deja utilisé, 3 : erreur lors du parse
      */
     @Override
-    public int useCode(String idAccount, String code) {
+    public int useCode(final String idAccount, final String code) {
         int codeRetour;
         try {
             long codeLong = Long.parseLong(code);
@@ -35,9 +33,11 @@ public class CodeServiceImpl implements IcodeService {
                 Account account = accountService.getInfo(idAccountLong);
                 if (account != null) {
                     account.setNbDice(account.getNbDice() + 1);
+                    repoCode.updateCode(codeBDD);
+                    accountService.updateAccount(account);
                     codeRetour = 0;
                 } else {
-                    codeRetour = 4;
+                    codeRetour = 1;
                 }
             } else {
                 codeRetour = 2;
@@ -47,5 +47,10 @@ public class CodeServiceImpl implements IcodeService {
             codeRetour = 3;
         }
         return codeRetour;
+    }
+
+    public int changeUsed(final long id, final boolean used) {
+        repoCode.changeUsed(id, used);
+        return 0;
     }
 }

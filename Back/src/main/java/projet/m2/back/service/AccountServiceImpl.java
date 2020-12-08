@@ -41,4 +41,14 @@ public class AccountServiceImpl implements IaccountService {
     public Account getInfo(long id) {
         return accountRepository.findAccountById(id);
     }
+
+    public int changeNbDice(long id, int nbDice) {
+        return accountRepository.changeNbDice(id, nbDice);
+    }
+
+    @Override
+    public int updateAccount(final Account account) {
+        accountRepository.updateAccount(account);
+        return 0;
+    }
 }

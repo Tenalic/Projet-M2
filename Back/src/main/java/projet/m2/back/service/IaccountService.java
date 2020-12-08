@@ -3,7 +3,13 @@ package projet.m2.back.service;
 import projet.m2.back.entity.Account;
 
 public interface IaccountService {
-    public Account connexion(String email, String password);
-    public Account creationAccount(String email, String lastname, String firstname, String nickname, String password);
-    public Account getInfo(long id);
+    Account connexion(final String email, final String password);
+
+    Account creationAccount(final String email, final String lastname, final String firstname, final String nickname, final String password);
+
+    Account getInfo(final long id);
+
+    int changeNbDice(final long id, final int nbDice);
+
+    int updateAccount(Account account);
 }
