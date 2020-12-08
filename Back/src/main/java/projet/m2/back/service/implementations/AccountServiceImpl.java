@@ -13,6 +13,7 @@ import projet.m2.back.service.interfaces.ISquareService;
 import projet.m2.back.service.interfaces.IUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -79,6 +80,7 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    @Transactional
     public int throwDice(long id) {
         int backCode;
         Account account = accountRepository.findAccountById(id);
@@ -88,6 +90,8 @@ public class AccountServiceImpl implements IAccountService {
                 account = boardService.moveOnBoard(account, utils.rand(1, 6));
                 if(account != null) {
                     backCode = account.getIndexSquare();
+                    //TODO PERMET DE METTRE A JOUR L'INDEX DE LA CASE EN BASE
+                    accountRepository.updateAccount(account);
                 } else {
                     backCode = -3;
                 }
@@ -125,17 +129,17 @@ public class AccountServiceImpl implements IAccountService {
     @Transactional
     public Prize checkSquareColorWinner(long idAccount) {
         Account a = accountRepository.findAccountById(idAccount);
-        Integer[] listSquare = (Integer[])a.getIndexSquarePurchased().toArray();
-        for (int i = 0; i < listSquare.length - 1 ; i++) {
-            Square square1 = squareService.getSquare(listSquare[i]);
-            for(int j = i+1; j < listSquare.length; j++){
-                Square square2 = squareService.getSquare(listSquare[j]);
+        List<Integer> listSquare = (List<Integer>)a.getIndexSquarePurchased();
+        for (int i = 0; i < listSquare.size() - 1 ; i++) {
+            Square square1 = squareService.getSquare(listSquare.get(i));
+            for(int j = i+1; j < listSquare.size(); j++){
+                Square square2 = squareService.getSquare(listSquare.get(j));
                 if(square1.getColor().equals(square2.getColor())){
                     a.getIndexSquarePurchased().remove(square1.getIndex());
                     a.getIndexSquarePurchased().remove(square2.getIndex());
                     //TODO CHOISIR LE PRIZE A RETOURNER ET MODIF LA BASE
                     accountRepository.updateAccount(a);
-                    return null;
+                    return new Prize("DEBUG");
                 }
             }
         }

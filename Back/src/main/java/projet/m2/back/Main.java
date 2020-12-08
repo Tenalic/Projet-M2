@@ -24,9 +24,9 @@ public class Main {
     public CommandLineRunner demo(IAccountService service) {
         return (args -> {
             //iBoardService.createBord();
-            Board board = iBoardService.getBoardByName(Constant.boardName);
+             Board board = iBoardService.getBoardByName(Constant.boardName);
 
-            System.out.println("test");
+           System.out.println("test");
 
 //            Account a = new Account("test");
 //            repo.save(a);

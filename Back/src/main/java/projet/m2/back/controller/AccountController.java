@@ -103,7 +103,7 @@ public class AccountController {
     }
 
     @PostMapping("/account/dice")
-    public void throwDice(@RequestHeader(value = "IdCompte") long id) {
+    public void throwDice(@RequestHeader(value = "IdAccount") long id) {
         iaccountService.throwDice(id);
     }
 
