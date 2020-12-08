@@ -7,4 +7,5 @@ import projet.m2.back.entity.Account;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
     public Account findAccountByEmail(String email);
+    public Account findAccountById(long id);
 }

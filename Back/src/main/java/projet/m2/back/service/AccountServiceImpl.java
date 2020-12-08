@@ -24,4 +24,9 @@ public class AccountServiceImpl implements IaccountService{
     public Account creationAccount(String email, String lastname, String firstname, String nickname, String password) {
         return null;
     }
+
+
+    public Account getInfo(long id){
+        return accountRepository.findAccountById(id);
+    }
 }
