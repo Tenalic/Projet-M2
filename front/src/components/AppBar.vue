@@ -5,15 +5,20 @@
       color="primary"
       dark
     >
+      <!-- PARTIE GAUCHE -->
       <div class="d-flex align-center">
+        <!-- Accueil -->
         <v-btn color="primary" elevation = 0 to="/" >
         <span class="btn"> Accueil</span>
         </v-btn>
       </div>
+      <!-- FIN PARTIE GAUCHE -->
 
       <v-spacer></v-spacer>
+
+      <!-- PARTIE DROITE -->
       <div class="d-flex align-center">
-        <!-- ENTRER UN CODE -->
+        <!-- Entrer un code -->
         <v-btn color="primary"
         elevation = 0>
             <span class="btn">Entrer un code</span>
@@ -29,19 +34,20 @@
 
         <!-- UTILISATEUR NON CONNECTE -->
         <div v-else>
-          <!-- SE CONNECTER -->
+          <!-- Se connecter -->
           <v-btn color = "primary"
           elevation = 0
           to="/about">
             <span class="btn">Se connecter</span>
           </v-btn>
-          <!-- INSCRIPTION -->
+          <!-- Inscription -->
           <v-btn color = "primary"
           elevation = 0>
             <span class="btn">Inscription</span>
           </v-btn>
         </div>
       </div>
+      <!-- FIN PARTIE DROITE -->
     </v-app-bar>
 </v-container>
 </template>
@@ -57,6 +63,7 @@ export default {
         this.$store.getters.user !== undefined
       )
     },
+    // Retourne le nom de l'utilisateur
     getUsername () {
       return (
         this.$store.getters.user
