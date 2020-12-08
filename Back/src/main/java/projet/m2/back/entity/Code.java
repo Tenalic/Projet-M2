@@ -14,7 +14,7 @@ public class Code {
     public Code() {
     }
 
-    public Code(Long code, int value, boolean used){
+    public Code(Long code, boolean used){
         this.code = code;
         this.used = used;
     }
