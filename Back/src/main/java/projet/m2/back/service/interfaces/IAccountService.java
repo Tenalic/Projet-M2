@@ -1,4 +1,4 @@
-package projet.m2.back.service;
+package projet.m2.back.service.interfaces;
 
 import projet.m2.back.entity.Account;
 

@@ -2,7 +2,7 @@ package projet.m2.back.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import projet.m2.back.service.ICodeService;
+import projet.m2.back.service.interfaces.ICodeService;
 
 @RestController
 public class CodeController {

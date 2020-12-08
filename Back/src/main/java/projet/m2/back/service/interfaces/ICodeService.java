@@ -1,4 +1,4 @@
-package projet.m2.back.service;
+package projet.m2.back.service.interfaces;
 
 public interface ICodeService {
 

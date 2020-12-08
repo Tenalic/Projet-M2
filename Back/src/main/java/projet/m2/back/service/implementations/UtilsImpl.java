@@ -1,8 +1,7 @@
-package projet.m2.back.service;
+package projet.m2.back.service.implementations;
 
 import org.springframework.stereotype.Service;
-
-import java.util.Random;
+import projet.m2.back.service.interfaces.IUtils;
 
 @Service
 public class UtilsImpl implements IUtils {

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import projet.m2.back.entity.Account;
-import projet.m2.back.repository.custom.AccountRepositoryCustom;
+import projet.m2.back.repository.custom.interfaces.AccountRepositoryCustom;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long>, AccountRepositoryCustom {

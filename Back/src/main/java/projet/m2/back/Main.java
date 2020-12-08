@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import projet.m2.back.service.IAccountService;
+import projet.m2.back.service.interfaces.IAccountService;
 
 @SpringBootApplication
 public class Main {

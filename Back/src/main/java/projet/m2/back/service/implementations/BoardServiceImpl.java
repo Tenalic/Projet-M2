@@ -1,4 +1,4 @@
-package projet.m2.back.service;
+package projet.m2.back.service.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import projet.m2.back.constant.Constant;
 import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Board;
 import projet.m2.back.repository.BoardRepository;
+import projet.m2.back.service.interfaces.IBoardService;
 
 @Service
 public class BoardServiceImpl implements IBoardService {

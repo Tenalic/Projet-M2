@@ -1,4 +1,4 @@
-package projet.m2.back.repository.custom;
+package projet.m2.back.repository.custom.interfaces;
 
 import projet.m2.back.entity.Code;
 

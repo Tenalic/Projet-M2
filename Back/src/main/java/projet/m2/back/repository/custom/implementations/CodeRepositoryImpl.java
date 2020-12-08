@@ -1,11 +1,12 @@
-package projet.m2.back.repository.custom;
+package projet.m2.back.repository.custom.implementations;
 
 import projet.m2.back.entity.Code;
+import projet.m2.back.repository.custom.interfaces.CodeRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class CodeRepositoryImpl implements CodeRepositoryCustom{
+public class CodeRepositoryImpl implements CodeRepositoryCustom {
 
     @PersistenceContext
     EntityManager em;

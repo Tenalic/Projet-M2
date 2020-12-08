@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projet.m2.back.entity.Account;
-import projet.m2.back.service.IAccountService;
+import projet.m2.back.service.interfaces.IAccountService;
 import org.json.simple.JSONObject;
 
 import java.io.UnsupportedEncodingException;

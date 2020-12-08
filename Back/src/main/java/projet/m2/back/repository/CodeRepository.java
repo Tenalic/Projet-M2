@@ -2,7 +2,7 @@ package projet.m2.back.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import projet.m2.back.entity.Code;
-import projet.m2.back.repository.custom.CodeRepositoryCustom;
+import projet.m2.back.repository.custom.interfaces.CodeRepositoryCustom;
 
 public interface CodeRepository extends CrudRepository<Code, Long>, CodeRepositoryCustom {
 

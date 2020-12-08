@@ -1,6 +1,7 @@
-package projet.m2.back.repository.custom;
+package projet.m2.back.repository.custom.implementations;
 
 import projet.m2.back.entity.Account;
+import projet.m2.back.repository.custom.interfaces.AccountRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

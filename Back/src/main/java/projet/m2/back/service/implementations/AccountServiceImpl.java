@@ -1,10 +1,13 @@
-package projet.m2.back.service;
+package projet.m2.back.service.implementations;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.m2.back.entity.Account;
 import projet.m2.back.repository.AccountRepository;
+import projet.m2.back.service.interfaces.IAccountService;
+import projet.m2.back.service.interfaces.IBoardService;
+import projet.m2.back.service.interfaces.IUtils;
 
 import javax.transaction.Transactional;
 
