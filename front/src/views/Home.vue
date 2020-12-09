@@ -11,9 +11,9 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
-<v-container grid-list-md text-xs-center style="margin-top:3%">
-      <v-row align="center">
-        <v-flex xs6 offset-xs3 v-for="select in team" :key="select.MenuSelected" :to="select.list">
+<v-container fluid mt-5>
+      <v-row align="center" justify="center" v-for="select in team" :key="select.MenuSelected">
+        <v-col md="6">
           <v-hover v-slot:default="{ hover }">
           <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle" width="55%" :to="select.link">
             <v-card-title primary-title class="layout justify-center">
@@ -23,7 +23,7 @@
             </v-card-title>
           </v-card>
           </v-hover>
-        </v-flex>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -62,7 +62,6 @@ export default {
 
 <style scoped>
 .menuTitle {
-  margin: 3%;
   cursor: pointer;
 }
 
