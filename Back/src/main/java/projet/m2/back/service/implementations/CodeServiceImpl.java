@@ -29,6 +29,11 @@ public class CodeServiceImpl implements ICodeService {
     @Autowired
     IPrizeService prizeService;
 
+    /**
+     * @param idAccount : id du compte ou l'on souhaite appliqué le code
+     * @param code      : code du code
+     * @return 0 : ok, 1 : compte non trouvé, 2 : code deja utilisé, 3 : code inconue
+     */
     @Transactional
     @Override
     public Object useCode(final long idAccount, final String code) {
