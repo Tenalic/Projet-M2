@@ -65,6 +65,11 @@ public class AccountServiceImpl implements IAccountService {
         return accountRepository.findAccountById(id);
     }
 
+    @Override
+    public Account getAccountById(long id) {
+        return accountRepository.findAccountById(id);
+    }
+
     public int changeNbDice(long id, int nbDice) {
         return accountRepository.changeNbDice(id, nbDice);
     }
