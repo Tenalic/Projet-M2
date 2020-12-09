@@ -11,6 +11,7 @@ import projet.m2.back.service.implementations.CodeServiceImpl;
 import projet.m2.back.service.interfaces.IAccountService;
 import projet.m2.back.service.interfaces.IBoardService;
 import projet.m2.back.service.interfaces.ICodeService;
+import projet.m2.back.service.interfaces.IPrizeService;
 
 @SpringBootApplication
 public class Main {
@@ -20,6 +21,9 @@ public class Main {
 
     @Autowired
     ICodeService iCodeService;
+
+    @Autowired
+    IPrizeService prizeService;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -32,7 +36,7 @@ public class Main {
              Board board = iBoardService.getBoardByName(Constant.boardName);
 
             //  iCodeService.createDatasetCode(); //NE PAS DECOMMENTER MERCI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+            //prizeService.createDatasetPrize(); //NE PAS DECOMMENTER MERCI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
            System.out.println("test");
 

@@ -11,12 +11,14 @@ public class Prize {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String reward;
+    private int quantity;
 
     public Prize() {
     }
 
-    public Prize(String reward){
+    public Prize(String reward, int quantity){
         this.reward = reward;
+        this.quantity = quantity;
     }
 
     public Prize(long id, String reward) {
@@ -46,5 +48,13 @@ public class Prize {
                 "id=" + id +
                 ", reward='" + reward + '\'' +
                 '}';
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
