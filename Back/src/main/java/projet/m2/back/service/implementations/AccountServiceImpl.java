@@ -139,7 +139,7 @@ public class AccountServiceImpl implements IAccountService {
                     a.getIndexSquarePurchased().remove(square2.getIndex());
                     //TODO CHOISIR LE PRIZE A RETOURNER ET MODIF LA BASE
                     accountRepository.updateAccount(a);
-                    return new Prize("DEBUG", 1);
+                    return new Prize("DEBUG", 1, 100);
                 }
             }
         }

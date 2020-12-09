@@ -32,6 +32,7 @@ public class Account {
     private Collection<Integer> indexSquarePurchased;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection
     private Collection<String> prize;
 
     public Account(long id, String lastname, String firstname, String nickname, String email, String password,
