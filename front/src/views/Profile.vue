@@ -59,6 +59,7 @@
             </v-row>
             <v-card-actions>
               <v-spacer></v-spacer>
+              <v-btn class="grey darken-2" dark @click="edit = false" depressed>Cancel</v-btn>
               <v-btn class="primary" depressed type="submit">Save</v-btn>
             </v-card-actions>
           </v-form>
