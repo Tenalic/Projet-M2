@@ -26,15 +26,19 @@ public class AccountController {
 
     @GetMapping("/account")
     public JSONObject info(@RequestHeader(value = "IdAccount") long idAccount) {
-        Account a = iaccountService.getInfo(idAccount);
         JSONObject jsonInfo = new JSONObject();
 
-        jsonInfo.put("NbDice", a.getNbDice());
-        jsonInfo.put("Credit", a.getCredit());
-        jsonInfo.put("Prize", a.getPrize());
-        jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
-        jsonInfo.put("IndexSquare", a.getIndexSquare());
+        if(iaccountService.accountExistsById(idAccount)){
+            Account a = iaccountService.getInfo(idAccount);
 
+            jsonInfo.put("NbDice", a.getNbDice());
+            jsonInfo.put("Credit", a.getCredit());
+            jsonInfo.put("Prize", a.getPrize());
+            jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
+
+        } else {
+            jsonInfo.put("error", "Account not found");
+        }
         return jsonInfo;
     }
 
