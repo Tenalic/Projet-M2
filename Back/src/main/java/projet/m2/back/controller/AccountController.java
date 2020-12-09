@@ -24,7 +24,7 @@ public class AccountController {
     @Autowired
     private IAccountService iaccountService;
 
-    @GetMapping("/account")
+    @GetMapping("/account/game-info")
     public ResponseEntity info(@RequestHeader(value = "IdAccount") long idAccount) {
         JSONObject jsonInfo = new JSONObject();
 
@@ -46,7 +46,7 @@ public class AccountController {
 
     }
 
-    @DeleteMapping("/account")
+    @DeleteMapping("/account/delete")
     public ResponseEntity deleteAccount(@RequestHeader(value = "IdAccount") long id) {
         JSONObject myJSON = new JSONObject();
         if (!iaccountService.accountExistsById(id)) {
