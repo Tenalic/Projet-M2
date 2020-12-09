@@ -39,6 +39,8 @@
       <v-card-subtitle>
         Argent : {{account.credit}}€
       </v-card-subtitle>
+      <v-divider></v-divider>
+      <v-treeview></v-treeview>
       </v-card>
     </v-row>
     <!-- BOUTON LANCER DE DES -->
@@ -57,7 +59,7 @@
       {{ board[piece.index].id }} {{ board[piece.index].streetName }}
     </v-card-title>
     <v-card-subtitle>
-      {{ board[piece.index].cost }}
+      Valeur : {{ board[piece.index].cost }}€
     </v-card-subtitle>
     <v-btn :id="buyButton" @click="buy(piece.index)" :disabled="!canBuy">Acheter</v-btn>
     <v-btn>Refuser</v-btn>
