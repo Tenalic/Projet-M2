@@ -39,9 +39,9 @@
           :to="select.link"
           >
             <v-card-title primary-title class="layout justify-center">
-            <v-car-text>
+            <!-- <v-card-text> -->
               <div> {{select.title}} </div>
-            </v-car-text>
+            <!-- </v-card-text> -->
             </v-card-title>
           </v-card>
           </v-hover>
