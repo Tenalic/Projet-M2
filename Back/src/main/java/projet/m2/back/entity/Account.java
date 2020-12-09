@@ -32,10 +32,11 @@ public class Account {
     private Collection<Integer> indexSquarePurchased;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Collection<String> prize;
+    @OneToMany
+    private Collection<Prize> prize;
 
     public Account(long id, String lastname, String firstname, String nickname, String email, String password,
-                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<String> prize) {
+                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<Prize> prize) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -49,7 +50,7 @@ public class Account {
     }
 
     public Account(long id, String lastname, String firstname, String nickname, String email, String password,
-                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<String> prize, int indexSquare) {
+                   int nbDice, int credit, Collection<Integer> indexSquarePurchased, Collection<Prize> prize, int indexSquare) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -154,11 +155,11 @@ public class Account {
         this.indexSquarePurchased = indexSquarePurchased;
     }
 
-    public Collection<String> getPrize() {
+    public Collection<Prize> getPrize() {
         return prize;
     }
 
-    public void setPrize(Collection<String> prize) {
+    public void setPrize(Collection<Prize> prize) {
         this.prize = prize;
     }
 
