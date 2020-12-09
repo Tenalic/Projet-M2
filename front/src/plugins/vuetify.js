@@ -11,6 +11,10 @@ export default new Vuetify({
         primary: '#d75838',
         primary_light: '#db653d',
         primary_dark: '#d14232',
+        primary_additional_light: '#e5d5d1',
+        primary_additional_dark: '#363535',
+        primary_shadow: '#b52225',
+        highlight: '#e8904d',
         app_grey: '#EAEDED'
       }
     }

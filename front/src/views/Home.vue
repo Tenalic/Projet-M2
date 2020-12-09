@@ -1,25 +1,9 @@
 <template>
 <div align="center">
-  <v-carousel
-    cycle
-    height="250"
-    hide-delimiter-background
-    show-arrows-on-hover
-    interval="3000"
-  >
-    <v-carousel-item
-      v-for="(slide, i) in slides"
-      :key="i"
-    >
-      <v-sheet
-        :color="colors[i]"
-        height="100%"
-      >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
+  <v-carousel cycle height="250" hide-delimiter-background show-arrows-on-hover interval="3000">
+    <v-carousel-item v-for="(slide, i) in slides" :key="i">
+      <v-sheet :color="colors[i]" height="100%">
+        <v-row class="fill-height" align="center" justify="center">
           <div class="display-3">
             {{ slide }}
           </div>
@@ -31,13 +15,7 @@
       <v-row align="center">
         <v-flex xs6 offset-xs3 v-for="select in team" :key="select.MenuSelected" :to="select.list">
           <v-hover v-slot:default="{ hover }">
-          <v-card
-          color="#d75838"
-          :elevation="hover ? 16 : 2"
-          class="menuTitle"
-          width="55%"
-          :to="select.link"
-          >
+          <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle" width="55%" :to="select.link">
             <v-card-title primary-title class="layout justify-center">
             <!-- <v-card-text> -->
               <div> {{select.title}} </div>
