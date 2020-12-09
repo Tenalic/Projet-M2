@@ -10,6 +10,7 @@ import projet.m2.back.entity.Account;
 import projet.m2.back.service.interfaces.ICodeService;
 
 @RestController
+
 public class CodeController {
 
     @Autowired

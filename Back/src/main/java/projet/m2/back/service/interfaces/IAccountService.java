@@ -12,6 +12,8 @@ public interface IAccountService {
 
     Account getInfo(final long id);
 
+    Account getAccountById(long id);
+
     int changeNbDice(final long id, final int nbDice);
 
     int updateAccount(Account account);
