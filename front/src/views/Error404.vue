@@ -5,7 +5,7 @@
     </v-row>
     <v-row justify="center" align="center">
       <v-col md="6">
-        <v-card flat>
+        <v-card flat class="transparent">
           <p style="font-size: 32px; color: #b52225">
             La page que vous recherchez n'est pas disponible ou n'existe pas ! ¯\_(ツ)_/¯
           </p>

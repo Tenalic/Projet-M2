@@ -5,7 +5,7 @@
     </v-row>
     <v-row justify="center" align="center">
       <v-col md="6">
-        <v-card flat color="mainBackground">
+        <v-card flat color="mainBackground transparent">
           <p style="font-size: 24px; color: #b52225">
             Monopolight est un projet réalisé par les étudiants de seconde année
             de Master TNSI FI à l'Université Polytechnique des Hauts-de-France. Entrez vos
