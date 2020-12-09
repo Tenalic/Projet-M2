@@ -2,8 +2,10 @@ package projet.m2.back.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projet.m2.back.constant.Constant;
 import projet.m2.back.entity.Account;
 import projet.m2.back.service.interfaces.ICodeService;
 
@@ -36,10 +38,23 @@ public class CodeController {
                     responseJSON.put("message", "Error: Erreur inconue");
                     break;
             }
-            return ResponseEntity.status(200).body(responseJSON);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
         } else {
-            Account account = (Account) response;
-            return ResponseEntity.status(200).body(account);
+            Object[] tabObj = (Object[]) response;
+            Account account = (Account) tabObj[0];
+            String prize = (String)tabObj[1];
+            int creditWin = (int)tabObj[2];
+            if(creditWin != 0){
+                responseJSON.put("creditWin", creditWin);
+                responseJSON.put("credit", account.getCredit());
+            }
+            if(prize != null){
+                responseJSON.put("prizeWin", prize);
+                responseJSON.put("prize", account.getPrize());
+            }
+            responseJSON.put("nbDice", account.getNbDice());
+
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
         }
     }
 

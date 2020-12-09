@@ -35,6 +35,7 @@ public class CodeServiceImpl implements ICodeService {
         Integer backCode;
         long codeLong = Long.parseLong(code);
         String prize = null;
+        int creditWin = 0;
         Code codeBDD = repoCode.findByCode(codeLong);
         if (codeBDD != null) {
             if (!codeBDD.isUsed()) {
@@ -48,15 +49,18 @@ public class CodeServiceImpl implements ICodeService {
                             break;
                         case 1:
                             account.setNbDice(account.getNbDice() + 1);
-                            account.setCredit(account.getCredit() + 50);
+                            creditWin = 50;
+                            account.setCredit(account.getCredit() + creditWin);
                             break;
                         case 2:
+                            creditWin = 100;
                             account.setNbDice(account.getNbDice() + 1);
-                            account.setCredit(account.getCredit() + 100);
+                            account.setCredit(account.getCredit() + creditWin);
                             break;
                         case 3:
+                            creditWin = 150;
                             account.setNbDice(account.getNbDice() + 1);
-                            account.setCredit(account.getCredit() + 150);
+                            account.setCredit(account.getCredit() + creditWin);
                             break;
                         case 4:
                             prize = prizeService.randomPrize(account);
@@ -67,7 +71,8 @@ public class CodeServiceImpl implements ICodeService {
                     }
                     repoCode.updateCode(codeBDD);
                     accountService.updateAccount(account);
-                    return account;
+                    Object[] tabObjet = {account, prize, creditWin};
+                    return tabObjet;
                 } else {
                     backCode = 1;
                 }
