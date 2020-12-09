@@ -6,6 +6,7 @@ import GameView from '../views/GameView.vue'
 import Error404 from '../views/Error404.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
+import EnterCode from '../views/EnterCode.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import('@/views/Profile')
+  },
+  {
+    path: '/enterCode',
+    name: 'EnterCode',
+    component: EnterCode
   },
   {
     path: '/game',
