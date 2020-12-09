@@ -167,17 +167,21 @@ public class AccountController {
                 String firstname = (String) accountJson.get("firstname");
                 String nickname = (String) accountJson.get("nickname");
                 HashMap<String, String> listModifyValue = new HashMap<String, String>();
-                if (!lastname.isBlank()) {
-                    listModifyValue.put("lastname", lastname);
+
+                if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
+                    jsonError.put("error", "Un des champs est vide");
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
-                if (!firstname.isBlank()) {
-                    listModifyValue.put("firstname", firstname);
-                }
-                if (!nickname.isBlank() && !iaccountService.accountExistsByNickname(nickname)) {
+
+                listModifyValue.put("lastname", lastname);
+                listModifyValue.put("firstname", firstname);
+                if (!iaccountService.accountExistsByNickname(nickname))
                     listModifyValue.put("nickname", nickname);
-                } else {
-                    jsonError.put("message", "Error: compte inconnu");
+                else {
+                    jsonError.put("error", "Pseudo déjà utilisé");
+                    listModifyValue.put("error", "Pseudo déjà utilisé");
                 }
+
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
