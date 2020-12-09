@@ -13,7 +13,10 @@ import projet.m2.back.service.interfaces.ISquareService;
 import projet.m2.back.service.interfaces.IUtils;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -68,6 +71,31 @@ public class AccountServiceImpl implements IAccountService {
     public int updateAccount(final Account account) {
         accountRepository.updateAccount(account);
         return 0;
+    }
+
+    @Transactional
+    @Override
+    public Account modifyValue(Map<String, String> listModifyValue, long id) {
+        Set<String> keylist = listModifyValue.keySet();
+        Account account = accountRepository.findAccountById(id);
+        if(account != null) {
+            for (String key : keylist) {
+                switch (key){
+                    case "lastname":
+                        account.setLastname(listModifyValue.get(key));
+                        break;
+                    case "firstname" :
+                        account.setFirstname(listModifyValue.get(key));
+                        break;
+                    case "nickname" :
+                        account.setNickname(listModifyValue.get(key));
+                        break;
+                }
+
+            }
+            accountRepository.updateAccount(account);
+        }
+        return account;
     }
 
     @Transactional
@@ -146,6 +174,8 @@ public class AccountServiceImpl implements IAccountService {
 
         return null;
     }
+
+
 
 
 }
