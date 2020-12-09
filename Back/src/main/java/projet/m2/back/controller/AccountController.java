@@ -95,11 +95,11 @@ public class AccountController {
                 String password = (String) accountJson.get("password");
                 Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
                 if (account != null) {
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -160,6 +160,7 @@ public class AccountController {
     public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id) {
         if (updateAccountBody != null) {
             JSONParser parser = new JSONParser();
+            JSONObject jsonError = new JSONObject();
             try {
                 JSONObject accountJson = (JSONObject) parser.parse(updateAccountBody);
                 String lastname = (String) accountJson.get("lastname");
@@ -174,12 +175,13 @@ public class AccountController {
                 }
                 if (nickname != null && !iaccountService.accountExistsByNickname(nickname)) {
                     listModifyValue.put("nickname", nickname);
+                } else {
+                    jsonError.put("message", "Error: compte inconnu");
                 }
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
                 } else {
-                    JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: compte inconnu");
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
