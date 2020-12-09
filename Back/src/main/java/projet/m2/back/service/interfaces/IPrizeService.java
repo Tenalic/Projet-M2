@@ -13,7 +13,7 @@ public interface IPrizeService {
 
     void createDatasetPrize();
 
-    void randomPrize(int choice, Account account);
+    String randomPrize(Account account);
 
 
 }

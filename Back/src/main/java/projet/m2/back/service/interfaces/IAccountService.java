@@ -25,6 +25,7 @@ public interface IAccountService {
     boolean accountExistsByNickname (String nickname);
 
 
+
     /**
      * @param id : id du compte
      * @return : -1 : Compte non trouvé, -2 : nombre de dé insuffisant, -3 : board non trouvé
@@ -33,5 +34,5 @@ public interface IAccountService {
 
     boolean buySquare(long id_account);
 
-    Prize checkSquareColorWinner(long idAccount);
+    String checkSquareColorWinner(long idAccount);
 }

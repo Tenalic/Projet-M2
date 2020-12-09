@@ -11,5 +11,4 @@ public interface PrizeRepository extends CrudRepository<Prize, Long>, PrizeRepos
 
     Prize findById(long id);
 
-
 }

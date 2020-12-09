@@ -33,6 +33,9 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     private ISquareService squareService;
 
+    @Autowired
+    private PrizeServiceImpl prizeService;
+
     @Override
     public Account connection(String email, String password) {
         Account account = accountRepository.findAccountByEmail(email);
@@ -162,7 +165,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     @Transactional
-    public Prize checkSquareColorWinner(long idAccount) {
+    public String checkSquareColorWinner(long idAccount) {
         Account a = accountRepository.findAccountById(idAccount);
         List<Integer> listSquare = (List<Integer>)a.getIndexSquarePurchased();
         for (int i = 0; i < listSquare.size() - 1 ; i++) {
@@ -172,15 +175,16 @@ public class AccountServiceImpl implements IAccountService {
                 if(square1.getColor().equals(square2.getColor())){
                     a.getIndexSquarePurchased().remove(square1.getIndex());
                     a.getIndexSquarePurchased().remove(square2.getIndex());
-                    //TODO CHOISIR LE PRIZE A RETOURNER ET MODIF LA BASE
+                    String prize = prizeService.randomPrize(a);
                     accountRepository.updateAccount(a);
-                    return new Prize("DEBUG", 1, 100);
+                    return prize;
                 }
             }
         }
 
         return null;
     }
+
 
 
 
