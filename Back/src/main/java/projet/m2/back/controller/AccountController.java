@@ -167,13 +167,13 @@ public class AccountController {
                 String firstname = (String) accountJson.get("firstname");
                 String nickname = (String) accountJson.get("nickname");
                 HashMap<String, String> listModifyValue = new HashMap<String, String>();
-                if (lastname != null) {
+                if (!lastname.isBlank()) {
                     listModifyValue.put("lastname", lastname);
                 }
-                if (firstname != null) {
+                if (!firstname.isBlank()) {
                     listModifyValue.put("firstname", firstname);
                 }
-                if (nickname != null && !iaccountService.accountExistsByNickname(nickname)) {
+                if (!nickname.isBlank() && !iaccountService.accountExistsByNickname(nickname)) {
                     listModifyValue.put("nickname", nickname);
                 } else {
                     jsonError.put("message", "Error: compte inconnu");
