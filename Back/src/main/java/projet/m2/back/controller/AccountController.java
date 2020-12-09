@@ -24,39 +24,45 @@ public class AccountController {
     @Autowired
     private IAccountService iaccountService;
 
-    @GetMapping("/account")
-    public JSONObject info(@RequestHeader(value = "IdAccount") long idAccount) {
+    @GetMapping("/account/game-info")
+    public ResponseEntity info(@RequestHeader(value = "IdAccount") long idAccount) {
         JSONObject jsonInfo = new JSONObject();
 
         if(iaccountService.accountExistsById(idAccount)){
             Account a = iaccountService.getInfo(idAccount);
 
-            jsonInfo.put("NbDice", a.getNbDice());
-            jsonInfo.put("Credit", a.getCredit());
-            jsonInfo.put("Prize", a.getPrize());
-            jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
-            jsonInfo.put("IndexSquare", a.getIndexSquare());
+            jsonInfo.put("nbDice", a.getNbDice());
+            jsonInfo.put("credit", a.getCredit());
+            jsonInfo.put("prize", a.getPrize());
+            jsonInfo.put("indexSquarePurchased", a.getIndexSquarePurchased());
+            jsonInfo.put("indexSquare", a.getIndexSquare());
+
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonInfo);
 
         } else {
             jsonInfo.put("message", "Error: Account not found");
+            return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonInfo);
         }
-        return jsonInfo;
+
     }
 
-    @DeleteMapping("/account")
-    public JSONObject deleteAccount(@RequestHeader(value = "IdAccount") long id) {
+    @DeleteMapping("/account/delete")
+    public ResponseEntity deleteAccount(@RequestHeader(value = "IdAccount") long id) {
         JSONObject myJSON = new JSONObject();
         if (!iaccountService.accountExistsById(id)) {
             myJSON.put("message", "Error: Account does not exist");
+            return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
         } else {
             iaccountService.deleteAccount(id);
             if (iaccountService.accountExistsById(id)) {
                 myJSON.put("message", "Error: Account not deleted");
+                return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
             } else {
                 myJSON.put("message", "Account deleted successfully");
+                return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
             }
         }
-        return myJSON;
+
     }
 
     @PostMapping("/account/connection")
