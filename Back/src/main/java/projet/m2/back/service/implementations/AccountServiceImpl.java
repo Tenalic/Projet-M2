@@ -108,6 +108,11 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    public boolean accountExistsByNickname(String nickname) {
+        return accountRepository.existsAccountByNickname(nickname);
+    }
+
+    @Override
     @Transactional
     public Object throwDice(long id) {
         Integer backCode;

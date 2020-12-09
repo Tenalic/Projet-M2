@@ -22,6 +22,9 @@ public interface IAccountService {
 
     boolean accountExistsById(long id);
 
+    boolean accountExistsByNickname (String nickname);
+
+
     /**
      * @param id : id du compte
      * @return : -1 : Compte non trouvé, -2 : nombre de dé insuffisant, -3 : board non trouvé

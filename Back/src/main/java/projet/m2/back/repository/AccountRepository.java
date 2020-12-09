@@ -18,4 +18,6 @@ public interface AccountRepository extends CrudRepository<Account, Long>, Accoun
 
     boolean existsAccountById(long id);
 
+    boolean existsAccountByNickname(String nickname);
+
 }

@@ -26,15 +26,19 @@ public class AccountController {
 
     @GetMapping("/account")
     public JSONObject info(@RequestHeader(value = "IdAccount") long idAccount) {
-        Account a = iaccountService.getInfo(idAccount);
         JSONObject jsonInfo = new JSONObject();
 
-        jsonInfo.put("NbDice", a.getNbDice());
-        jsonInfo.put("Credit", a.getCredit());
-        jsonInfo.put("Prize", a.getPrize());
-        jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
-        jsonInfo.put("IndexSquare", a.getIndexSquare());
+        if(iaccountService.accountExistsById(idAccount)){
+            Account a = iaccountService.getInfo(idAccount);
 
+            jsonInfo.put("NbDice", a.getNbDice());
+            jsonInfo.put("Credit", a.getCredit());
+            jsonInfo.put("Prize", a.getPrize());
+            jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
+
+        } else {
+            jsonInfo.put("error", "Account not found");
+        }
         return jsonInfo;
     }
 
@@ -91,11 +95,11 @@ public class AccountController {
                 String password = (String) accountJson.get("password");
                 Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
                 if (account != null) {
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -103,7 +107,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/dice")
@@ -113,8 +117,23 @@ public class AccountController {
             Account a = (Account) o;
             return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(a);
         } else {
-            Integer code = (Integer) o;
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(code);
+            JSONObject responseJSON = new JSONObject();
+            Integer errorCode = (Integer) o;
+            switch (errorCode) {
+                case -1:
+                    responseJSON.put("message", "Error: Compte non trouvé");
+                    break;
+                case -2:
+                    responseJSON.put("message", "Error: nombre de dé insuffisant");
+                    break;
+                case -3:
+                    responseJSON.put("message", "Error: board non trouvé");
+                    break;
+                default:
+                    responseJSON.put("message", "Error: Erreur inconue");
+                    break;
+            }
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
         }
     }
 
@@ -138,29 +157,35 @@ public class AccountController {
 
 
     @PutMapping("/account/update")
-    public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id){
-        if(updateAccountBody != null){
+    public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id) {
+        if (updateAccountBody != null) {
             JSONParser parser = new JSONParser();
+            JSONObject jsonError = new JSONObject();
             try {
                 JSONObject accountJson = (JSONObject) parser.parse(updateAccountBody);
                 String lastname = (String) accountJson.get("lastname");
                 String firstname = (String) accountJson.get("firstname");
                 String nickname = (String) accountJson.get("nickname");
-                HashMap<String,String> listModifyValue = new HashMap<String, String>();
-                if(lastname != null) {
-                    listModifyValue.put("lastname", lastname);
+                HashMap<String, String> listModifyValue = new HashMap<String, String>();
+
+                if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
+                    jsonError.put("error", "Un des champs est vide");
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
-                if (firstname != null) {
-                    listModifyValue.put("firstname", firstname);
-                }
-                if (nickname != null) {
+
+                listModifyValue.put("lastname", lastname);
+                listModifyValue.put("firstname", firstname);
+                if (!iaccountService.accountExistsByNickname(nickname))
                     listModifyValue.put("nickname", nickname);
+                else {
+                    jsonError.put("error", "Pseudo déjà utilisé");
+                    listModifyValue.put("error", "Pseudo déjà utilisé");
                 }
+
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
                 } else {
-                    JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: compte inconnu");
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
