@@ -65,6 +65,10 @@
 </template>
 
 <script>
+import Api from '../api/Api.js'
+
+const api = new Api()
+
 export default {
   name: 'Signup',
   data () {
@@ -85,11 +89,25 @@ export default {
     }
   },
   methods: {
-    submit () {
-      this.$refs.loginForm.validate()
+    async submit () {
+      try {
+        if (this.$refs.signupForm.validate()) {
+          console.log('submit')
+          const data = await api.createUser({
+            lastname: this.lastname,
+            firstname: this.firstname,
+            nickname: this.nickname,
+            email: this.email,
+            password: this.password
+          })
+          console.log(data)
+        }
+      } catch (err) {
+        console.error(err)
+      }
     },
     reset () {
-      this.$refs.loginForm.reset()
+      this.$refs.signupForm.reset()
     }
   }
 }
