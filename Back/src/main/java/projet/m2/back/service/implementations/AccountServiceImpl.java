@@ -121,8 +121,7 @@ public class AccountServiceImpl implements IAccountService {
             if (account.getNbDice() >= 2) {
                 account.setNbDice(account.getNbDice() - 2);
                 int diceResult[] = {utils.rand(1, 6), utils.rand(1, 6)};
-                account = boardService.moveOnBoard(account, diceResult[0]);
-                account = boardService.moveOnBoard(account, diceResult[1]);
+                account = boardService.moveOnBoard(account, diceResult[0]+diceResult[1]);
                 if(account != null) {
                     backCode = account.getIndexSquare();
                     accountRepository.updateAccount(account);

@@ -152,10 +152,8 @@ public class AccountController {
 
     @PostMapping("/account/buy")
     public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id) {
-        boolean buy = iaccountService.buySquare(id);
-
         JSONObject responseJSON = new JSONObject();
-        if (buy) {
+        if (iaccountService.buySquare(id)) {
             Account a = iaccountService.getInfo(id);
             Prize prizeWin = iaccountService.checkSquareColorWinner(id);
             if (prizeWin != null) {
@@ -164,6 +162,8 @@ public class AccountController {
             }
             responseJSON.put("indexSquarePurchased", a.getIndexSquarePurchased());
             responseJSON.put("credit", a.getCredit());
+        }else{
+            responseJSON.put("message", "Error: Impossible d'acheter la case.");
         }
         return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
     }
