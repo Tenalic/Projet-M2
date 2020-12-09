@@ -35,9 +35,10 @@ public class AccountController {
             jsonInfo.put("Credit", a.getCredit());
             jsonInfo.put("Prize", a.getPrize());
             jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
+            jsonInfo.put("IndexSquare", a.getIndexSquare());
 
         } else {
-            jsonInfo.put("error", "Account not found");
+            jsonInfo.put("message", "Error: Account not found");
         }
         return jsonInfo;
     }
@@ -113,10 +114,17 @@ public class AccountController {
     @PostMapping("/account/dice")
     public ResponseEntity throwDice(@RequestHeader(value = "IdAccount") long id) {
         Object o = iaccountService.throwDice(id);
-        if (o instanceof Account) {
-            Account a = (Account) o;
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(a);
-        } else {
+        if (o instanceof Object[]) {
+            Object[]  tabO = (Object[])o;
+            Account a = (Account) tabO[0];
+            int[] diceResult = (int[]) tabO[1];
+            JSONObject jsonResult = new JSONObject();
+            jsonResult.put("nbDice", a.getNbDice());
+            jsonResult.put("indexSquare", a.getIndexSquare());
+            jsonResult.put("diceResult", diceResult);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonResult);
+        }
+        if(o instanceof Integer){
             JSONObject responseJSON = new JSONObject();
             Integer errorCode = (Integer) o;
             switch (errorCode) {
@@ -134,7 +142,12 @@ public class AccountController {
                     break;
             }
             return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+
         }
+        //TODO CHECK ERROR CODE
+        JSONObject jsonError = new JSONObject();
+        jsonError.put("message", "Error: Une erreur inattendue est survenue.");
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/buy")
