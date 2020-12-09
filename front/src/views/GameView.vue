@@ -50,7 +50,7 @@
     <v-card>
     <v-progress-linear value="100" :color="board[piece.index].color"/>
     <v-card-title>
-      {{ board[piece.index].streetName }}
+      {{ board[piece.index].id }} {{ board[piece.index].streetName }}
     </v-card-title>
     <v-card-subtitle>
       {{ board[piece.index].cost }}
