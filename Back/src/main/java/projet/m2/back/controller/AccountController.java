@@ -157,27 +157,27 @@ public class AccountController {
 
 
     @PutMapping("/account/update")
-    public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id){
-        if(updateAccountBody != null){
+    public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id) {
+        if (updateAccountBody != null) {
             JSONParser parser = new JSONParser();
             try {
                 JSONObject accountJson = (JSONObject) parser.parse(updateAccountBody);
                 String lastname = (String) accountJson.get("lastname");
                 String firstname = (String) accountJson.get("firstname");
                 String nickname = (String) accountJson.get("nickname");
-                HashMap<String,String> listModifyValue = new HashMap<String, String>();
-                if(lastname != null) {
+                HashMap<String, String> listModifyValue = new HashMap<String, String>();
+                if (lastname != null) {
                     listModifyValue.put("lastname", lastname);
                 }
                 if (firstname != null) {
                     listModifyValue.put("firstname", firstname);
                 }
-                if (nickname != null) {
+                if (nickname != null && !iaccountService.accountExistsByNickname(nickname)) {
                     listModifyValue.put("nickname", nickname);
                 }
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: compte inconnu");
