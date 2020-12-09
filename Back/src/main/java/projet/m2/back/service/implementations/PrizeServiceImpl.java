@@ -74,6 +74,7 @@ public class PrizeServiceImpl implements IPrizeService {
     }
 
     @Override
+    @Transactional
     public void createDatasetPrize() {
         Prize p = new Prize("prize1",100 , 100);
         repo.save(p);
@@ -93,30 +94,11 @@ public class PrizeServiceImpl implements IPrizeService {
         repo.save(p);
     }
 
+
     @Override
-    public void randomPrize (int choice, Account account)  //choice comporte le resultat de gain
+    @Transactional
+    public String randomPrize (Account account)  //choice comporte le resultat de gain
     {
-        if(choice == 0)//gagne juste un dé
-        {
-            account.setNbDice(account.getNbDice() + 1);
-        }
-        if (choice == 1) //gagne un dé + 50pts
-        {
-            account.setNbDice(account.getNbDice() + 1);
-            account.setCredit(account.getCredit() + 50);
-        }
-        if (choice == 2) // gagne un dé + 100 pts
-        {
-            account.setNbDice(account.getNbDice() + 1);
-            account.setCredit(account.getCredit() + 100);
-        }
-        if (choice == 3)  // gagne un dé + 150pts
-        {
-            account.setNbDice(account.getNbDice() + 1);
-            account.setCredit(account.getCredit() + 150);
-        }
-        if (choice == 4)  //donne un dé et un prix aléatoire au compte
-        {
             Random r = new Random();
             account.setNbDice(account.getNbDice() + 1);
             Iterable<Prize> tmp = getAllPrize(); //tout les prize
@@ -129,13 +111,13 @@ public class PrizeServiceImpl implements IPrizeService {
                 }
             }
             int tmpRand = r.nextInt(listPrize.size());
+            Prize prize = listPrize.get(tmpRand);
             //décrémenter la quantité
-            listPrize.get(tmpRand).setQuantity(listPrize.get(tmpRand).getQuantity() - 1);
+            prize.setQuantity(prize.getQuantity() - 1);
             //update le prize dans la bdd
-            repo.updatePrize(listPrize.get(tmpRand).getId(), listPrize.get(tmpRand).getQuantity());
-            account.getPrize().add(listPrize.get(tmpRand).getReward());
-            iAccountService.updateAccount(account);
-        }
+            repo.updatePrize(prize.getId(), prize.getQuantity());
+            account.getPrize().add(prize.getReward());
+            return prize.getReward();
     }
 
 }

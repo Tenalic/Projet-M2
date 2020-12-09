@@ -158,7 +158,7 @@ public class AccountController {
         JSONObject responseJSON = new JSONObject();
         if (iaccountService.buySquare(id)) {
             Account a = iaccountService.getInfo(id);
-            Prize prizeWin = iaccountService.checkSquareColorWinner(id);
+            String prizeWin = iaccountService.checkSquareColorWinner(id);
             if (prizeWin != null) {
                 responseJSON.put("prizeWin", prizeWin);
                 responseJSON.put("prize", a.getPrize());

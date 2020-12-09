@@ -34,6 +34,7 @@ public class CodeServiceImpl implements ICodeService {
     public Object useCode(final long idAccount, final String code) {
         Integer backCode;
         long codeLong = Long.parseLong(code);
+        String prize = null;
         Code codeBDD = repoCode.findByCode(codeLong);
         if (codeBDD != null) {
             if (!codeBDD.isUsed()) {
@@ -58,7 +59,7 @@ public class CodeServiceImpl implements ICodeService {
                             account.setCredit(account.getCredit() + 150);
                             break;
                         case 4:
-                            //TODO gerer génération
+                            prize = prizeService.randomPrize(account);
                             break;
                         default:
                             account.setNbDice(account.getNbDice() + 1);
