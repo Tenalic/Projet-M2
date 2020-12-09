@@ -46,6 +46,10 @@
       <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
       Lancez vos dés
     </v-btn>
+    <!-- BOUTON ENTRER UN CODE -->
+    <v-btn>
+      Entrer un code
+    </v-btn>
     <!-- CARTE D'INFOS SUR LA RUE -->
     <v-card>
     <v-progress-linear value="100" :color="board[piece.index].color"/>
