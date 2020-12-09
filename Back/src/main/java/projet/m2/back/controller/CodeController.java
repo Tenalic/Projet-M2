@@ -26,7 +26,7 @@ public class CodeController {
             Integer codeErreur = (Integer) response;
             switch (codeErreur) {
                 case 1:
-                    responseJSON.put("message", "Error: Code non trouvé");
+                    responseJSON.put("message", "Error: Compte non trouvé");
                     break;
                 case 2:
                     responseJSON.put("message", "Error: Code déjà utilisé");
