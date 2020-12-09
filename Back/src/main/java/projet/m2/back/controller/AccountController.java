@@ -71,7 +71,7 @@ public class AccountController {
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
                     if (account != null) {
-                        return ResponseEntity.status(200).body(account);
+                        return ResponseEntity.status(400).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
                     exception.printStackTrace();
@@ -80,7 +80,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: autorization error");
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
+        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
     }
 
     @PostMapping("/account/create")
@@ -182,7 +182,7 @@ public class AccountController {
                 HashMap<String, String> listModifyValue = new HashMap<String, String>();
 
                 if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
-                    jsonError.put("error", "Un des champs est vide");
+                    jsonError.put("message", "Error: Un des champs est vide");
                     return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
 
@@ -191,8 +191,8 @@ public class AccountController {
                 if (!iaccountService.accountExistsByNickname(nickname))
                     listModifyValue.put("nickname", nickname);
                 else {
-                    jsonError.put("error", "Pseudo déjà utilisé");
-                    listModifyValue.put("error", "Pseudo déjà utilisé");
+                    jsonError.put("message", "Error: Pseudo déjà utilisé");
+                    listModifyValue.put("message", "Error: Pseudo déjà utilisé");
                 }
 
                 Account account = iaccountService.modifyValue(listModifyValue, id);
