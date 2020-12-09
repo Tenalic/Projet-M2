@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Prize;
 import projet.m2.back.repository.PrizeRepository;
+import projet.m2.back.repository.custom.implementations.PrizeRepositoryImpl;
 import projet.m2.back.service.interfaces.IPrizeService;
 import projet.m2.back.service.interfaces.IUtils;
 
@@ -18,6 +19,9 @@ public class PrizeServiceImpl implements IPrizeService {
 
     @Autowired
     PrizeRepository repo;
+
+
+    PrizeRepositoryImpl prizeRepositoryImpl;
 
     @Autowired
     IUtils utils;
@@ -87,7 +91,7 @@ public class PrizeServiceImpl implements IPrizeService {
         repo.save(p);
     }
 
-
+    @Override
     public void randomPrize (int choice, Account account)  //choice comporte le resultat de gain
     {
         if(choice == 0)//gagne juste un dé
@@ -113,28 +117,23 @@ public class PrizeServiceImpl implements IPrizeService {
         {
             Random r = new Random();
             account.setNbDice(account.getNbDice() + 1);
-            Iterable<Prize> tmp = getAllPrize();
-            ArrayList<Prize> listPrize = new ArrayList<>();
+            Iterable<Prize> tmp = getAllPrize(); //tout les prize
+            ArrayList<Prize> listPrize = new ArrayList<>();//convertir en ArrayList que ceux qui ont de la quantité
             for(Prize p : tmp)
             {
-                listPrize.add(p);
+                if(p.getQuantity()<0)
+                {
+                    listPrize.add(p);
+                }
             }
             int tmpRand = r.nextInt(listPrize.size());
-            Collection<Prize> prize = account.getPrize();
-            prize.add(listPrize.get(tmpRand));
-            //delete le prix de la bdd si il y en a qu'un
-            if(listPrize.get(tmpRand).getQuantity() == 1)
-            {
-                repo.delete(listPrize.get(tmpRand));
-            }
-            else
-            {
-                //décrementer la quantité
-                listPrize.get(tmpRand).setQuantity(listPrize.get(tmpRand).getQuantity() - 1);
-                //update le prize dans la bdd
-
-            }
-
+            Collection<String> prize = account.getPrize();
+            prize.add(listPrize.get(tmpRand).getReward());
+            //décrémenter la quantité
+            listPrize.get(tmpRand).setQuantity(listPrize.get(tmpRand).getQuantity() - 1);
+            //update le prize dans la bdd
+            prizeRepositoryImpl.updatePrize(listPrize.get(tmpRand).getId(), listPrize.get(tmpRand).getQuantity());
+            account.setPrize(account.getPrize().add(listPrize.get(tmpRand).getReward()));
         }
     }
 
