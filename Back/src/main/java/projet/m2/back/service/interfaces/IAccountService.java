@@ -3,6 +3,8 @@ package projet.m2.back.service.interfaces;
 import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Prize;
 
+import java.util.Map;
+
 public interface IAccountService {
     Account connection(final String email, final String password);
 
@@ -13,6 +15,8 @@ public interface IAccountService {
     int changeNbDice(final long id, final int nbDice);
 
     int updateAccount(Account account);
+
+   // Account modifyValue(Map<String,String> listModifyValue);
 
     void deleteAccount(long id);
 
