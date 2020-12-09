@@ -63,22 +63,41 @@ export default {
       },
       prizeError: {
         message: 'Error: ça va pas le faire'
-      }
+      },
+      requestRes: null
     }
   },
   methods: {
     get_prizes () {
-      var obj = axios.get()
-      obj = this.prizeError
-      if ('message' in obj) {
-        console.log('error ', obj.message)
-        console.log('code ', this.code)
-        if (this.code === '123') {
-          console.log('errur validé 123')
-          console.log('after')
-          this.couponNonValide = true
+      console.log('get_prizes of ', this.code)
+      // var obj = null
+      // test code 9559948 or 4430164 or 3030553
+      const config = {
+        headers: {
+          IdAccount: 123
         }
       }
+      const data = {
+      }
+
+      // var obj = null
+      // var headers = { IdAccount: 123 }
+      var url = 'http://monopolym2tnsi.hopto.org:8080/code/use/' + this.code
+      axios.post(url, data, config)
+        .then(res => {
+          // console.log(res.data)
+          var obj = res.data
+          if ('message' in obj) {
+            console.log('Error: ', obj.message)
+          }
+          if ('credit' in obj) {
+          }
+          if ('prize' in obj) {
+          }
+          if (!('credit' in obj) && !('prize' in obj) && !('message' in obj)) {
+          }
+        })
+        .catch(err => console.log('error ', err))
     }
   }
 }
