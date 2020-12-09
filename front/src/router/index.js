@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import GameView from '../views/GameView.vue'
-import Error404 from '../views/Error404.vue'
 
 Vue.use(VueRouter)
 
@@ -12,8 +9,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-    // children: [
-    // ]
   },
   {
     path: '/profile',
@@ -23,25 +18,30 @@ const routes = [
   {
     path: '/game',
     name: 'GameView',
-    component: GameView
-  },
-  {
-    path: '/game',
-    name: 'GameView',
-    component: GameView
+    component: () => import('@/views/GameView')
   },
   {
     path: '/about',
     name: 'About',
-    component: About
+    component: () => import('@/views/About')
   },
   {
     path: '*',
     name: 'Error404',
-    component: Error404,
+    component: () => import('@/views/Error404'),
     meta: {
       title: 'Error 404 - Page not found'
     }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login')
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: () => import('@/views/Signup')
   }
 ]
 
