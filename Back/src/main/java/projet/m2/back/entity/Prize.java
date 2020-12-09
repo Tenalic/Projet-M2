@@ -12,6 +12,7 @@ public class Prize {
     private long id;
     private String reward;
     private int quantity;
+    private int probWeight;
 
     public Prize() {
     }
@@ -56,5 +57,13 @@ public class Prize {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getProbWeight() {
+        return probWeight;
+    }
+
+    public void setProbWeight(int probWeight) {
+        this.probWeight = probWeight;
     }
 }
