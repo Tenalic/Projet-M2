@@ -13,7 +13,6 @@ import projet.m2.back.entity.Board;
 import projet.m2.back.service.interfaces.IBoardService;
 
 @RestController
-@CrossOrigin
 public class BoardController {
     @Autowired
     private IBoardService boardService;

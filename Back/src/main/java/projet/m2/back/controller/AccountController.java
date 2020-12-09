@@ -19,7 +19,6 @@ import java.util.Base64;
 import java.util.HashMap;
 
 @RestController
-@CrossOrigin
 public class AccountController {
 
     @Autowired
