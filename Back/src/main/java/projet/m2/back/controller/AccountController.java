@@ -50,7 +50,6 @@ public class AccountController {
             myJSON.put("message", "Error: Account does not exist");
         } else {
             iaccountService.deleteAccount(id);
-            System.out.println(iaccountService.accountExistsById(id));
             if (iaccountService.accountExistsById(id)) {
                 myJSON.put("message", "Error: Account not deleted");
             } else {
@@ -71,7 +70,7 @@ public class AccountController {
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
                     if (account != null) {
-                        return ResponseEntity.status(201).body(account);
+                        return ResponseEntity.status(302).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
                     exception.printStackTrace();
@@ -100,7 +99,7 @@ public class AccountController {
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -127,27 +126,31 @@ public class AccountController {
         if(o instanceof Integer){
             JSONObject responseJSON = new JSONObject();
             Integer errorCode = (Integer) o;
+            int status = 200;
             switch (errorCode) {
                 case -1:
                     responseJSON.put("message", "Error: Compte non trouvé");
+                    status = 400;
                     break;
                 case -2:
                     responseJSON.put("message", "Error: nombre de dé insuffisant");
+                    status = 400;
                     break;
                 case -3:
                     responseJSON.put("message", "Error: board non trouvé");
+                    status = 400;
                     break;
                 default:
                     responseJSON.put("message", "Error: Erreur inconue");
+                    status = 400;
                     break;
             }
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+            return ResponseEntity.status(status).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
 
         }
-        //TODO CHECK ERROR CODE
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/buy")
@@ -165,9 +168,8 @@ public class AccountController {
         }else{
             responseJSON.put("message", "Error: Impossible d'acheter la case.");
         }
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+        return ResponseEntity.status(202).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
     }
-
 
     @PutMapping("/account/update")
     public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id) {
@@ -179,7 +181,7 @@ public class AccountController {
                 String lastname = (String) accountJson.get("lastname");
                 String firstname = (String) accountJson.get("firstname");
                 String nickname = (String) accountJson.get("nickname");
-                HashMap<String, String> listModifyValue = new HashMap<String, String>();
+                HashMap<String, String> listModifyValue = new HashMap<>();
 
                 if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
                     jsonError.put("message", "Error: Un des champs est vide");
@@ -197,10 +199,10 @@ public class AccountController {
 
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
+                    return ResponseEntity.status(406).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
                 } else {
                     jsonError.put("message", "Error: compte inconnu");
-                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -209,6 +211,6 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: erreur inconnu");
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 }
