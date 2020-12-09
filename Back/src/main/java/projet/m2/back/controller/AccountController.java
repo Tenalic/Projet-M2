@@ -71,7 +71,7 @@ public class AccountController {
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
                     if (account != null) {
-                        return ResponseEntity.status(400).body(account);
+                        return ResponseEntity.status(201).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
                     exception.printStackTrace();
@@ -152,10 +152,8 @@ public class AccountController {
 
     @PostMapping("/account/buy")
     public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id) {
-        boolean buy = iaccountService.buySquare(id);
-
         JSONObject responseJSON = new JSONObject();
-        if (buy) {
+        if (iaccountService.buySquare(id)) {
             Account a = iaccountService.getInfo(id);
             Prize prizeWin = iaccountService.checkSquareColorWinner(id);
             if (prizeWin != null) {
