@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
 
 @RestController
 public class AccountController {
@@ -32,6 +33,7 @@ public class AccountController {
         jsonInfo.put("Credit", a.getCredit());
         jsonInfo.put("Prize", a.getPrize());
         jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
+        jsonInfo.put("IndexSquare", a.getIndexSquare());
 
         return jsonInfo;
     }
@@ -151,7 +153,39 @@ public class AccountController {
 
 
     @PutMapping("/account/update")
-    public String updateAccount(Account account) {
-        return null;
+    public ResponseEntity updateAccount(@RequestBody String updateAccountBody, @RequestHeader(value = "IdAccount") long id){
+        if(updateAccountBody != null){
+            JSONParser parser = new JSONParser();
+            try {
+                JSONObject accountJson = (JSONObject) parser.parse(updateAccountBody);
+                String lastname = (String) accountJson.get("lastname");
+                String firstname = (String) accountJson.get("firstname");
+                String nickname = (String) accountJson.get("nickname");
+                HashMap<String,String> listModifyValue = new HashMap<String, String>();
+                if(lastname != null) {
+                    listModifyValue.put("lastname", lastname);
+                }
+                if (firstname != null) {
+                    listModifyValue.put("firstname", firstname);
+                }
+                if (nickname != null) {
+                    listModifyValue.put("nickname", nickname);
+                }
+                Account account = iaccountService.modifyValue(listModifyValue, id);
+                if (account != null) {
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                } else {
+                    JSONObject jsonError = new JSONObject();
+                    jsonError.put("message", "Error: compte inconnu");
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                }
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        JSONObject jsonError = new JSONObject();
+        jsonError.put("message", "Error: erreur inconnu");
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 }
