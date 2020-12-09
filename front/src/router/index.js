@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import GameView from '../views/GameView.vue'
 import Error404 from '../views/Error404.vue'
+import Login from '../views/Login.vue'
+import Signup from '../views/Signup.vue'
 
 Vue.use(VueRouter)
 
@@ -42,6 +44,15 @@ const routes = [
     meta: {
       title: 'Error 404 - Page not found'
     }
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   }
 ]
 
