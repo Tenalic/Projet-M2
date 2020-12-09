@@ -107,32 +107,33 @@ public class AccountController {
     }
 
     @PostMapping("/account/dice")
-    public void throwDice(@RequestHeader(value = "IdAccount") long id) {
+    public ResponseEntity throwDice(@RequestHeader(value = "IdAccount") long id) {
         Object o = iaccountService.throwDice(id);
-        if(o instanceof Account){
-            Account a = (Account)o;
-        }
-        if(o instanceof Integer){
-            Integer code = (Integer)o;
+        if (o instanceof Account) {
+            Account a = (Account) o;
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(a);
+        } else {
+            Integer code = (Integer) o;
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(code);
         }
     }
 
     @PostMapping("/account/buy")
-    public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id){
-            boolean buy = iaccountService.buySquare(id);
+    public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id) {
+        boolean buy = iaccountService.buySquare(id);
 
-            JSONObject responseJSON = new JSONObject();
-            if(buy){
-                Account a = iaccountService.getInfo(id);
-                Prize prizeWin = iaccountService.checkSquareColorWinner(id);
-                if(prizeWin != null){
-                    responseJSON.put("prizeWin", prizeWin);
-                    responseJSON.put("prize", a.getPrize());
-                }
-                responseJSON.put("indexSquarePurchased", a.getIndexSquarePurchased());
-                responseJSON.put("credit", a.getCredit());
+        JSONObject responseJSON = new JSONObject();
+        if (buy) {
+            Account a = iaccountService.getInfo(id);
+            Prize prizeWin = iaccountService.checkSquareColorWinner(id);
+            if (prizeWin != null) {
+                responseJSON.put("prizeWin", prizeWin);
+                responseJSON.put("prize", a.getPrize());
             }
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+            responseJSON.put("indexSquarePurchased", a.getIndexSquarePurchased());
+            responseJSON.put("credit", a.getCredit());
+        }
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
     }
 
 
