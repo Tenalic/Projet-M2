@@ -35,9 +35,10 @@ public class AccountController {
             jsonInfo.put("Credit", a.getCredit());
             jsonInfo.put("Prize", a.getPrize());
             jsonInfo.put("IndexSquarePurchased", a.getIndexSquarePurchased());
+            jsonInfo.put("IndexSquare", a.getIndexSquare());
 
         } else {
-            jsonInfo.put("error", "Account not found");
+            jsonInfo.put("message", "Error: Account not found");
         }
         return jsonInfo;
     }
@@ -70,7 +71,7 @@ public class AccountController {
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
                     if (account != null) {
-                        return ResponseEntity.status(200).body(account);
+                        return ResponseEntity.status(201).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
                     exception.printStackTrace();
@@ -79,7 +80,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: autorization error");
-        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
+        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
     }
 
     @PostMapping("/account/create")
@@ -113,10 +114,17 @@ public class AccountController {
     @PostMapping("/account/dice")
     public ResponseEntity throwDice(@RequestHeader(value = "IdAccount") long id) {
         Object o = iaccountService.throwDice(id);
-        if (o instanceof Account) {
-            Account a = (Account) o;
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(a);
-        } else {
+        if (o instanceof Object[]) {
+            Object[]  tabO = (Object[])o;
+            Account a = (Account) tabO[0];
+            int[] diceResult = (int[]) tabO[1];
+            JSONObject jsonResult = new JSONObject();
+            jsonResult.put("nbDice", a.getNbDice());
+            jsonResult.put("indexSquare", a.getIndexSquare());
+            jsonResult.put("diceResult", diceResult);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonResult);
+        }
+        if(o instanceof Integer){
             JSONObject responseJSON = new JSONObject();
             Integer errorCode = (Integer) o;
             switch (errorCode) {
@@ -134,15 +142,18 @@ public class AccountController {
                     break;
             }
             return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+
         }
+        //TODO CHECK ERROR CODE
+        JSONObject jsonError = new JSONObject();
+        jsonError.put("message", "Error: Une erreur inattendue est survenue.");
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/buy")
     public ResponseEntity buySquare(@RequestHeader(value = "IdAccount") long id) {
-        boolean buy = iaccountService.buySquare(id);
-
         JSONObject responseJSON = new JSONObject();
-        if (buy) {
+        if (iaccountService.buySquare(id)) {
             Account a = iaccountService.getInfo(id);
             Prize prizeWin = iaccountService.checkSquareColorWinner(id);
             if (prizeWin != null) {
@@ -169,7 +180,7 @@ public class AccountController {
                 HashMap<String, String> listModifyValue = new HashMap<String, String>();
 
                 if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
-                    jsonError.put("error", "Un des champs est vide");
+                    jsonError.put("message", "Error: Un des champs est vide");
                     return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
 
@@ -178,8 +189,8 @@ public class AccountController {
                 if (!iaccountService.accountExistsByNickname(nickname))
                     listModifyValue.put("nickname", nickname);
                 else {
-                    jsonError.put("error", "Pseudo déjà utilisé");
-                    listModifyValue.put("error", "Pseudo déjà utilisé");
+                    jsonError.put("message", "Error: Pseudo déjà utilisé");
+                    listModifyValue.put("message", "Error: Pseudo déjà utilisé");
                 }
 
                 Account account = iaccountService.modifyValue(listModifyValue, id);

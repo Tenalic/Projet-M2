@@ -6,6 +6,8 @@ import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Prize;
 import projet.m2.back.repository.PrizeRepository;
 import projet.m2.back.repository.custom.implementations.PrizeRepositoryImpl;
+import projet.m2.back.repository.custom.interfaces.PrizeRepositoryCustom;
+import projet.m2.back.service.interfaces.IAccountService;
 import projet.m2.back.service.interfaces.IPrizeService;
 import projet.m2.back.service.interfaces.IUtils;
 
@@ -20,15 +22,15 @@ public class PrizeServiceImpl implements IPrizeService {
     @Autowired
     PrizeRepository repo;
 
-
-    PrizeRepositoryImpl prizeRepositoryImpl;
+    @Autowired
+    IAccountService iAccountService;
 
     @Autowired
     IUtils utils;
 
     @Transactional
-    public void createPrize(String reward, int quantity) {
-        repo.save(new Prize(reward, quantity));
+    public void createPrize(String reward, int quantity, int weight) {
+        repo.save(new Prize(reward, quantity, weight));
     }
 
     @Override
@@ -73,21 +75,21 @@ public class PrizeServiceImpl implements IPrizeService {
 
     @Override
     public void createDatasetPrize() {
-        Prize p = new Prize("prize1",100 );
+        Prize p = new Prize("prize1",100 , 100);
         repo.save(p);
-        p = new Prize("prize2",100 );
+        p = new Prize("prize2",100, 100 );
         repo.save(p);
-        p = new Prize("prize3",70 );
+        p = new Prize("prize3",70, 80 );
         repo.save(p);
-        p = new Prize("prize4",50 );
+        p = new Prize("prize4",50, 40 );
         repo.save(p);
-        p = new Prize("prize5",40 );
+        p = new Prize("prize5",40, 30 );
         repo.save(p);
-        p = new Prize("prize6",40 );
+        p = new Prize("prize6",40, 20 );
         repo.save(p);
-        p = new Prize("prize7",30 );
+        p = new Prize("prize7",30, 20 );
         repo.save(p);
-        p = new Prize("prize8",4 );
+        p = new Prize("prize8",4, 5 );
         repo.save(p);
     }
 
@@ -121,19 +123,18 @@ public class PrizeServiceImpl implements IPrizeService {
             ArrayList<Prize> listPrize = new ArrayList<>();//convertir en ArrayList que ceux qui ont de la quantité
             for(Prize p : tmp)
             {
-                if(p.getQuantity()<0)
+                if(p.getQuantity()>0)
                 {
                     listPrize.add(p);
                 }
             }
             int tmpRand = r.nextInt(listPrize.size());
-            Collection<String> prize = account.getPrize();
-            prize.add(listPrize.get(tmpRand).getReward());
             //décrémenter la quantité
             listPrize.get(tmpRand).setQuantity(listPrize.get(tmpRand).getQuantity() - 1);
             //update le prize dans la bdd
-            prizeRepositoryImpl.updatePrize(listPrize.get(tmpRand).getId(), listPrize.get(tmpRand).getQuantity());
-            account.setPrize(account.getPrize().add(listPrize.get(tmpRand).getReward()));
+            repo.updatePrize(listPrize.get(tmpRand).getId(), listPrize.get(tmpRand).getQuantity());
+            account.getPrize().add(listPrize.get(tmpRand).getReward());
+            iAccountService.updateAccount(account);
         }
     }
 

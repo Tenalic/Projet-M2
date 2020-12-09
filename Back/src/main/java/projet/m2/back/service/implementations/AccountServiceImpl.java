@@ -120,11 +120,14 @@ public class AccountServiceImpl implements IAccountService {
         if (account != null) {
             if (account.getNbDice() >= 2) {
                 account.setNbDice(account.getNbDice() - 2);
-                account = boardService.moveOnBoard(account, utils.rand(1, 6));
+                int diceResult[] = {utils.rand(1, 6), utils.rand(1, 6)};
+                account = boardService.moveOnBoard(account, diceResult[0]);
+                account = boardService.moveOnBoard(account, diceResult[1]);
                 if(account != null) {
                     backCode = account.getIndexSquare();
                     accountRepository.updateAccount(account);
-                    return account;
+                    Object[] returnFunc = {account, diceResult};
+                    return returnFunc;
                 } else {
                     backCode = -3;
                 }
@@ -172,7 +175,7 @@ public class AccountServiceImpl implements IAccountService {
                     a.getIndexSquarePurchased().remove(square2.getIndex());
                     //TODO CHOISIR LE PRIZE A RETOURNER ET MODIF LA BASE
                     accountRepository.updateAccount(a);
-                    return new Prize("DEBUG", 1);
+                    return new Prize("DEBUG", 1, 100);
                 }
             }
         }

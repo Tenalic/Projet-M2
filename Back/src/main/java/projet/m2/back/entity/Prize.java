@@ -17,9 +17,10 @@ public class Prize {
     public Prize() {
     }
 
-    public Prize(String reward, int quantity){
+    public Prize(String reward, int quantity, int probWeight){
         this.reward = reward;
         this.quantity = quantity;
+        this.probWeight = probWeight;
     }
 
     public Prize(long id, String reward) {
