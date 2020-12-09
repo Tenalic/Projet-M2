@@ -101,11 +101,11 @@ public class AccountController {
                 String password = (String) accountJson.get("password");
                 Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
                 if (account != null) {
-                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
+                    return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -113,7 +113,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
-        return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/dice")
