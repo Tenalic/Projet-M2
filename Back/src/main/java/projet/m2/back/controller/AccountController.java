@@ -111,8 +111,23 @@ public class AccountController {
             Account a = (Account) o;
             return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(a);
         } else {
-            Integer code = (Integer) o;
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(code);
+            JSONObject responseJSON = new JSONObject();
+            Integer errorCode = (Integer) o;
+            switch (errorCode) {
+                case -1:
+                    responseJSON.put("message", "Error: Compte non trouvé");
+                    break;
+                case -2:
+                    responseJSON.put("message", "Error: nombre de dé insuffisant");
+                    break;
+                case -3:
+                    responseJSON.put("message", "Error: board non trouvé");
+                    break;
+                default:
+                    responseJSON.put("message", "Error: Erreur inconue");
+                    break;
+            }
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
         }
     }
 
