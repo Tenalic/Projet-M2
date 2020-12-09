@@ -2,7 +2,9 @@
 <template>
   <v-app>
     <AppBar/>
-      <router-view/>
+    <v-main class="app_grey">
+      <router-view></router-view>
+    </v-main>
     <Footer />
   </v-app>
 </template>

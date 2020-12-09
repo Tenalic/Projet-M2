@@ -29,17 +29,18 @@
   </v-carousel>
 <v-container grid-list-md text-xs-center style="margin-top:3%">
       <v-row align="center">
-        <v-flex xs6 offset-xs3 v-for="select in team" :key="select.MenuSelected" >
+        <v-flex xs6 offset-xs3 v-for="select in team" :key="select.MenuSelected" :to="select.list">
           <v-hover v-slot:default="{ hover }">
           <v-card
           color="#d75838"
           :elevation="hover ? 16 : 2"
           class="menuTitle"
           width="55%"
+          :to="select.link"
           >
             <v-card-title primary-title class="layout justify-center">
             <v-car-text>
-              <div> {{select.MenuSelected}} </div>
+              <div> {{select.title}} </div>
             </v-car-text>
             </v-card-title>
           </v-card>
@@ -56,11 +57,11 @@ export default {
   data () {
     return {
       team: [
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' }
+        { title: 'Cadeaux', link: '/cadeaux' },
+        { title: 'allo' },
+        { title: 'allo' },
+        { title: 'allo' },
+        { title: 'Profile', link: '/profile' }
       ],
       colors: [
         'indigo',

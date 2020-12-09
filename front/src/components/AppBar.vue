@@ -1,10 +1,6 @@
 <template>
-<v-container>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+<div>
+    <v-app-bar app color="primary" dark>
       <!-- PARTIE GAUCHE -->
       <div class="d-flex align-center">
         <!-- Accueil -->
@@ -49,7 +45,7 @@
       </div>
       <!-- FIN PARTIE DROITE -->
     </v-app-bar>
-</v-container>
+</div>
 </template>
 
 <script>
