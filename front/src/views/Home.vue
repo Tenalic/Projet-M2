@@ -1,5 +1,5 @@
 <template>
-<div align="center">
+<div align="center" justify="center">
   <v-carousel
     cycle
     height="250"
@@ -27,24 +27,24 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
-<v-container grid-list-md text-xs-center style="margin-top:3%">
-      <v-row align="center">
-        <v-flex xs6 offset-xs3 v-for="select in team" :key="select.MenuSelected" >
+<v-container fluid mt-5>
+      <v-row align="center" justify="center" v-for="select in team" :key="select.MenuSelected">
+        <v-col md="6">
           <v-hover v-slot:default="{ hover }">
           <v-card
           color="#d75838"
           :elevation="hover ? 16 : 2"
           class="menuTitle"
-          width="55%"
+          width="60%"
           >
             <v-card-title primary-title class="layout justify-center">
-            <v-car-text>
-              <div> {{select.MenuSelected}} </div>
-            </v-car-text>
+            <!-- <v-card-text> -->
+              <div> {{select.title}} </div>
+            <!-- </v-card-text> -->
             </v-card-title>
           </v-card>
           </v-hover>
-        </v-flex>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -56,11 +56,11 @@ export default {
   data () {
     return {
       team: [
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' },
-        { MenuSelected: 'allo' }
+        { title: 'Cadeaux', link: '/cadeaux' },
+        { title: 'allo' },
+        { title: 'allo' },
+        { title: 'allo' },
+        { title: 'Profile', link: '/profile' }
       ],
       colors: [
         'indigo',
@@ -83,7 +83,6 @@ export default {
 
 <style scoped>
 .menuTitle {
-  margin: 3%;
   cursor: pointer;
 }
 
