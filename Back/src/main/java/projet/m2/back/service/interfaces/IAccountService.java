@@ -16,7 +16,7 @@ public interface IAccountService {
 
     int updateAccount(Account account);
 
-   // Account modifyValue(Map<String,String> listModifyValue);
+    Account modifyValue(Map<String,String> listModifyValue, long id);
 
     void deleteAccount(long id);
 
