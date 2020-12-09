@@ -8,22 +8,34 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      title: 'Monopolight'
+    }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('@/views/Profile')
+    component: () => import('@/views/Profile'),
+    meta: {
+      title: 'My profile'
+    }
   },
   {
     path: '/game',
     name: 'GameView',
-    component: () => import('@/views/GameView')
+    component: () => import('@/views/GameView'),
+    meta: {
+      title: 'Game view'
+    }
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('@/views/About')
+    component: () => import('@/views/About'),
+    meta: {
+      title: 'About us'
+    }
   },
   {
     path: '*',
@@ -36,12 +48,18 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Login')
+    component: () => import('@/views/Login'),
+    meta: {
+      title: 'Login'
+    }
   },
   {
     path: '/signup',
     name: 'Signup',
-    component: () => import('@/views/Signup')
+    component: () => import('@/views/Signup'),
+    meta: {
+      title: 'Sign up'
+    }
   }
 ]
 
