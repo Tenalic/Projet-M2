@@ -44,6 +44,7 @@ const routes = [
     meta: {
       title: 'Error 404 - Page not found'
     }
+  },
   {
     path: '/login',
     name: 'Login',

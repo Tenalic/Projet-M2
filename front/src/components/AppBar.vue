@@ -33,12 +33,13 @@
           <!-- Se connecter -->
           <v-btn color = "primary"
           elevation = 0
-          to="/about">
+          to="Login">
             <span class="btn">Se connecter</span>
           </v-btn>
           <!-- Inscription -->
           <v-btn color = "primary"
-          elevation = 0>
+          elevation = 0
+          to="Signup">
             <span class="btn">Inscription</span>
           </v-btn>
         </div>

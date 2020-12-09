@@ -11,7 +11,7 @@ export default new Vuetify({
         primary: '#d75838',
         secondary: '#db653',
         success: '#e8904d',
-        error: '#b52225'
+        error: '#b52225',
         primary_light: '#db653d',
         primary_dark: '#d14232',
         app_grey: '#EAEDED'
