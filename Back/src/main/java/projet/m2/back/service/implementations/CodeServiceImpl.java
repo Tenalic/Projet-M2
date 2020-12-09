@@ -95,7 +95,6 @@ public class CodeServiceImpl implements ICodeService {
             codeAlreadyCreated.add(code);
             Code c = new Code(code, false);
             repoCode.save(c);
-
         }
     }
 }

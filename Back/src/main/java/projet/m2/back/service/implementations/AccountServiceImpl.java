@@ -81,8 +81,8 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     @Transactional
-    public int throwDice(long id) {
-        int backCode;
+    public Object throwDice(long id) {
+        Integer backCode;
         Account account = accountRepository.findAccountById(id);
         if (account != null) {
             if (account.getNbDice() >= 2) {
@@ -90,8 +90,8 @@ public class AccountServiceImpl implements IAccountService {
                 account = boardService.moveOnBoard(account, utils.rand(1, 6));
                 if(account != null) {
                     backCode = account.getIndexSquare();
-                    //TODO PERMET DE METTRE A JOUR L'INDEX DE LA CASE EN BASE
                     accountRepository.updateAccount(account);
+                    return account;
                 } else {
                     backCode = -3;
                 }
@@ -139,7 +139,7 @@ public class AccountServiceImpl implements IAccountService {
                     a.getIndexSquarePurchased().remove(square2.getIndex());
                     //TODO CHOISIR LE PRIZE A RETOURNER ET MODIF LA BASE
                     accountRepository.updateAccount(a);
-                    return new Prize("DEBUG");
+                    return new Prize("DEBUG", 1);
                 }
             }
         }

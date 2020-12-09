@@ -19,8 +19,8 @@ public class PrizeServiceImpl implements IPrizeService {
     IUtils utils;
 
     @Transactional
-    public void createPrize(String reward) {
-        repo.save(new Prize(reward));
+    public void createPrize(String reward, int quantity) {
+        repo.save(new Prize(reward, quantity));
     }
 
     @Override
@@ -61,5 +61,25 @@ public class PrizeServiceImpl implements IPrizeService {
                 return 4;
             }
         }
+    }
+
+    @Override
+    public void createDatasetPrize() {
+        Prize p = new Prize("prize1",100 );
+        repo.save(p);
+        p = new Prize("prize2",100 );
+        repo.save(p);
+        p = new Prize("prize3",70 );
+        repo.save(p);
+        p = new Prize("prize4",50 );
+        repo.save(p);
+        p = new Prize("prize5",40 );
+        repo.save(p);
+        p = new Prize("prize6",40 );
+        repo.save(p);
+        p = new Prize("prize7",30 );
+        repo.save(p);
+        p = new Prize("prize8",4 );
+        repo.save(p);
     }
 }

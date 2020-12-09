@@ -3,9 +3,11 @@ package projet.m2.back.controller;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projet.m2.back.constant.Constant;
 import projet.m2.back.entity.Account;
 import projet.m2.back.entity.Prize;
 import projet.m2.back.service.interfaces.IAccountService;
@@ -71,7 +73,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: autorization error");
-        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
     }
 
     @PostMapping("/account/create")
@@ -87,11 +89,11 @@ public class AccountController {
                 String password = (String) accountJson.get("password");
                 Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
                 if (account != null) {
-                    return ResponseEntity.status(200).body(account);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(200).body(jsonError);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -99,12 +101,18 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
-        return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(jsonError);
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/dice")
     public void throwDice(@RequestHeader(value = "IdAccount") long id) {
-        iaccountService.throwDice(id);
+        Object o = iaccountService.throwDice(id);
+        if(o instanceof Account){
+            Account a = (Account)o;
+        }
+        if(o instanceof Integer){
+            Integer code = (Integer)o;
+        }
     }
 
     @PostMapping("/account/buy")
@@ -122,7 +130,7 @@ public class AccountController {
                 responseJSON.put("indexSquarePurchased", a.getIndexSquarePurchased());
                 responseJSON.put("credit", a.getCredit());
             }
-            return ResponseEntity.status(200).body(responseJSON);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
     }
 
 
