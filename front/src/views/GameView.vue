@@ -55,7 +55,7 @@
     <v-card-subtitle>
       {{ board[piece.index].cost }}
     </v-card-subtitle>
-    <v-btn @click="buy">Acheter</v-btn>
+    <v-btn :id="buyButton" @click="buy(piece.index)" :disabled="!canBuy">Acheter</v-btn>
     <v-btn>Refuser</v-btn>
     </v-card>
   </v-container>
@@ -69,7 +69,7 @@ export default {
       // Utilisateur
       account: {
         nickname: 'Nono',
-        credit: 1000,
+        credit: 50,
         nbDice: 2
       },
       board: [
@@ -230,6 +230,7 @@ export default {
         icon: 'fas fa-chess-pawn',
         index: -1
       }
+
     }
   },
   beforeMount () {
@@ -280,11 +281,10 @@ export default {
     },
     // Retourne la carte avec les informations de la rue
     getStreet () {
-
     },
     // Fonction achat
-    buy () {
-
+    buy (index) {
+      this.account.credit -= this.board[index].cost
     }
   },
   watch: {
@@ -297,6 +297,10 @@ export default {
     // Retourne l'index du pion
     playerIndex () {
       return this.piece.index
+    },
+    // Retourne si le joueur a assez d'argent pour payer
+    canBuy () {
+      return (this.account.credit >= this.board[this.piece.index].cost)
     }
   }
 }
