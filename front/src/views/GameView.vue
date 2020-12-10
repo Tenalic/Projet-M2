@@ -1,9 +1,10 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row justify="center">
       <!-- PLATEAU -->
       <v-sheet
-      color="white"
+      color="#EAEDED"
+      class="background-image"
       elevation="20"
       height="600"
       width="600">
@@ -39,6 +40,10 @@
       <v-card-subtitle>
         Argent : {{account.credit}}€
       </v-card-subtitle>
+        <v-card id="dice">
+          <img v-bind:src="showDiceImageD1" width="60">
+          <img v-bind:src="showDiceImageD2" width="60">
+        </v-card>
       </v-card>
     </v-row>
     <!-- BOUTON LANCER DE DES -->
@@ -225,6 +230,8 @@ export default {
       ],
       // Résultat du lancé de dés
       diceToss: 0,
+      dice1: 0,
+      dice2: 0,
       // Pion
       piece: {
         icon: 'fas fa-chess-pawn',
@@ -264,7 +271,9 @@ export default {
     },
     // Lance les 2 dés
     rollTheDices () {
-      this.diceToss = Math.floor(Math.random() * (12 - 2 + 1) + 2)
+      this.dice1 = Math.floor(Math.random() * 6) + 1
+      this.dice2 = Math.floor(Math.random() * 6) + 1
+      this.diceToss = this.dice1 + this.dice2
       this.advance()
     },
     // Faire avancer le pion
@@ -297,7 +306,69 @@ export default {
     // Retourne l'index du pion
     playerIndex () {
       return this.piece.index
+    },
+    // Retourne les images du dé en fonction du lancer
+    showDiceImageD1 () {
+      if (this.dice1 === 1) {
+        return require('../assets/dices/dice1.png')
+      }
+      if (this.dice1 === 2) {
+        return require('../assets/dices/dice2.png')
+      }
+      if (this.dice1 === 3) {
+        return require('../assets/dices/dice3.png')
+      }
+      if (this.dice1 === 4) {
+        return require('../assets/dices/dice4.png')
+      }
+      if (this.dice1 === 5) {
+        return require('../assets/dices/dice5.png')
+      }
+      if (this.dice1 === 6) {
+        return require('../assets/dices/dice6.png')
+      }
+      return null
+    },
+    showDiceImageD2 () {
+      if (this.dice2 === 1) {
+        return require('../assets/dices/dice1.png')
+      }
+      if (this.dice2 === 2) {
+        return require('../assets/dices/dice2.png')
+      }
+      if (this.dice2 === 3) {
+        return require('../assets/dices/dice3.png')
+      }
+      if (this.dice2 === 4) {
+        return require('../assets/dices/dice4.png')
+      }
+      if (this.dice2 === 5) {
+        return require('../assets/dices/dice5.png')
+      }
+      if (this.dice2 === 6) {
+        return require('../assets/dices/dice6.png')
+      }
+      return null
     }
   }
 }
 </script>
+
+<style scoped>
+#dice {
+  position: absolute;
+    z-index: 6;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    color: #232323;
+    font-weight: 600;
+    padding: 7px 19px;
+  font-size: 19px;
+}
+
+.background-image {
+  background-position: right 64% top 85%;
+  background-image: url("../assets/logotnsi.png");
+}
+</style>
