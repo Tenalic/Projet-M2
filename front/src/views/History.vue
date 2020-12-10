@@ -4,9 +4,8 @@
       <v-col md="6">
         <v-card outlined>
           <v-card-title>
-            History 
+            History
           </v-card-title>
-          
         </v-card>
       </v-col>
     </v-row>
