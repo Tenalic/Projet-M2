@@ -38,20 +38,28 @@
         <!-- INFOS JOUEURS -->
         <v-card>
           <v-card-title>
-            {{ account.nickname }}
+            {{ account.firstname}} {{ account.lastname }}
           </v-card-title>
         <v-card-subtitle>
+          @{{ account.nickname }}<br>
           Argent : {{account.credit}}€
         </v-card-subtitle>
         <v-divider></v-divider>
         <v-treeview></v-treeview>
         <!-- BOUTON LANCER DE DES -->
-        <v-btn id="diceToss" @click="rollTheDices">
-          <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
-          Lancez vos dés
-        </v-btn>
+        <v-tooltip v-model="hasDices" top>
+          <template v-slot:activator="{ on, attrs }">
+            <div v-on="on" >
+              <v-btn id="diceToss" @click="rollTheDices" disabled="hasDices" v-bind="attrs">
+                <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
+                <span>Lancez vos dés</span>
+              </v-btn>
+            </div>
+          </template>
+          <span>Vous n'avez pas assez de dés</span>
+        </v-tooltip>
         <!-- BOUTON ENTRER UN CODE -->
-        <v-btn>
+        <v-btn to="EnterCode">
           Entrer un code
         </v-btn>
         <v-card v-if="diceToss" id="dice">
@@ -83,14 +91,7 @@ export default {
   data () {
     return {
       // Utilisateur
-      account: {
-        id: 310,
-        nickname: 'Nono',
-        credit: 50,
-        nbDice: 2,
-        indexSquare: 0,
-        bought: []
-      },
+      account: null,
       board: null,
       // Tableau pour l'affichage du plateau
       displayBoard: [
@@ -103,12 +104,13 @@ export default {
       ],
       // Résultat du lancé de dés
       diceToss: null,
+      // Chargement
       loading: true
     }
   },
   mounted () {
+    this.account = this.$store.getters.user
     this.getBoard()
-    this.piece.index = 0
   },
   methods: {
     /*
@@ -127,32 +129,52 @@ export default {
       let n = 5
       let m = 5
       for (m = 5; m >= 0; m--) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
-        console.log(this.board[i])
       }
       m = 0
       for (n = 4; n >= 0; n--) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
       n = 0
       for (m = 1; m < 6; m++) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
       m = 5
       for (n = 1; n < 5; n++) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
-      console.log(this.displayBoard)
       this.loading = false
     },
+    // Renvoie l'image du dé
+    getDiceImage (n) {
+      switch (n) {
+        case 1: return require('../assets/dices/dice1.png')
+        case 2: return require('../assets/dices/dice2.png')
+        case 3: return require('../assets/dices/dice3.png')
+        case 4: return require('../assets/dices/dice4.png')
+        case 5: return require('../assets/dices/dice5.png')
+        case 6: return require('../assets/dices/dice6.png')
+        default: return null
+      }
+    },
+    /*
+    * Booléens cases
+    */
+    // Renvoie à une case si elle est achetée (affichage de l'icône maison)
+    isBought (index) {
+      return this.account.indexSquarePurchased.includes(index)
+    },
+    // Renvoie si le joueur est sur la case
+    hasPiece (index) {
+      return this.account.indexSquare === index
+    },
+    /*
+    * Jeu
+    */
     // Lance les 2 dés
     async rollTheDices () {
       await axios
@@ -175,45 +197,25 @@ export default {
           { headers: { IdAccount: this.account.id } })
         .then(response => {
           this.account.credit = response.data.credit
-          this.account.bought = response.data.indexSquarePurchased
+          this.account.indexSquarePurchased = response.data.indexSquarePurchased
         })
-    },
-    // Renvoie l'image du dé
-    getDiceImage (n) {
-      switch (n) {
-        case 1: return require('../assets/dices/dice1.png')
-        case 2: return require('../assets/dices/dice2.png')
-        case 3: return require('../assets/dices/dice3.png')
-        case 4: return require('../assets/dices/dice4.png')
-        case 5: return require('../assets/dices/dice5.png')
-        case 6: return require('../assets/dices/dice6.png')
-        default: return null
-      }
-    },
-    // Renvoie à une case si elle est achetée (affichage de l'icône maison)
-    isBought (index) {
-      return this.account.bought.includes(index)
-    },
-    // Renvoie si le joueur est sur la case
-    hasPiece (index) {
-      return this.account.indexSquare === index
-    }
-  },
-  watch: {
-    // Met à jour la position du joueur sur le plateau (graphique)
-    playerIndex () {
-      document.getElementById(this.piece.index)
     }
   },
   computed: {
-    // Retourne l'index du pion
-    playerIndex () {
-      return this.piece.index
-    },
+    /*
+    * Booléens boutons
+    */
     // Retourne si le joueur a assez d'argent pour payer
     canBuy () {
       return (this.account.credit >= this.board[this.account.indexSquare].cost)
     },
+    // Retourne si le joueur a assez de dés pour jouer
+    hasDices () {
+      return (this.account.nbDice > 1)
+    },
+    /*
+    * Images dés
+    */
     // Retourne l'image du dé 1
     diceImage1 () {
       return this.getDiceImage(this.diceToss[0])
