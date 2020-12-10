@@ -4,7 +4,8 @@
         <!-- PLATEAU -->
         <v-sheet
         v-if="board"
-        color="white"
+        color="#EAEDED"
+        class="background-image"
         elevation="20"
         height="600"
         width="600">
@@ -223,3 +224,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#dice {
+  position: absolute;
+    z-index: 6;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    color: #232323;
+    font-weight: 600;
+    padding: 7px 19px;
+  font-size: 19px;
+}
+
+.background-image {
+  background-position: right 64% top 85%;
+  background-image: url("../assets/logotnsi.png");
+}
+</style>

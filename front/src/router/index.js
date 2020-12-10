@@ -38,14 +38,6 @@ const routes = [
     }
   },
   {
-    path: '*',
-    name: 'Error404',
-    component: () => import('@/views/Error404'),
-    meta: {
-      title: 'Error 404 - Page not found'
-    }
-  },
-  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login'),
@@ -60,13 +52,41 @@ const routes = [
     meta: {
       title: 'Sign up'
     }
+  },
+  {
+    path: '/contact',
+    name: 'ContactUs',
+    component: () => import('@/views/ContactUs'),
+    meta: {
+      title: 'Contact us'
+    }
+  },
+  {
+    path: '*',
+    name: 'Error404',
+    component: () => import('@/views/Error404'),
+    meta: {
+      title: 'Error 404 - Page not found'
+    }
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    } else {
+      return {
+        x: 0,
+        y: 0
+      }
+    }
+  }
 })
 
 router.beforeEach((to, from, next) => {

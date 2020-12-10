@@ -12,7 +12,7 @@
     </v-carousel-item>
   </v-carousel>
 <v-container fluid mt-5>
-      <v-row align="center" justify="center" v-for="select in team" :key="select.MenuSelected">
+      <v-row align="center" justify="center" v-for="select in team" :key="select.link">
         <v-col md="6">
           <v-hover v-slot:default="{ hover }">
           <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle" width="55%" :to="select.link">
@@ -36,7 +36,7 @@ export default {
     return {
       team: [
         { title: 'Cadeaux', link: '/cadeaux' },
-        { title: 'allo' },
+        { title: 'Game', link: '/game' },
         { title: 'allo' },
         { title: 'allo' },
         { title: 'Profile', link: '/profile' }
