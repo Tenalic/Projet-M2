@@ -49,7 +49,7 @@ public class BoardServiceImpl implements IBoardService {
      * Permet de changer l'index de la case sur lequel l'Account est sur la nouvelle case selon le move et le sauvgarder en base.
      * @param account le compte sur lequel le move sera fait
      * @param move le nombre de case à bouger
-     * @return le compte avec le nouvelle index de la case
+     * @return le compte avec le nouvel index de la case
      */
     @Override
     public Account moveOnBoard(Account account, final int move) {
@@ -66,8 +66,8 @@ public class BoardServiceImpl implements IBoardService {
     }
 
     /**
-     * Fonction qui permet de créer les Squares et le Board associé et de le mettre en Base. (Fonction réservé pour le back)
-     * @return le Board créer.
+     * Fonction qui permet de créer les Squares et le Board associé et de les mettre en Base. (Fonction réservé pour le back)
+     * @return le Board créé.
      */
     @Transactional
     @Override
