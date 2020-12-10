@@ -33,13 +33,13 @@ public class CodeController {
                     responseJSON.put("message", "Error: Code déjà utilisé");
                     break;
                 case 3:
-                    responseJSON.put("message", "Error: Code inconue");
+                    responseJSON.put("message", "Error: Code inconnu");
                     break;
                 default:
-                    responseJSON.put("message", "Error: Erreur inconue");
+                    responseJSON.put("message", "Error: Erreur inconnue");
                     break;
             }
-            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
+            return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
         } else {
             Object[] tabObj = (Object[]) response;
             Account account = (Account) tabObj[0];
