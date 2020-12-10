@@ -22,10 +22,10 @@ export default {
     return {
       footerLinks: [
         { title: 'Home', link: '/' },
-        { title: 'Contact us', link: '/contact' },
-        { title: 'About us', link: '/about' },
-        { title: 'Sign in', link: '/sign-in' },
-        { title: 'Sign up', link: '/sign-up' }
+        { title: 'Nous contacter', link: '/contact' },
+        { title: 'À propos', link: '/about' },
+        { title: 'Se connecter', link: '/Login' },
+        { title: "S'inscrire", link: '/Signup' }
       ],
       socialLinks: [
         { icon: 'mdi-facebook', link: 'https://www.facebook.com/' },
