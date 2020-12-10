@@ -2,6 +2,15 @@ package projet.m2.back.entity;
 
 import javax.persistence.*;
 
+/**
+ * Entité réprésentant les codes qui permettent l'acquisition de  dés et soient des crédits ou un cadeau
+ *
+ *
+ * Attributs :
+ *
+ * code : suite de chiffres générés aléatoirement représentant le code qui sera utilisé
+ * used : booléen permettant de vérifier si le code est déjà utilisé ou pas .
+ */
 @Entity
 public class Code {
     @Id
