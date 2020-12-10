@@ -7,11 +7,12 @@
             Se connecter
           </v-card-title>
           <v-card-text>
-            <v-form ref="loginForm" v-model="valid">
+            <v-form ref="form" v-model="valid">
               <v-container>
                 <v-row justify="start">
                   <v-col md="10">
-                    <v-text-field append-outer-icon="mdi-at" clearable dense outlined required v-model="email" :rules="emailRules" label="E-mail"></v-text-field>
+                    <!-- :rules="emailRules" -->
+                    <v-text-field append-outer-icon="mdi-at" clearable dense outlined required v-model="email" label="E-mail"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row justify="start">
@@ -21,7 +22,7 @@
                 </v-row>
                 <v-row justify="start">
                   <v-col>
-                    <v-btn :disabled="!valid" color="success" class="mr-2" @click="submit">Se connecter</v-btn>
+                    <v-btn :disabled="!valid" color="success" class="mr-2" @click="onSignIn">Se connecter</v-btn>
                     <v-btn color="error" class="mx-2" @click="reset">Annuler</v-btn>
                   </v-col>
                 </v-row>
@@ -35,11 +36,15 @@
 </template>
 
 <script>
+import { store } from '@/store'
+import router from '@/router'
+
 export default {
   name: 'Login',
   data () {
     return {
       valid: true,
+      loading: false,
       email: '',
       emailRules: [
         v => !!v || 'Un email est requis pour ce champ',
@@ -52,8 +57,20 @@ export default {
     }
   },
   methods: {
-    submit () {
-      this.$refs.loginForm.validate()
+    onSignIn () {
+      if (this.$refs.form.validate()) {
+        this.loading = true
+        const credentials = { email: this.email, password: this.password }
+        store.dispatch('signUserIn', credentials)
+          .then(() => {
+            this.loading = false
+            router.push('/')
+          })
+          .catch(err => {
+            this.loading = false
+            store.commit('setError', err)
+          })
+      }
     },
     reset () {
       this.$refs.loginForm.reset()

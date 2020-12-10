@@ -1,25 +1,9 @@
 <template>
-<div align="center" justify="center">
-  <v-carousel
-    cycle
-    height="250"
-    hide-delimiter-background
-    show-arrows-on-hover
-    interval="3000"
-  >
-    <v-carousel-item
-      v-for="(slide, i) in slides"
-      :key="i"
-    >
-      <v-sheet
-        :color="colors[i]"
-        height="100%"
-      >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
+<div align="center">
+  <v-carousel cycle height="175" hide-delimiter-background show-arrows-on-hover interval="3000">
+    <v-carousel-item v-for="(slide, i) in slides" :key="i">
+      <v-sheet :color="colors[i]" height="100%">
+        <v-row class="fill-height" align="center" justify="center">
           <div class="display-3">
             {{ slide }}
           </div>
@@ -27,16 +11,11 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
-<v-container fluid mt-5>
-      <v-row align="center" justify="center" v-for="select in team" :key="select.MenuSelected">
+<v-container fluid>
+      <v-row align="center" justify="center" v-for="select in team" :key="select.link" class="mt-10">
         <v-col md="6">
           <v-hover v-slot:default="{ hover }">
-          <v-card
-          color="#d75838"
-          :elevation="hover ? 16 : 2"
-          class="menuTitle"
-          width="60%"
-          >
+          <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle" width="45%" :to="select.link">
             <v-card-title primary-title class="layout justify-center">
             <!-- <v-card-text> -->
               <div> {{select.title}} </div>
@@ -56,10 +35,8 @@ export default {
   data () {
     return {
       team: [
-        { title: 'Cadeaux', link: '/cadeaux' },
-        { title: 'allo' },
-        { title: 'allo' },
-        { title: 'allo' },
+        { title: 'Plateau de jeu', link: '/game' },
+        { title: 'Règles du jeu' },
         { title: 'Profile', link: '/profile' }
       ],
       colors: [
