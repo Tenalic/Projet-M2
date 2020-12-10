@@ -41,7 +41,7 @@
           <v-btn color = "primary"
           elevation = 0
           to="Signup">
-            <span class="btn">Inscription</span>
+            <span class="btn">S'inscrire</span>
           </v-btn>
         </div>
       </div>
