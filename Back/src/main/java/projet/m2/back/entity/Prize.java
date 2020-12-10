@@ -5,6 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Classe Prize qui contient les paramètres d"un prix stocké dans la Base de Donnée.
+ * String Reward contient le nom du prix.
+ * int quantity contient le nombre d'exemplaire du prix disponible dans la base de donnée.
+ * int probWeight contient un poid pour la génération aléatoire du prix.
+ */
+
 @Entity
 public class Prize {
     @Id
