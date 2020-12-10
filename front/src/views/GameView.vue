@@ -1,6 +1,32 @@
 <template>
   <v-container v-if="!loading">
       <v-row justify="center">
+        <!-- CARTE D'INFOS SUR LA RUE -->
+      <v-card
+      v-if="showStreetCard"
+      width="150"
+      height="300">
+      <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
+      <v-card-title>
+        {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
+      </v-card-title>
+      <v-card-subtitle>
+        Valeur : {{ board[account.indexSquare].cost }}€
+      </v-card-subtitle>
+      <v-row>
+        <!-- BOUTON ACHETER -->
+        <v-tooltip :disabled="canBuy" bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <div v-on="on" >
+              <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
+            </div>
+          </template>
+          <span>Vous n'avez pas assez d'argent</span>
+        </v-tooltip>
+        <!-- BOUTON REFUSER -->
+      <v-btn to="EnterCode">Refuser</v-btn>
+      </v-row>
+      </v-card>
         <!-- PLATEAU -->
         <v-sheet
         v-if="board"
@@ -79,27 +105,6 @@
         </v-card>
         </v-card>
       </v-row>
-      <!-- CARTE D'INFOS SUR LA RUE -->
-      <v-card>
-      <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
-      <v-card-title>
-        {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
-      </v-card-title>
-      <v-card-subtitle>
-        Valeur : {{ board[account.indexSquare].cost }}€
-      </v-card-subtitle>
-      <v-row>
-        <v-tooltip :disabled="canBuy" bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <div v-on="on" >
-              <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
-            </div>
-          </template>
-          <span>Vous n'avez pas assez d'argent</span>
-        </v-tooltip>
-      <v-btn to="EnterCode">Refuser</v-btn>
-      </v-row>
-      </v-card>
   </v-container>
 </template>
 
@@ -125,7 +130,8 @@ export default {
       // Résultat du lancé de dés
       diceToss: null,
       // Chargement
-      loading: true
+      loading: true,
+      showStreetCard: false
     }
   },
   mounted () {
@@ -192,6 +198,11 @@ export default {
     hasPiece (index) {
       return this.account.indexSquare === index
     },
+    setShowStreetCard () {
+      if (this.board[this.account.indexSquare].color === 'white' ||
+      this.account.indexSquarePurchased.includes[this.board[this.account.indexSquare].index]) this.showStreetCard = false
+      else this.showStreetCard = true
+    },
     /*
     * Jeu
     */
@@ -206,6 +217,7 @@ export default {
           this.account.nbDice = response.data.nbDice
           this.account.indexSquare = response.data.indexSquare
           this.diceToss = response.data.diceResult
+          this.setShowStreetCard()
         })
         .catch(error => console.log(error))
     },
