@@ -23,9 +23,7 @@ export default {
       footerLinks: [
         { title: 'Home', link: '/' },
         { title: 'Nous contacter', link: '/contact' },
-        { title: 'À propos', link: '/about' },
-        { title: 'Se connecter', link: '/Login' },
-        { title: "S'inscrire", link: '/Signup' }
+        { title: 'À propos', link: '/about' }
       ],
       socialLinks: [
         { icon: 'mdi-facebook', link: 'https://www.facebook.com/' },
