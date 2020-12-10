@@ -39,6 +39,7 @@ public class PrizeServiceImpl implements IPrizeService {
     }
 
     /**
+     * Fonction qui mets en place différentes probabilités pour avoir différent prix
      * @return 0 si juste dé, 1 si 50 pts, 2 pour 100 pts, 3 pour 150 pts et 4 pour un prix
      */
     @Override
@@ -60,19 +61,14 @@ public class PrizeServiceImpl implements IPrizeService {
                     }
                 }
             } else {
-               /* Iterable<Prize> tmp = getAllPrize();
-                ArrayList<Prize> listPrize = new ArrayList<Prize>();
-                for(Prize p : tmp)
-                {
-                    listPrize.add(p);
-                }
-                int tmpRand = r.nextInt(listPrize.size());
-                listPrize.get(tmpRand);//donne le cadeau obtenu*/
                 return 4;
             }
         }
     }
 
+    /**
+     * Fonction qui crée un jeu de données pour les prix dans la base de données
+     */
     @Override
     @Transactional
     public void createDatasetPrize() {
@@ -95,6 +91,11 @@ public class PrizeServiceImpl implements IPrizeService {
     }
 
 
+    /**
+     * Fonction qui permet de tirer aléatoirement un prix.
+     * @param account
+     * @return le prix qui à été choisi aléatoirement.
+     */
     @Override
     @Transactional
     public String randomPrize (Account account)  //choice comporte le resultat de gain
