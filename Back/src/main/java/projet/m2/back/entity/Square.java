@@ -2,6 +2,18 @@ package projet.m2.back.entity;
 
 import javax.persistence.*;
 
+/**
+ * Entité représentant les cases du plateau de jeu de Monopoly
+ * Intervenant sous forme de collection dans le compte utilisateur (Account)
+ * Permet de tracker les utilisateurs pour leur attribuer leur position actuelle sur le plateau
+ * Et de lister les cases achetées par ceux-ci
+ *
+ * Attributs :
+ * squareIndex : numéro de la case relatif au plateau (démarrant en bas à droite et avancée dans le sens anti-horaire)
+ * streetName : nom de la rue spécifiée sur la case
+ * color : couleur de la case
+ * cost : coût en crédits de la case
+ */
 @Entity
 public class Square {
 
