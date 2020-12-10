@@ -7,7 +7,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+/**
+ * Symbolise le plateau de jeu
+ */
 @Entity
 public class Board {
 

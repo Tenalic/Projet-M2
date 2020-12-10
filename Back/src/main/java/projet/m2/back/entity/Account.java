@@ -9,6 +9,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Représente un compte
+ */
 @Entity
 public class Account {
 
