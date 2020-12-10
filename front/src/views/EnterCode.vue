@@ -147,17 +147,16 @@ export default {
       console.log('get_prizes of ', this.code)
       // var obj = null
       // test code 9559948 or 4430164 or 3030553
+      // code 9702578 or 400
 
-      const config = {
+      var config = {
         headers: {
           IdAccount: 180
         }
       }
       console.log('confog ', config)
-      const data = {
+      var data = {
       }
-      // var obj = null
-      // var headers = { IdAccount: 310 }
       var url = 'http://monopolym2tnsi.hopto.org:8080/code/use/' + this.code
       axios.post(url, data, config)
         .then(res => {
@@ -176,7 +175,7 @@ export default {
             this.render()
           }
         })
-        .catch(err => console.log('error ', err))
+        .catch(err => console.log('error delphin', err))
     }
   }
 }
