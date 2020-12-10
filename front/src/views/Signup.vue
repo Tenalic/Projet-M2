@@ -7,7 +7,7 @@
             S'inscrire
           </v-card-title>
           <v-card-text>
-            <v-form ref="signupForm" v-model="valid">
+            <v-form ref="form" v-model="valid">
               <v-container>
                 <v-row justify="start">
                   <v-col md="10">
@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import { store } from '@/store'
+
 export default {
   name: 'Signup',
   data () {
@@ -86,10 +88,26 @@ export default {
   },
   methods: {
     submit () {
-      this.$refs.loginForm.validate()
+      if (this.$refs.form.validate()) {
+        const userDetails = {
+          lastname: this.lastname,
+          firstname: this.firstname,
+          nickname: this.nickname,
+          email: this.email,
+          password: this.password
+        }
+        store.dispatch('signUserUp', userDetails)
+          .then(() => {
+            this.loading = false
+          })
+          .catch(err => {
+            this.isLoading = false
+            store.commit('seterror', err)
+          })
+      }
     },
     reset () {
-      this.$refs.loginForm.reset()
+      this.$refs.form.reset()
     }
   }
 }
