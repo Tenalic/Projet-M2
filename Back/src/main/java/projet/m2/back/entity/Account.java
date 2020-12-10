@@ -11,6 +11,13 @@ import java.util.Collection;
 
 /**
  * Représente un compte
+ * Entité représentant un utilisateur avec ses informations personnelles
+ * Le password est stocké haché en base de données
+ *
+ * Attributs:
+ * nbDice : nombre de lancers de dés restant à  l'utilisateur
+ * credit : argent virtuel dont dispose l'utilisateur pour acheter des cases du plateau
+ * indexSquare : position relative actuelle de l'utilisateur sur le plateau de jeu
  */
 @Entity
 public class Account {
