@@ -29,6 +29,7 @@ public class Main {
     @Bean
     public CommandLineRunner demo(IAccountService service) {
         return (args -> {
+            //iCodeService.createDatasetCodeDebug();
             //iBoardService.createBord();
              //Board board = iBoardService.getBoardByName(Constant.boardName);
 

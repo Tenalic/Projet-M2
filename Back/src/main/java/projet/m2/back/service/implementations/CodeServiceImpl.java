@@ -39,51 +39,93 @@ public class CodeServiceImpl implements ICodeService {
     @Transactional
     @Override
     public Object useCode(final long idAccount, final String code) {
-        Integer backCode;
+        Integer backCode = 4;
         try {
             long codeLong = Long.parseLong(code);
             String prize = null;
+            boolean codeDebug = false;
             int creditWin = 0;
             Code codeBDD = repoCode.findByCode(codeLong);
             if (codeBDD != null) {
-                if (!codeBDD.isUsed()) {
+                if (!codeBDD.isUsed() || codeBDD.getCode() == 1 ||
+                        codeBDD.getCode() == 2 ||
+                        codeBDD.getCode() == 3 ||
+                        codeBDD.getCode() == 4||
+                        codeBDD.getCode() == 5) {
+                    if (codeBDD.getCode() == 1 ||
+                            codeBDD.getCode() == 2 ||
+                            codeBDD.getCode() == 3 ||
+                            codeBDD.getCode() == 4 ||
+                            codeBDD.getCode() == 5) {
+                        codeDebug = true;
+
+                    }
                     codeBDD.setUsed(true);
                     Account account = accountService.getInfo(idAccount);
                     if (account != null) {
-                        int result = prizeService.gain();
-                        switch (result) {
-                            case 0:
-                                account.setNbDice(account.getNbDice() + 1);
-                                break;
-                            case 1:
-                                account.setNbDice(account.getNbDice() + 1);
-                                creditWin = 50;
-                                account.setCredit(account.getCredit() + creditWin);
-                                break;
-                            case 2:
-                                creditWin = 100;
-                                account.setNbDice(account.getNbDice() + 1);
-                                account.setCredit(account.getCredit() + creditWin);
-                                break;
-                            case 3:
-                                creditWin = 150;
-                                account.setNbDice(account.getNbDice() + 1);
-                                account.setCredit(account.getCredit() + creditWin);
-                                break;
-                            case 4:
-                                prize = prizeService.randomPrize(account);
-                                break;
-                            default:
-                                account.setNbDice(account.getNbDice() + 1);
-                                break;
+                        if (!codeDebug) {
+                            int result = prizeService.gain();
+                            switch (result) {
+                                case 0:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    break;
+                                case 1:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    creditWin = 50;
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 2:
+                                    creditWin = 100;
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 3:
+                                    creditWin = 150;
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 4:
+                                    prize = prizeService.randomPrize(account);
+                                    break;
+                                default:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    break;
+                            }
+                        } else {
+                            switch (codeBDD.getCode().intValue()) {
+                                case 1:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    break;
+                                case 2:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    creditWin = 50;
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 3:
+                                    creditWin = 100;
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 4:
+                                    creditWin = 150;
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    account.setCredit(account.getCredit() + creditWin);
+                                    break;
+                                case 5:
+                                    prize = prizeService.randomPrize(account);
+                                    break;
+                                default:
+                                    account.setNbDice(account.getNbDice() + 1);
+                                    break;
+                            }
                         }
-                        repoCode.updateCode(codeBDD);
-                        accountService.updateAccount(account);
-                        Object[] tabObjet = {account, prize, creditWin};
-                        return tabObjet;
-                    } else {
+                    repoCode.updateCode(codeBDD);
+                    accountService.updateAccount(account);
+                    Object[] tabObjet = {account, prize, creditWin};
+                    return tabObjet;
+                } else {
                         backCode = 1;
-                    }
+                }
                 } else {
                     backCode = 2;
                 }
@@ -121,6 +163,19 @@ public class CodeServiceImpl implements ICodeService {
             } while (codeAlreadyCreated.contains(code));
             codeAlreadyCreated.add(code);
             Code c = new Code(code, false);
+            repoCode.save(c);
+        }
+    }
+
+    /**
+     * Ajoute en base 200 codes générés aléatoirement
+     */
+    public void createDatasetCodeDebug() {
+        Random r = new Random();
+        List<Long> codeAlreadyCreated = new ArrayList<>();
+        long code;
+        for (int i = 1; i < 6; i++) {
+            Code c = new Code(Integer.toUnsignedLong(i), false);
             repoCode.save(c);
         }
     }

@@ -24,4 +24,6 @@ public interface ICodeService {
      * Ajoute en base 200 codes générés aléatoirement
      */
     void createDatasetCode();
+
+    void createDatasetCodeDebug();
 }

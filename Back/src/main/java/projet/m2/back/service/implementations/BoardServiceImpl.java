@@ -73,20 +73,20 @@ public class BoardServiceImpl implements IBoardService {
     @Override
     public Board createBord() {
         ArrayList<String> listeCouleur = new ArrayList<>();
-        listeCouleur.add("red");
-        listeCouleur.add("yellow");
-        listeCouleur.add("green");
-        listeCouleur.add("blue");
-        listeCouleur.add("purple");
-        listeCouleur.add("pink");
-        listeCouleur.add("orange");
-        listeCouleur.add("brown");
+        listeCouleur.add("#de2828");
+        listeCouleur.add("#6bc947");
+        listeCouleur.add("#35a0b3");
+        listeCouleur.add("#8a42c5");
+        listeCouleur.add("#ef6a18");
+        listeCouleur.add("#f65fe4");
+        listeCouleur.add("#244283");
+        listeCouleur.add("#217c32");
         int j = 0;
         ArrayList<Square> listeSquare = new ArrayList<>();
         Square square;
         for (int i = 0; i < 20; i++) {
             if (i == 0 || i == 5 || i == 10 || i == 15) {
-                square = squareService.createSquare(new Square(i, "street" + i, "white", 60));
+                square = squareService.createSquare(new Square(i, "street" + i, "#363535", 60));
                 if (square != null) {
                     listeSquare.add(square);
                 } else {
