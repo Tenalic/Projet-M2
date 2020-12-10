@@ -13,6 +13,9 @@ import projet.m2.back.service.interfaces.ISquareService;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
+/**
+ * Classe service du board permettant de le manipuler (création, récupération, etc...)
+ */
 @Service
 public class BoardServiceImpl implements IBoardService {
 
@@ -22,16 +25,32 @@ public class BoardServiceImpl implements IBoardService {
     @Autowired
     ISquareService squareService;
 
+    /**
+     * Permet de récupérer le board selon son nom en base
+     * @param name le nom du board en base
+     * @return le board
+     */
     @Override
     public Board getBoardByName(final String name) {
         return boardRepository.findByName(name);
     }
 
+    /**
+     * Permet de récupérer le board selon son id en base
+     * @param id id du board en base
+     * @return le board
+     */
     @Override
     public Board getBoardById(final long id) {
         return boardRepository.findById(id);
     }
 
+    /**
+     * Permet de changer l'index de la case sur lequel l'Account est sur la nouvelle case selon le move et le sauvgarder en base.
+     * @param account le compte sur lequel le move sera fait
+     * @param move le nombre de case à bouger
+     * @return le compte avec le nouvelle index de la case
+     */
     @Override
     public Account moveOnBoard(Account account, final int move) {
         Board board = getBoardByName(Constant.boardName);
@@ -46,6 +65,10 @@ public class BoardServiceImpl implements IBoardService {
         return null;
     }
 
+    /**
+     * Fonction qui permet de créer les Squares et le Board associé et de le mettre en Base. (Fonction réservé pour le back)
+     * @return le Board créer.
+     */
     @Transactional
     @Override
     public Board createBord() {
