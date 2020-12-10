@@ -14,7 +14,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#db653d">
+        android:background="#d14232">
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,15 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/bottom"
         android:layout_below="@+id/top"
-        android:background="#ABA29C">
+        android:background="#e5d5d1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="23sp"
+            android:layout_marginVertical="43dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/plateau"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -64,6 +72,12 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/plateau"
             >
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -102,6 +116,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home11"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/deuxiemehaut"
@@ -120,6 +163,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home12"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -140,6 +212,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home13"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/quatriemehaut"
@@ -158,6 +259,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home14"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -211,6 +341,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home4"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/deuxiemebas"
@@ -229,6 +388,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home3"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -249,6 +437,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home2"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/quatriemebas"
@@ -267,6 +484,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -308,6 +554,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home10"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -328,6 +603,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home9"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/deuxiemegauche"
@@ -346,6 +650,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home8"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -366,6 +699,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home7"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/quatriemegauche"
@@ -385,6 +747,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home6"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/coinbasgauche2"
@@ -403,6 +794,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home5"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
 
@@ -433,6 +853,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home15"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -453,6 +902,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home16"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/deuxiemedroite"
@@ -471,6 +949,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home17"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -491,6 +998,35 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home18"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/quatriemedroite"
@@ -509,6 +1045,35 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home19"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -529,9 +1094,39 @@
                         android:background="@drawable/circle"
                         android:visibility="invisible"/>
 
+                    <ImageView
+                        android:id="@+id/home0"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
                 </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </RelativeLayout>
 
@@ -543,13 +1138,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        android:background="#db653d">
+        android:background="#d14232">
 
         <Button
             android:id="@+id/btndice"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Lancer de dé"
+            android:text="Lancer de dés"
             android:layout_centerInParent="true"
             android:layout_marginVertical="10dp"/>
 
@@ -557,7 +1152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="25sp"
+            android:layout_marginStart="35sp"
             android:layout_gravity="center"
             android:gravity="center">
 
@@ -572,12 +1167,21 @@
                 android:id="@+id/credit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2500 $"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/test">
+
+            </ImageView>
 
 
         </RelativeLayout>
@@ -587,7 +1191,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="25sp"
+            android:layout_marginEnd="15sp"
             android:layout_gravity="center"
             android:gravity="center">
 
@@ -602,13 +1206,19 @@
                 android:id="@+id/nbdice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/dice"/>
 
         </RelativeLayout>
 
