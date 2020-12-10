@@ -66,6 +66,7 @@
 
 <script>
 import { store } from '@/store'
+import router from '@/router'
 
 export default {
   name: 'Signup',
@@ -99,6 +100,7 @@ export default {
         store.dispatch('signUserUp', userDetails)
           .then(() => {
             this.loading = false
+            router.push('/welcome')
           })
           .catch(err => {
             this.isLoading = false

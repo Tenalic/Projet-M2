@@ -37,6 +37,7 @@
 
 <script>
 import { store } from '@/store'
+import router from '@/router'
 
 export default {
   name: 'Login',
@@ -63,6 +64,7 @@ export default {
         store.dispatch('signUserIn', credentials)
           .then(() => {
             this.loading = false
+            router.push('/')
           })
           .catch(err => {
             this.loading = false
