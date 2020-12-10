@@ -24,7 +24,7 @@
           <span>Vous n'avez pas assez d'argent</span>
         </v-tooltip>
         <!-- BOUTON REFUSER -->
-      <v-btn to="EnterCode">Refuser</v-btn>
+      <v-btn @click="refuseToBuy">Refuser</v-btn>
       </v-row>
       </v-card>
         <!-- PLATEAU -->
@@ -200,8 +200,11 @@ export default {
     },
     setShowStreetCard () {
       if (this.board[this.account.indexSquare].color === 'white' ||
-      this.account.indexSquarePurchased.includes[this.board[this.account.indexSquare].index]) this.showStreetCard = false
+      this.account.indexSquarePurchased.includes(this.board[this.account.indexSquare].index)) this.showStreetCard = false
       else this.showStreetCard = true
+    },
+    refuseToBuy () {
+      this.showStreetCard = false
     },
     /*
     * Jeu
@@ -214,6 +217,7 @@ export default {
           { headers: { IdAccount: this.account.id } })
         .then(response => {
           // On affecte les variables de la réponses
+          this.showStreetCard = false
           this.account.nbDice = response.data.nbDice
           this.account.indexSquare = response.data.indexSquare
           this.diceToss = response.data.diceResult
@@ -228,6 +232,7 @@ export default {
           {},
           { headers: { IdAccount: this.account.id } })
         .then(response => {
+          this.showStreetCard = false
           this.account.credit = response.data.credit
           this.account.indexSquarePurchased = response.data.indexSquarePurchased
         })
