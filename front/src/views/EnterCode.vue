@@ -11,7 +11,7 @@
               <v-container>
                 <v-row justify='start'>
                   <v-col md='10'>
-                    <v-text-field clearable dense outlined required v-model='code' :rules='codeRules' label='Votre coupon'></v-text-field>
+                    <v-text-field dense outlined required v-model='code' :rules='codeRules' label='Votre coupon'></v-text-field>
                     <h1 v-if="couponNonValide"> Coupon non valide </h1>
                   </v-col>
                 </v-row>
