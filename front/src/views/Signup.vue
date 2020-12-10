@@ -101,6 +101,7 @@ export default {
             password: this.password
           })
           console.log(data)
+          this.$router.push('/registrationsuccessful')
         }
       } catch (err) {
         console.error(err)

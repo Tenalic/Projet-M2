@@ -60,6 +60,14 @@ const routes = [
     meta: {
       title: 'Sign up'
     }
+  },
+  {
+    path: '/registrationsuccessful',
+    name: 'InscriptionConfirmation',
+    component: () => import('@/views/InscriptionConfirmation'),
+    meta: {
+      title: 'Registration successful'
+    }
   }
 ]
 
