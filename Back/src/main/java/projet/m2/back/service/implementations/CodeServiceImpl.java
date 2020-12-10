@@ -34,60 +34,64 @@ public class CodeServiceImpl implements ICodeService {
      *
      * @param idAccount : id du compte ou l'on souhaite appliqué le code
      * @param code      : code du code
-     * @return 0 : ok, 1 : compte non trouvé, 2 : code deja utilisé, 3 : code inconue
+     * @return 0 : ok, 1 : compte non trouvé, 2 : code deja utilisé, 3 : code inconue, 4 : le code saisie n'est pas un numérique
      */
     @Transactional
     @Override
     public Object useCode(final long idAccount, final String code) {
         Integer backCode;
-        long codeLong = Long.parseLong(code);
-        String prize = null;
-        int creditWin = 0;
-        Code codeBDD = repoCode.findByCode(codeLong);
-        if (codeBDD != null) {
-            if (!codeBDD.isUsed()) {
-                codeBDD.setUsed(true);
-                Account account = accountService.getInfo(idAccount);
-                if (account != null) {
-                    int result = prizeService.gain();
-                    switch (result) {
-                        case 0:
-                            account.setNbDice(account.getNbDice() + 1);
-                            break;
-                        case 1:
-                            account.setNbDice(account.getNbDice() + 1);
-                            creditWin = 50;
-                            account.setCredit(account.getCredit() + creditWin);
-                            break;
-                        case 2:
-                            creditWin = 100;
-                            account.setNbDice(account.getNbDice() + 1);
-                            account.setCredit(account.getCredit() + creditWin);
-                            break;
-                        case 3:
-                            creditWin = 150;
-                            account.setNbDice(account.getNbDice() + 1);
-                            account.setCredit(account.getCredit() + creditWin);
-                            break;
-                        case 4:
-                            prize = prizeService.randomPrize(account);
-                            break;
-                        default:
-                            account.setNbDice(account.getNbDice() + 1);
-                            break;
+        try {
+            long codeLong = Long.parseLong(code);
+            String prize = null;
+            int creditWin = 0;
+            Code codeBDD = repoCode.findByCode(codeLong);
+            if (codeBDD != null) {
+                if (!codeBDD.isUsed()) {
+                    codeBDD.setUsed(true);
+                    Account account = accountService.getInfo(idAccount);
+                    if (account != null) {
+                        int result = prizeService.gain();
+                        switch (result) {
+                            case 0:
+                                account.setNbDice(account.getNbDice() + 1);
+                                break;
+                            case 1:
+                                account.setNbDice(account.getNbDice() + 1);
+                                creditWin = 50;
+                                account.setCredit(account.getCredit() + creditWin);
+                                break;
+                            case 2:
+                                creditWin = 100;
+                                account.setNbDice(account.getNbDice() + 1);
+                                account.setCredit(account.getCredit() + creditWin);
+                                break;
+                            case 3:
+                                creditWin = 150;
+                                account.setNbDice(account.getNbDice() + 1);
+                                account.setCredit(account.getCredit() + creditWin);
+                                break;
+                            case 4:
+                                prize = prizeService.randomPrize(account);
+                                break;
+                            default:
+                                account.setNbDice(account.getNbDice() + 1);
+                                break;
+                        }
+                        repoCode.updateCode(codeBDD);
+                        accountService.updateAccount(account);
+                        Object[] tabObjet = {account, prize, creditWin};
+                        return tabObjet;
+                    } else {
+                        backCode = 1;
                     }
-                    repoCode.updateCode(codeBDD);
-                    accountService.updateAccount(account);
-                    Object[] tabObjet = {account, prize, creditWin};
-                    return tabObjet;
                 } else {
-                    backCode = 1;
+                    backCode = 2;
                 }
             } else {
-                backCode = 2;
+                backCode = 3;
             }
-        } else {
-            backCode = 3;
+        } catch (NumberFormatException e) {
+            backCode = 4;
         }
         return backCode;
     }
