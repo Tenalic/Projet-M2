@@ -29,6 +29,8 @@
                     {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
                     {{displayBoard[i-1][j-1].streetName}}<br>
                     {{displayBoard[i-1][j-1].cost}}€
+                    <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
+                    <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)">fas fa-chess-pawn</v-icon>
                   </v-card>
               </v-col>
             </v-row>
@@ -67,8 +69,8 @@
       <v-card-subtitle>
         Valeur : {{ board[account.indexSquare].cost }}€
       </v-card-subtitle>
-      <v-btn :id="buyButton" @click="buy(account.indexSquare)" :disabled="!canBuy">Acheter</v-btn>
-      <v-btn>Refuser</v-btn>
+      <v-btn :id="buyButton" @click="buy" :disabled="!canBuy">Acheter</v-btn>
+      <v-btn to="EnterCode">Refuser</v-btn>
       </v-card>
   </v-container>
 </template>
@@ -86,7 +88,8 @@ export default {
         nickname: 'Nono',
         credit: 50,
         nbDice: 2,
-        indexSquare: 0
+        indexSquare: 0,
+        bought: []
       },
       board: null,
       // Tableau pour l'affichage du plateau
@@ -100,11 +103,6 @@ export default {
       ],
       // Résultat du lancé de dés
       diceToss: null,
-      // Pion
-      piece: {
-        icon: 'fas fa-chess-pawn',
-        index: -1
-      },
       loading: true
     }
   },
@@ -162,32 +160,25 @@ export default {
           {},
           { headers: { IdAccount: this.account.id } })
         .then(response => {
-          console.log(response)
+          // On affecte les variables de la réponses
           this.account.nbDice = response.data.nbDice
           this.account.indexSquare = response.data.indexSquare
           this.diceToss = response.data.diceResult
-          console.log(this.diceToss)
         })
         .catch(error => console.log(error))
     },
-    // Faire avancer le pion
-    advance () {
-      if (this.piece.index < 19) this.piece.index++
-      else {
-        this.piece.index = 0
-      }
-      this.diceToss--
-      if (this.diceToss !== 0) {
-        this.advance()
-      }
-    },
-    // Retourne la carte avec les informations de la rue
-    getStreet () {
-    },
     // Fonction achat
-    buy (index) {
-      this.account.credit -= this.board[index].cost
+    async buy () {
+      await axios
+        .post('http://monopolym2tnsi.hopto.org:8080/account/buy',
+          {},
+          { headers: { IdAccount: this.account.id } })
+        .then(response => {
+          this.account.credit = response.data.credit
+          this.account.bought = response.data.indexSquarePurchased
+        })
     },
+    // Renvoie l'image du dé
     getDiceImage (n) {
       switch (n) {
         case 1: return require('../assets/dices/dice1.png')
@@ -198,6 +189,14 @@ export default {
         case 6: return require('../assets/dices/dice6.png')
         default: return null
       }
+    },
+    // Renvoie à une case si elle est achetée (affichage de l'icône maison)
+    isBought (index) {
+      return this.account.bought.includes(index)
+    },
+    // Renvoie si le joueur est sur la case
+    hasPiece (index) {
+      return this.account.indexSquare === index
     }
   },
   watch: {
@@ -213,11 +212,13 @@ export default {
     },
     // Retourne si le joueur a assez d'argent pour payer
     canBuy () {
-      return (this.account.credit >= this.board[this.piece.index].cost)
+      return (this.account.credit >= this.board[this.account.indexSquare].cost)
     },
+    // Retourne l'image du dé 1
     diceImage1 () {
       return this.getDiceImage(this.diceToss[0])
     },
+    // Retourne l'image du dé 2
     diceImage2 () {
       return this.getDiceImage(this.diceToss[1])
     }
