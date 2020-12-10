@@ -23,6 +23,31 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    signUserIn ({ commit, getters }, payload) {
+      commit('clearError')
+
+      return new Promise((resolve, reject) => {
+        const url = getters.API_URL
+        const pseudoPassword = payload.email + ':' + payload.password
+        var basicAuth = `Basic ${btoa(pseudoPassword)}`
+
+        axios({
+          method: 'post',
+          url: `${url}/account/connection`,
+          data: {},
+          headers: { Authorization: basicAuth }
+        })
+          .then((response) => {
+            commit('setUser', response.data)
+            console.log('user: ', response.data)
+            resolve()
+          })
+          .catch((err) => {
+            console.log('err: ', err)
+            reject(err)
+          })
+      })
+    },
     signUserUp ({ commit, getters }, payload) {
       commit('clearError')
       return new Promise((resolve, reject) => {
