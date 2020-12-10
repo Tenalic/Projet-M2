@@ -45,23 +45,34 @@
           Argent : {{account.credit}}€
         </v-card-subtitle>
         <v-divider></v-divider>
-        <v-treeview></v-treeview>
-        <!-- BOUTON LANCER DE DES -->
-        <v-tooltip v-model="hasDices" top>
-          <template v-slot:activator="{ on, attrs }">
-            <div v-on="on" >
-              <v-btn id="diceToss" @click="rollTheDices" disabled="hasDices" v-bind="attrs">
-                <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
-                <span>Lancez vos dés</span>
-              </v-btn>
-            </div>
-          </template>
-          <span>Vous n'avez pas assez de dés</span>
-        </v-tooltip>
-        <!-- BOUTON ENTRER UN CODE -->
-        <v-btn to="EnterCode">
-          Entrer un code
-        </v-btn>
+        <!-- LISTE DES PROPRIETES -->
+        <v-list>
+          <v-subheader>Propriétés</v-subheader>
+          <v-list-item v-for="i in account.indexSquarePurchased" :key = "account.indexSquarePurchased[i]">
+            <v-list-item-content>
+              <v-progress-linear value="100" :color="board[i].color"/>
+              <v-list-item-text v-text = board[i].streetName></v-list-item-text>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-row>
+          <!-- BOUTON LANCER DE DES -->
+          <v-tooltip :disabled="hasDices==true" bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <div v-on="on" >
+                <v-btn id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
+                  <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
+                  <span>Lancez vos dés</span>
+                </v-btn>
+              </div>
+            </template>
+            <span>Vous n'avez pas assez de dés</span>
+          </v-tooltip>
+          <!-- BOUTON ENTRER UN CODE -->
+          <v-btn to="EnterCode">
+            Entrer un code
+          </v-btn>
+        </v-row>
         <v-card v-if="diceToss" id="dice">
           <img v-bind:src="diceImage1" width="60">
           <img v-bind:src="diceImage2" width="60">
@@ -77,8 +88,17 @@
       <v-card-subtitle>
         Valeur : {{ board[account.indexSquare].cost }}€
       </v-card-subtitle>
-      <v-btn :id="buyButton" @click="buy" :disabled="!canBuy">Acheter</v-btn>
+      <v-row>
+        <v-tooltip :disabled="canBuy" bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <div v-on="on" >
+              <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
+            </div>
+          </template>
+          <span>Vous n'avez pas assez d'argent</span>
+        </v-tooltip>
       <v-btn to="EnterCode">Refuser</v-btn>
+      </v-row>
       </v-card>
   </v-container>
 </template>
