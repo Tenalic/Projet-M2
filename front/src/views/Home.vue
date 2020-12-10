@@ -36,7 +36,7 @@ export default {
     return {
       team: [
         { title: 'Cadeaux', link: '/cadeaux' },
-        { title: 'allo' },
+        { title: 'Game', link: '/game' },
         { title: 'allo' },
         { title: 'allo' },
         { title: 'Profile', link: '/profile' }
