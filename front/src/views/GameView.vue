@@ -1,11 +1,16 @@
 <template>
   <v-container v-if="!loading">
     <!-- POP UP GAIN DE PRIX -->
-    <v-dialog v-model="prizeAlert" max-width="600px">
+    <v-dialog v-model="prizeAlert" max-width="500px">
       <v-card>
-        <v-card-title>Félicitations !</v-card-title>
-        <v-card-text>Vous avez gagné : {{prizeWin}}</v-card-text>
-        <v-btn @click="prizeAlert=false">Fermer</v-btn>
+        <v-card-title class="primary white--text">
+          <h4>Félicitations !</h4>
+          <v-spacer></v-spacer>
+          <v-icon class="font-weight-black white--text" @click="prizeAlert = false">mdi-window-close</v-icon>
+        </v-card-title>
+        <v-card-text class="mt-4">
+          <h3>Vous avez gagné : <span class="primary--text">{{prizeWin}}</span></h3>
+        </v-card-text>
       </v-card>
     </v-dialog>
       <v-row justify="center">
@@ -36,30 +41,12 @@
       </v-row>
       </v-card>
         <!-- PLATEAU -->
-        <v-sheet
-        v-if="board"
-        color="#EAEDED"
-        class="background-image"
-        elevation="20"
-        height="600"
-        width="600">
-            <v-row
-            v-for="i in 6"
-            :key="i"
-            no-gutters>
-              <v-col
-              v-for="j in 6"
-              :key="j"
-              no-gutters>
+        <v-sheet v-if="board" color="#EAEDED" class="background-image" elevation="20" height="600" width="600" rounded>
+            <v-row v-for="i in 6" :key="i" no-gutters>
+              <v-col v-for="j in 6" :key="j" no-gutters>
                   <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
                         on affiche les coordonnées de la rue -->
-                  <v-card v-if="displayBoard[i-1][j-1] != null"
-                  tile
-                  outlined
-                  v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}"
-                  v-bind:id = displayBoard[i-1][j-1].index
-                  height="100"
-                  width="100">
+                  <v-card v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
                     {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
                     {{displayBoard[i-1][j-1].streetName}}<br>
                     {{displayBoard[i-1][j-1].cost}}€
@@ -147,6 +134,7 @@ export default {
   },
   mounted () {
     this.account = this.$store.getters.user
+    console.log('user: ', this.account)
     this.getBoard()
   },
   methods: {
