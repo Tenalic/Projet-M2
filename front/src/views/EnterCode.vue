@@ -23,7 +23,7 @@
               </v-container>
               <!-- list prizes container -->
               <!-- just won in GREEN -->
-              <v-container v-if="finalPrize" fluid mt-5>
+              <v-container v-if="isListPrize" fluid mt-5>
                 <v-card>
                   <v-row align="center" justify="center">
                     <v-col md="6">
@@ -63,6 +63,7 @@
                   <v-col md="6">
                     <v-card>
                       <v-card-title>simple</v-card-title>
+                      {{finalPrize}}
                     </v-card>
                   </v-col>
                 </v-row>
@@ -74,11 +75,24 @@
                   <v-col md="6">
                     <v-card>
                       <v-card-title>credit</v-card-title>
+                      {{finalPrize}}
                     </v-card>
                   </v-col>
                 </v-row>
               </v-container>
               <!-- credit prize container -->
+              <!-- error prize container -->
+              <v-container v-if="isErrorPrize" fluid mt-5>
+                <v-row align="center" justify="center">
+                  <v-col md="6">
+                    <v-card color="#d75838"  class="menuTitle" width="60%">
+                      <!-- <v-card-title>error</v-card-title> -->
+                      {{finalPrize.message}}
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-container>
+              <!-- error prize container -->
             </v-form>
           </v-card-text>
         </v-card>
@@ -88,7 +102,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'EnterCode',
@@ -125,36 +139,52 @@ export default {
       requestRes: null,
       // received object
       finalPrize: null,
-      isSimplePrize: true,
-      isCreditPrize: true,
-      isListPrize: true
+
+      isSimplePrize: false,
+      isCreditPrize: false,
+      isListPrize: false,
+      isErrorPrize: false
     }
   },
   methods: {
-    render () {
-
+    set_prizes_fale () {
+      this.isSimplePrize = false
+      this.isCreditPrize = false
+      this.isListPrize = false
+      this.isErrorPrize = false
+    },
+    render_simple () {
+      console.log('SIMPLE')
+      this.isSimplePrize = true
     },
     render_credit () {
-
+      console.log('CREDIT')
+      this.isCreditPrize = true
     },
     render_prizes () {
-
+      console.log('LIST')
+      this.isListPrize = true
     },
     render_error () {
+      console.log('ERROR')
+      this.isErrorPrize = true
 
+      var text = this.finalPrize.message
+      this.finalPrize.message = text.split(':')[1]
     },
     get_prizes () {
       console.log('get_prizes of ', this.code)
+      // axios.get()
       // var obj = null
       // test code 9559948 or 4430164 or 3030553
       // code 9702578 or 400
-
+      this.finalPrize = this.prizeError
+      /*
       var config = {
         headers: {
-          IdAccount: 180
+          IdAccount: 307
         }
       }
-      console.log('confog ', config)
       var data = {
       }
       var url = 'http://monopolym2tnsi.hopto.org:8080/code/use/' + this.code
@@ -162,6 +192,10 @@ export default {
         .then(res => {
           console.log('post.then ', res.data)
           var obj = res.data
+          this.finalPrize = obj
+
+          this.set_prizes_fale()
+
           if ('message' in obj) {
             this.render_error()
           }
@@ -172,10 +206,11 @@ export default {
             this.render_prizes()
           }
           if (!('credit' in obj) && !('prize' in obj) && !('message' in obj)) {
-            this.render()
+            this.render_simple()
           }
         })
-        .catch(err => console.log('error delphin', err))
+        .catch(err => console.log('error delphin', err.message))
+        */
     }
   }
 }
