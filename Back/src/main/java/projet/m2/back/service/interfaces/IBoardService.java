@@ -20,7 +20,7 @@ public interface IBoardService {
     Board getBoardById(final long id);
 
     /**
-     * Permet de changer l'index de la case sur lequel l'Account est sur la nouvelle case selon le move et le sauvgarder en base.
+     * Permet de changer l'index de la case sur lequel l'Account est sur la nouvelle case selon le move et le sauvegarder en base.
      * @param account le compte sur lequel le move sera fait
      * @param move le nombre de case à bouger
      * @return le compte avec le nouvelle index de la case
