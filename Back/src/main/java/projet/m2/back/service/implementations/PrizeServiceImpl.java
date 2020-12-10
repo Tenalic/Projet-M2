@@ -60,19 +60,14 @@ public class PrizeServiceImpl implements IPrizeService {
                     }
                 }
             } else {
-               /* Iterable<Prize> tmp = getAllPrize();
-                ArrayList<Prize> listPrize = new ArrayList<Prize>();
-                for(Prize p : tmp)
-                {
-                    listPrize.add(p);
-                }
-                int tmpRand = r.nextInt(listPrize.size());
-                listPrize.get(tmpRand);//donne le cadeau obtenu*/
                 return 4;
             }
         }
     }
 
+    /**
+     * Fonction qui crée un jeu de données pour les prix dans la base de données
+     */
     @Override
     @Transactional
     public void createDatasetPrize() {
@@ -95,6 +90,11 @@ public class PrizeServiceImpl implements IPrizeService {
     }
 
 
+    /**
+     * Fonction qui permet de tirer aléatoirement un prix.
+     * @param account
+     * @return le prix qui à été choisi aléatoirement.
+     */
     @Override
     @Transactional
     public String randomPrize (Account account)  //choice comporte le resultat de gain
