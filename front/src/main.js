@@ -13,5 +13,11 @@ new Vue({
   router,
   store,
   vuetify,
+  created () {
+    const currentUser = JSON.parse(localStorage.getItem('user'))
+    if (currentUser) {
+      store.commit('setUser', currentUser)
+    }
+  },
   render: h => h(App)
 }).$mount('#app')

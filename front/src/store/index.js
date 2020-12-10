@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    // Nom de l'utilisateur
+    // Données de l'utilisateur
     user: null,
     error: null,
     API_URL: 'http://monopolym2tnsi.hopto.org:8080'
@@ -20,6 +20,14 @@ export const store = new Vuex.Store({
     },
     setUser (state, payload) {
       state.user = payload
+
+      // add user to localStorage
+      window.localStorage.setItem('user', JSON.stringify(state.user))
+    },
+    clearUser (state) {
+      state.user = null
+      // delete user data from localStorage
+      window.localStorage.clear()
     }
   },
   actions: {
@@ -39,11 +47,9 @@ export const store = new Vuex.Store({
         })
           .then((response) => {
             commit('setUser', response.data)
-            console.log('user: ', response.data)
             resolve()
           })
           .catch((err) => {
-            console.log('err: ', err)
             reject(err)
           })
       })

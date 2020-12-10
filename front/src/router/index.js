@@ -70,6 +70,14 @@ const routes = [
     }
   },
   {
+    path: '/welcome',
+    name: 'Welcome',
+    component: () => import('@/views/Welcome'),
+    meta: {
+      title: 'Bienvenue'
+    }
+  },
+  {
     path: '*',
     name: 'Error404',
     component: () => import('@/views/Error404'),
