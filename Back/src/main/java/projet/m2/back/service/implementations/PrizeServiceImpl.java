@@ -39,6 +39,7 @@ public class PrizeServiceImpl implements IPrizeService {
     }
 
     /**
+     * Fonction qui mets en place différentes probabilités pour avoir différent prix
      * @return 0 si juste dé, 1 si 50 pts, 2 pour 100 pts, 3 pour 150 pts et 4 pour un prix
      */
     @Override
