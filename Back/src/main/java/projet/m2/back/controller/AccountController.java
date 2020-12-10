@@ -41,7 +41,7 @@ public class AccountController {
 
         } else {
             jsonInfo.put("message", "Error: Account not found");
-            return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonInfo);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonInfo);
         }
 
     }
@@ -51,12 +51,12 @@ public class AccountController {
         JSONObject myJSON = new JSONObject();
         if (!iaccountService.accountExistsById(id)) {
             myJSON.put("message", "Error: Account does not exist");
-            return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
+            return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
         } else {
             iaccountService.deleteAccount(id);
             if (iaccountService.accountExistsById(id)) {
                 myJSON.put("message", "Error: Account not deleted");
-                return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
+                return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
             } else {
                 myJSON.put("message", "Account deleted successfully");
                 return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(myJSON);
@@ -85,7 +85,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: autorization error");
-        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).headers(new HttpHeaders()).body(jsonError);
     }
 
     @PostMapping("/account/create")
@@ -105,7 +105,7 @@ public class AccountController {
                 } else {
                     JSONObject jsonError = new JSONObject();
                     jsonError.put("message", "Error: erreur de création du compte");
-                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -136,19 +136,19 @@ public class AccountController {
             switch (errorCode) {
                 case -1:
                     responseJSON.put("message", "Error: Compte non trouvé");
-                    status = 400;
+                    status = 200;
                     break;
                 case -2:
                     responseJSON.put("message", "Error: nombre de dé insuffisant");
-                    status = 400;
+                    status = 200;
                     break;
                 case -3:
                     responseJSON.put("message", "Error: board non trouvé");
-                    status = 400;
+                    status = 200;
                     break;
                 default:
                     responseJSON.put("message", "Error: Erreur inconue");
-                    status = 400;
+                    status = 200;
                     break;
             }
             return ResponseEntity.status(status).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(responseJSON);
@@ -156,7 +156,7 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: Une erreur inattendue est survenue.");
-        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 
     @PostMapping("/account/buy")
@@ -191,7 +191,7 @@ public class AccountController {
 
                 if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
                     jsonError.put("message", "Error: Un des champs est vide");
-                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
 
                 listModifyValue.put("lastname", lastname);
@@ -205,10 +205,10 @@ public class AccountController {
 
                 Account account = iaccountService.modifyValue(listModifyValue, id);
                 if (account != null) {
-                    return ResponseEntity.status(406).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(listModifyValue);
                 } else {
                     jsonError.put("message", "Error: compte inconnu");
-                    return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+                    return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {
                 ex.printStackTrace();
@@ -217,6 +217,6 @@ public class AccountController {
         }
         JSONObject jsonError = new JSONObject();
         jsonError.put("message", "Error: erreur inconnu");
-        return ResponseEntity.status(400).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
+        return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
     }
 }
