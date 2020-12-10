@@ -23,6 +23,38 @@
               </v-container>
               <!-- list prizes container -->
               <!-- just won in GREEN -->
+              <v-container v-if="isListPrize" >
+                <v-card class="text--centered">
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="green">mdi-gift</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col md="8" align="center">
+                      <v-card-text class="text--centered">Vous avez gagné {{finalPrize.prizeWin}}</v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-container>
+              <!-- list  -->
+              <v-container v-if="isListPrize" class="grey lighten-5">
+                <v-row>
+                  <v-col v-for="(prize,index) in finalPrize.prize" :key="index" cols="4">
+                    <v-card>
+                      <v-row align="center">
+                        <v-col align="center">
+                          <v-icon size="30" color="grey">mdi-gift</v-icon>
+                        </v-col>
+                        <v-col>
+                         {{prize}}
+                        </v-col>
+                      </v-row>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-container>
+
               <v-container v-if="isListPrize" fluid mt-5>
                   <v-row align="center" justify="center">
                     <v-card color="green" width="40%">
@@ -55,7 +87,7 @@
                   </v-col>
                 </v-row>
               </v-container>
-              <!-- list prizes container -->
+              <!-- list prizes container END-->
 
               <!-- simple prize container -->
               <v-container v-if="isSimplePrize" >
@@ -67,17 +99,18 @@
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col md="8" align="center">
-                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                      <v-card-text class="text--centered">Vous avez gagné 1 lancer</v-card-text>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col style="color: gray" align="center" md="4">
-                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                      <v-card-text>Total {{finalPrize.nbDice}}</v-card-text>
                     </v-col>
                   </v-row>
                 </v-card>
               </v-container>
-              <!-- simple prize container -->
+              <!-- simple prize container END-->
+
               <!-- credit prize container -->
               <!-- lancer -->
               <v-container v-if="isCreditPrize">
@@ -89,12 +122,12 @@
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col md="8" align="center">
-                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                      <v-card-text class="text--centered">Vous avez gagné 1 lancer</v-card-text>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col style="color: gray" align="center" md="4">
-                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                      <v-card-text>Total {{finalPrize.nbDice}}</v-card-text>
                     </v-col>
                   </v-row>
                 </v-card>
@@ -104,44 +137,38 @@
                 <v-card class="text--centered">
                   <v-row align="center" justify="center">
                     <v-col md='6' align="center" >
-                      <v-icon size="120" color="green">mdi-check</v-icon>
+                      <v-icon size="120" color="green">mdi-cash-usd-outline</v-icon>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col md="8" align="center">
-                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                      <v-card-text class="text--centered">Vous avez gagné {{finalPrize.creditWin}} credits</v-card-text>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col style="color: gray" align="center" md="4">
-                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                      <v-card-text>Total {{finalPrize.credit}}</v-card-text>
                     </v-col>
                   </v-row>
                 </v-card>
               </v-container>
-              <v-container v-if="isCreditPrize" fluid mt-5>
-                <v-row align="center" justify="center">
-                  <v-col md="6">
-                    <v-card>
-                      <v-card-title>credit</v-card-title>
-                      {{finalPrize}}
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <!-- credit prize container -->
+              <!-- credit prize container END-->
               <!-- error prize container -->
-              <v-container v-if="isErrorPrize">
-                <v-row align="center" justify="center">
-                  <v-col md="6">
-                    <v-card color="#d75838"  class="menuTitle" >
-                      <!-- <v-card-title>error</v-card-title> -->
-                      {{finalPrize.message}}
-                    </v-card>
-                  </v-col>
-                </v-row>
+              <v-container v-if="isErrorPrize" >
+                <v-card >
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="red">mdi-close</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row >
+                    <v-col align="center" md="4">
+                      <v-card-text>{{finalPrize.message}}</v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
               </v-container>
-              <!-- error prize container -->
+              <!-- error prize container END-->
             </v-form>
           </v-card-text>
         </v-card>
