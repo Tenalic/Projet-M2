@@ -40,6 +40,13 @@ export const store = new Vuex.Store({
             reject(err)
           })
       })
+    },
+    onContactUs ({ commit }, payload) {
+      commit('clearError')
+      return new Promise((resolve, reject) => {
+        console.log('payload: ', payload)
+        resolve()
+      })
     }
   },
   modules: {
