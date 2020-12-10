@@ -54,6 +54,14 @@ const routes = [
     }
   },
   {
+    path: '/registrationsuccessful',
+    name: 'InscriptionConfirmation',
+    component: () => import('@/views/InscriptionConfirmation'),
+    meta: {
+      title: 'Registration successful'
+    }
+  },
+  {
     path: '/contact',
     name: 'ContactUs',
     component: () => import('@/views/ContactUs'),
