@@ -1,5 +1,13 @@
 <template>
   <v-container v-if="!loading">
+    <!-- POP UP GAIN DE PRIX -->
+    <v-dialog v-model="prizeAlert" max-width="600px">
+      <v-card>
+        <v-card-title>Félicitations !</v-card-title>
+        <v-card-text>Vous avez gagné : {{prizeWin}}</v-card-text>
+        <v-btn @click="prizeAlert=false">Fermer</v-btn>
+      </v-card>
+    </v-dialog>
       <v-row justify="center">
         <!-- CARTE D'INFOS SUR LA RUE -->
       <v-card
@@ -131,7 +139,10 @@ export default {
       diceToss: null,
       // Chargement
       loading: true,
-      showStreetCard: false
+      // Affichage de la carte de la rue (Acheter/Refuser)
+      showStreetCard: false,
+      prizeWin: null,
+      prizeAlert: false
     }
   },
   mounted () {
@@ -199,7 +210,7 @@ export default {
       return this.account.indexSquare === index
     },
     setShowStreetCard () {
-      if (this.board[this.account.indexSquare].color === 'white' ||
+      if (this.board[this.account.indexSquare].color === '#363535' ||
       this.account.indexSquarePurchased.includes(this.board[this.account.indexSquare].index)) this.showStreetCard = false
       else this.showStreetCard = true
     },
@@ -235,6 +246,10 @@ export default {
           this.showStreetCard = false
           this.account.credit = response.data.credit
           this.account.indexSquarePurchased = response.data.indexSquarePurchased
+          if (response.data.prizeWin != null) {
+            this.prizeWin = response.data.prizeWin
+            this.prizeAlert = true
+          }
         })
     }
   },
