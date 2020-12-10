@@ -24,19 +24,19 @@
               <!-- list prizes container -->
               <!-- just won in GREEN -->
               <v-container v-if="isListPrize" fluid mt-5>
-                <v-card>
                   <v-row align="center" justify="center">
-                    <v-col md="6">
+                    <v-card color="green" width="40%">
                       <v-card-title>
-                        You won {{ finalPrize.prizeWin }}
+                        {{ finalPrize.prizeWin }}
                       </v-card-title>
+                    </v-card>
+                    <v-col md="6">
                     </v-col>
                   </v-row>
-                </v-card>
               </v-container>
 
               <v-container v-if="isListPrize" fluid mt-5>
-                <v-row align="center" justify="center" v-for="p in this.prize3.prize" :key="p.MenuSelected">
+                <v-row align="center" justify="center" v-for="p in this.finalPrize.prize" :key="p.MenuSelected">
                   <v-col md="6">
                     <v-hover v-slot:default="{ hover }">
                     <v-card
@@ -58,18 +58,67 @@
               <!-- list prizes container -->
 
               <!-- simple prize container -->
-              <v-container v-if="isSimplePrize" fluid mt-5>
-                <v-row align="center" justify="center">
-                  <v-col md="6">
-                    <v-card>
-                      <v-card-title>simple</v-card-title>
-                      {{finalPrize}}
-                    </v-card>
-                  </v-col>
-                </v-row>
+              <v-container v-if="isSimplePrize" >
+                <v-card class="text--centered">
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="green">mdi-check</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col md="8" align="center">
+                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col style="color: gray" align="center" md="4">
+                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
               </v-container>
               <!-- simple prize container -->
               <!-- credit prize container -->
+              <!-- lancer -->
+              <v-container v-if="isCreditPrize">
+                <v-card class="text--centered">
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="green">mdi-check</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col md="8" align="center">
+                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col style="color: gray" align="center" md="4">
+                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-container>
+              <!-- credit -->
+              <v-container v-if="isCreditPrize">
+                <v-card class="text--centered">
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="green">mdi-check</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col md="8" align="center">
+                      <v-text class="text--centered">Vous avez gagné 1 lancer</v-text>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col style="color: gray" align="center" md="4">
+                      <v-text>Total {{finalPrize.nbDice}}</v-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-container>
               <v-container v-if="isCreditPrize" fluid mt-5>
                 <v-row align="center" justify="center">
                   <v-col md="6">
@@ -82,10 +131,10 @@
               </v-container>
               <!-- credit prize container -->
               <!-- error prize container -->
-              <v-container v-if="isErrorPrize" fluid mt-5>
+              <v-container v-if="isErrorPrize">
                 <v-row align="center" justify="center">
                   <v-col md="6">
-                    <v-card color="#d75838"  class="menuTitle" width="60%">
+                    <v-card color="#d75838"  class="menuTitle" >
                       <!-- <v-card-title>error</v-card-title> -->
                       {{finalPrize.message}}
                     </v-card>
@@ -102,7 +151,7 @@
 </template>
 <script>
 // @ is an alias to /src
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'EnterCode',
@@ -116,15 +165,15 @@ export default {
       codeRules: [
         v => /^[0-9]/.test(v) || 'Seuls les chiffres sont acceptés'
       ],
-      prize1: {
+      prize_simple: {
         nbDice: 988
       },
-      prize2: {
+      prize_credit: {
         nbDice: 989,
         creditWin: 50,
         credit: 9750
       },
-      prize3: {
+      prize_list: {
         nbDice: 991,
         prizeWin: 'prize2',
         prize: [
@@ -178,8 +227,6 @@ export default {
       // var obj = null
       // test code 9559948 or 4430164 or 3030553
       // code 9702578 or 400
-      this.finalPrize = this.prizeError
-      /*
       var config = {
         headers: {
           IdAccount: 307
@@ -210,7 +257,6 @@ export default {
           }
         })
         .catch(err => console.log('error delphin', err.message))
-        */
     }
   }
 }
