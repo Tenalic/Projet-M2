@@ -25,7 +25,7 @@
         <div v-if="isUserAuthenticated == true">
           <v-btn color="primary"
           elevation = 0>
-            <span class="btn">{{ getUsername }}</span>
+            <span class="btn">{{ user.firstname }}</span>
           </v-btn>
         </div>
 
