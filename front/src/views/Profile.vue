@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" offset-md="3">
         <v-card color="grey lighten-4" class="pa-4">
           <v-row>
             <v-col cols="6">
@@ -29,9 +29,6 @@
 
                 <div class="grey--text darken-4 mt-3">E-mail</div>
                 <span class="mr-3">{{profile.email}}</span>
-
-                <div class="grey--text darken-4 mt-3">Bio</div>
-                <span class="mr-3">{{profile.bio}}</span>
               </v-col>
             </v-row>
           </div>
@@ -45,16 +42,6 @@
               </v-col>
               <v-col cols="6">
                 <v-text-field v-model="profile.lastName" label="Last Name" outlined dense required></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field v-model="profile.email" colv-model="email" label="E-mail" outlined dense required></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
-                <v-textarea v-model="profile.bio" label="Bio" auto-grow outlined dense required></v-textarea>
               </v-col>
             </v-row>
             <v-card-actions>
@@ -77,8 +64,7 @@ export default {
         nickname: 'Nickname',
         firstName: 'First Name',
         lastName: 'Last Name',
-        email: 'email@example.com',
-        bio: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error consequatur placeat nam reprehenderit odio cum ipsum rerum ab dolorem adipisci eius fugiat ducimus at beatae nostrum quisquam, provident itaque. Maxime.'
+        email: 'email@example.com'
       },
       valid: true,
       edit: false
