@@ -28,7 +28,7 @@
                   <v-col cols="12">
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="primary" :disabled="loading" :loading="loading" type="submit" value="send" large>Send</v-btn>
+                      <v-btn color="primary" :disabled="loading" :loading="loading" type="submit" value="send" large>Envoyer</v-btn>
                     </v-card-actions>
                   </v-col>
                 </v-row>

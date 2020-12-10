@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       footerLinks: [
-        { title: 'Home', link: '/' },
+        { title: 'Accueil', link: '/' },
         { title: 'Nous contacter', link: '/contact' },
         { title: 'À propos', link: '/about' }
       ],
