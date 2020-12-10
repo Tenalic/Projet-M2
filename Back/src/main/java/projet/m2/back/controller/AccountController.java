@@ -76,7 +76,7 @@ public class AccountController {
                     String[] uncodeSplitString = undecodeBase64String.split(":");
                     Account account = iaccountService.connection(uncodeSplitString[0], uncodeSplitString[1]);
                     if (account != null) {
-                        return ResponseEntity.status(302).body(account);
+                        return ResponseEntity.status(200).body(account);
                     }
                 } catch (UnsupportedEncodingException exception) {
                     exception.printStackTrace();
