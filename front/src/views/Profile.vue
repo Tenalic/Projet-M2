@@ -58,6 +58,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { store } from '@/store'
 
 export default {
   data () {
@@ -73,7 +74,21 @@ export default {
 
   methods: {
     onUpdateProfile () {
-      console.log(this.user)
+      if (this.$refs.form.validate()) {
+        const userDetails = {
+          lastname: this.lastname,
+          firstname: this.firstname,
+          nickname: this.nickname
+        }
+        store.dispatch('signUserUp', userDetails)
+          .then(() => {
+            this.loading = false
+          })
+          .catch(err => {
+            this.isLoading = false
+            store.commit('seterror', err)
+          })
+      }
     }
   },
 
