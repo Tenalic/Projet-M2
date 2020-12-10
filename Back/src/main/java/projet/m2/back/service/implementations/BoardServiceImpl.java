@@ -86,7 +86,7 @@ public class BoardServiceImpl implements IBoardService {
         Square square;
         for (int i = 0; i < 20; i++) {
             if (i == 0 || i == 5 || i == 10 || i == 15) {
-                square = squareService.createSquare(new Square(i, "street" + i, "#363535", 60));
+                square = squareService.createSquare(new Square(i, "street" + i, "#363535", 0));
                 if (square != null) {
                     listeSquare.add(square);
                 } else {
