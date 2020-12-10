@@ -35,6 +35,9 @@ public class CodeController {
                 case 3:
                     responseJSON.put("message", "Error: Code inconnu");
                     break;
+                case 4 :
+                    responseJSON.put("message", "Error: Le code n'est pas numérique");
+                    break;
                 default:
                     responseJSON.put("message", "Error: Erreur inconnue");
                     break;
