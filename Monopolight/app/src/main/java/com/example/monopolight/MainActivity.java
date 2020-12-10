@@ -256,7 +256,8 @@ public class MainActivity extends AppCompatActivity {
         listPrizes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, PrizeListActivity.class);
+                startActivity(intent);
             }
         });
 
