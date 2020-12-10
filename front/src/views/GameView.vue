@@ -29,6 +29,8 @@
                     {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
                     {{displayBoard[i-1][j-1].streetName}}<br>
                     {{displayBoard[i-1][j-1].cost}}€
+                    <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
+                    <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)">fas fa-chess-pawn</v-icon>
                   </v-card>
               </v-col>
             </v-row>
@@ -36,22 +38,41 @@
         <!-- INFOS JOUEURS -->
         <v-card>
           <v-card-title>
-            {{ account.nickname }}
+            {{ account.firstname}} {{ account.lastname }}
           </v-card-title>
         <v-card-subtitle>
+          @{{ account.nickname }}<br>
           Argent : {{account.credit}}€
         </v-card-subtitle>
         <v-divider></v-divider>
-        <v-treeview></v-treeview>
-        <!-- BOUTON LANCER DE DES -->
-        <v-btn id="diceToss" @click="rollTheDices">
-          <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
-          Lancez vos dés
-        </v-btn>
-        <!-- BOUTON ENTRER UN CODE -->
-        <v-btn>
-          Entrer un code
-        </v-btn>
+        <!-- LISTE DES PROPRIETES -->
+        <v-list>
+          <v-subheader>Propriétés</v-subheader>
+          <v-list-item v-for="i in account.indexSquarePurchased" :key = "account.indexSquarePurchased[i]">
+            <v-list-item-content>
+              <v-progress-linear value="100" :color="board[i].color"/>
+              <v-list-item-text v-text = board[i].streetName></v-list-item-text>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-row>
+          <!-- BOUTON LANCER DE DES -->
+          <v-tooltip :disabled="hasDices==true" bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <div v-on="on" >
+                <v-btn id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
+                  <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
+                  <span>Lancez vos dés</span>
+                </v-btn>
+              </div>
+            </template>
+            <span>Vous n'avez pas assez de dés</span>
+          </v-tooltip>
+          <!-- BOUTON ENTRER UN CODE -->
+          <v-btn to="EnterCode">
+            Entrer un code
+          </v-btn>
+        </v-row>
         <v-card v-if="diceToss" id="dice">
           <img v-bind:src="diceImage1" width="60">
           <img v-bind:src="diceImage2" width="60">
@@ -67,8 +88,17 @@
       <v-card-subtitle>
         Valeur : {{ board[account.indexSquare].cost }}€
       </v-card-subtitle>
-      <v-btn :id="buyButton" @click="buy(account.indexSquare)" :disabled="!canBuy">Acheter</v-btn>
-      <v-btn>Refuser</v-btn>
+      <v-row>
+        <v-tooltip :disabled="canBuy" bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <div v-on="on" >
+              <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
+            </div>
+          </template>
+          <span>Vous n'avez pas assez d'argent</span>
+        </v-tooltip>
+      <v-btn to="EnterCode">Refuser</v-btn>
+      </v-row>
       </v-card>
   </v-container>
 </template>
@@ -81,13 +111,7 @@ export default {
   data () {
     return {
       // Utilisateur
-      account: {
-        id: 310,
-        nickname: 'Nono',
-        credit: 50,
-        nbDice: 2,
-        indexSquare: 0
-      },
+      account: null,
       board: null,
       // Tableau pour l'affichage du plateau
       displayBoard: [
@@ -100,17 +124,13 @@ export default {
       ],
       // Résultat du lancé de dés
       diceToss: null,
-      // Pion
-      piece: {
-        icon: 'fas fa-chess-pawn',
-        index: -1
-      },
+      // Chargement
       loading: true
     }
   },
   mounted () {
+    this.account = this.$store.getters.user
     this.getBoard()
-    this.piece.index = 0
   },
   methods: {
     /*
@@ -129,65 +149,27 @@ export default {
       let n = 5
       let m = 5
       for (m = 5; m >= 0; m--) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
-        console.log(this.board[i])
       }
       m = 0
       for (n = 4; n >= 0; n--) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
       n = 0
       for (m = 1; m < 6; m++) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
       m = 5
       for (n = 1; n < 5; n++) {
-        console.log(i + ' ' + this.board[i])
         this.displayBoard[n][m] = this.board[i]
         i += 1
       }
-      console.log(this.displayBoard)
       this.loading = false
     },
-    // Lance les 2 dés
-    async rollTheDices () {
-      await axios
-        .post('http://monopolym2tnsi.hopto.org:8080/account/dice',
-          {},
-          { headers: { IdAccount: this.account.id } })
-        .then(response => {
-          console.log(response)
-          this.account.nbDice = response.data.nbDice
-          this.account.indexSquare = response.data.indexSquare
-          this.diceToss = response.data.diceResult
-          console.log(this.diceToss)
-        })
-        .catch(error => console.log(error))
-    },
-    // Faire avancer le pion
-    advance () {
-      if (this.piece.index < 19) this.piece.index++
-      else {
-        this.piece.index = 0
-      }
-      this.diceToss--
-      if (this.diceToss !== 0) {
-        this.advance()
-      }
-    },
-    // Retourne la carte avec les informations de la rue
-    getStreet () {
-    },
-    // Fonction achat
-    buy (index) {
-      this.account.credit -= this.board[index].cost
-    },
+    // Renvoie l'image du dé
     getDiceImage (n) {
       switch (n) {
         case 1: return require('../assets/dices/dice1.png')
@@ -198,26 +180,67 @@ export default {
         case 6: return require('../assets/dices/dice6.png')
         default: return null
       }
-    }
-  },
-  watch: {
-    // Met à jour la position du joueur sur le plateau (graphique)
-    playerIndex () {
-      document.getElementById(this.piece.index)
+    },
+    /*
+    * Booléens cases
+    */
+    // Renvoie à une case si elle est achetée (affichage de l'icône maison)
+    isBought (index) {
+      return this.account.indexSquarePurchased.includes(index)
+    },
+    // Renvoie si le joueur est sur la case
+    hasPiece (index) {
+      return this.account.indexSquare === index
+    },
+    /*
+    * Jeu
+    */
+    // Lance les 2 dés
+    async rollTheDices () {
+      await axios
+        .post('http://monopolym2tnsi.hopto.org:8080/account/dice',
+          {},
+          { headers: { IdAccount: this.account.id } })
+        .then(response => {
+          // On affecte les variables de la réponses
+          this.account.nbDice = response.data.nbDice
+          this.account.indexSquare = response.data.indexSquare
+          this.diceToss = response.data.diceResult
+        })
+        .catch(error => console.log(error))
+    },
+    // Fonction achat
+    async buy () {
+      await axios
+        .post('http://monopolym2tnsi.hopto.org:8080/account/buy',
+          {},
+          { headers: { IdAccount: this.account.id } })
+        .then(response => {
+          this.account.credit = response.data.credit
+          this.account.indexSquarePurchased = response.data.indexSquarePurchased
+        })
     }
   },
   computed: {
-    // Retourne l'index du pion
-    playerIndex () {
-      return this.piece.index
-    },
+    /*
+    * Booléens boutons
+    */
     // Retourne si le joueur a assez d'argent pour payer
     canBuy () {
-      return (this.account.credit >= this.board[this.piece.index].cost)
+      return (this.account.credit >= this.board[this.account.indexSquare].cost)
     },
+    // Retourne si le joueur a assez de dés pour jouer
+    hasDices () {
+      return (this.account.nbDice > 1)
+    },
+    /*
+    * Images dés
+    */
+    // Retourne l'image du dé 1
     diceImage1 () {
       return this.getDiceImage(this.diceToss[0])
     },
+    // Retourne l'image du dé 2
     diceImage2 () {
       return this.getDiceImage(this.diceToss[1])
     }
