@@ -36,7 +36,7 @@ export default {
   methods: {
     startBuffer () {
       this.interval = setInterval(() => {
-        this.value += this.bufferValue / 20
+        this.value += this.bufferValue / 15
         this.timeLeft--
         if (this.timeLeft <= 0) {
           router.push('/')
