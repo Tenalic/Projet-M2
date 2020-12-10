@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Symbolise le plateau de jeu
+ * Représente le plateau de jeu
+ * Entité représentant le plateau avec les cases
+ *
+ * Attributs:
+ * nbSquare : nombre de case du plateau de jeu
+ * name : nom du plateau, permet de le retrouver en base
+ * board : liste des case du plateau
  */
 @Entity
 public class Board {
