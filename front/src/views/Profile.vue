@@ -6,8 +6,8 @@
           <v-row>
             <v-col cols="6">
               <v-avatar class="avatar primary white--text">
-               {{ user.firstName | firstChar }}
-               {{ user.lastName | firstChar }}
+               {{ user.firstname | firstChar }}
+               {{ user.lastname | firstChar }}
               </v-avatar>
             </v-col>
             <v-col cols="6" >
