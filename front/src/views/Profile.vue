@@ -6,8 +6,8 @@
           <v-row>
             <v-col cols="6">
               <v-avatar class="avatar primary white--text">
-               {{ profile.firstName | firstChar }}
-               {{ profile.lastName | firstChar }}
+               {{ user.firstName | firstChar }}
+               {{ user.lastName | firstChar }}
               </v-avatar>
             </v-col>
             <v-col cols="6" >
@@ -21,27 +21,27 @@
             <v-row>
               <v-col cols="12" >
                 <div class="grey--text darken-4">Nickname</div>
-                <span class="mr-3">{{profile.nickname}}</span>
+                <span class="mr-3">{{user.nickname}}</span>
 
                 <div class="grey--text darken-4 mt-3">Name</div>
-                <span class="mr-3">{{profile.firstName}}</span>
-                <span>{{profile.lastName}}</span>
+                <span class="mr-3">{{user.firstname}}</span>
+                <span>{{user.lastname}}</span>
 
                 <div class="grey--text darken-4 mt-3">E-mail</div>
-                <span class="mr-3">{{profile.email}}</span>
+                <span class="mr-3">{{user.email}}</span>
               </v-col>
             </v-row>
           </div>
           <v-form v-else @submit.prevent="onUpdateProfile" ref="form" v-model="valid" class="mt-3">
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="profile.nickname" label="Nickname" outlined dense required></v-text-field>
+                <v-text-field v-model="user.nickname" label="Nickname" outlined dense required></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field v-model="profile.firstName" label="First Name" outlined dense required></v-text-field>
+                <v-text-field v-model="user.firstname" label="First Name" outlined dense required></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field v-model="profile.lastName" label="Last Name" outlined dense required></v-text-field>
+                <v-text-field v-model="user.lastname" label="Last Name" outlined dense required></v-text-field>
               </v-col>
             </v-row>
             <v-card-actions>
@@ -57,23 +57,23 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      profile: {
-        nickname: 'Nickname',
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        email: 'email@example.com'
-      },
       valid: true,
       edit: false
     }
   },
 
+  computed: {
+    ...mapGetters(['user'])
+  },
+
   methods: {
     onUpdateProfile () {
-      console.log(this.profile)
+      console.log(this.user)
     }
   },
 
