@@ -94,7 +94,7 @@
             <span>Vous n'avez pas assez de dés</span>
           </v-tooltip>
           <!-- BOUTON ENTRER UN CODE -->
-          <v-btn to="EnterCode">
+          <v-btn to="/enter-code">
             Entrer un code
           </v-btn>
           </v-col>
