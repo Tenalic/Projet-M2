@@ -71,6 +71,7 @@ public class CodeServiceImpl implements ICodeService {
                                 account.setCredit(account.getCredit() + creditWin);
                                 break;
                             case 4:
+                                account.setNbDice(account.getNbDice() + 1);
                                 prize = prizeService.randomPrize(account);
                                 break;
                             default:
