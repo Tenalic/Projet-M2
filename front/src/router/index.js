@@ -78,6 +78,14 @@ const routes = [
     }
   },
   {
+    path: '/enter-code',
+    name: 'EnterCode',
+    component: () => import('@/views/EnterCode'),
+    meta: {
+      title: 'Entrer un code'
+    }
+  },
+  {
     path: '*',
     name: 'Error404',
     component: () => import('@/views/Error404'),

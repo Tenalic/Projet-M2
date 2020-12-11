@@ -36,8 +36,7 @@ export default {
     return {
       team: [
         { title: 'Plateau de jeu', link: '/game' },
-        { title: 'Règles du jeu' },
-        { title: 'Profile', link: '/profile' }
+        { title: 'Règles du jeu' }
       ],
       colors: [
         'indigo',

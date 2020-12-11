@@ -4,7 +4,9 @@
       <!-- PARTIE GAUCHE -->
       <div class="d-flex align-center">
         <!-- Accueil -->
-        <img src="../assets/logotnsi3.png" height="100" width="auto" class="mt-5">
+        <a href="/">
+          <img src="../assets/logotnsi3.png" height="100" width="auto" class="mt-5">
+        </a>
       </div>
       <!-- FIN PARTIE GAUCHE -->
 
@@ -14,7 +16,7 @@
       <div class="d-flex align-center">
         <!-- Entrer un code -->
         <v-btn color="primary"
-        to="EnterCode"
+        to="enter-code"
         elevation = 0>
             <span class="btn">Entrer un code</span>
         </v-btn>
