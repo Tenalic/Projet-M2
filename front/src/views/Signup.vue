@@ -48,7 +48,7 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-btn :disabled="!valid" @click="submit" class="mr-2" color="success">
+                    <v-btn :disabled="!valid" @click="submit" :loading="loading" class="mr-2" color="success">
                       S'inscrire
                     </v-btn>
                     <v-btn @click="reset" class="mx-2" color="error">

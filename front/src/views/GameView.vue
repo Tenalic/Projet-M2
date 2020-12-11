@@ -46,6 +46,14 @@
       </v-card>
       <!-- PLATEAU -->
       <v-sheet v-if="board" color="#EAEDED" class="background-image" elevation="20" height="600" width="600" rounded>
+          <v-row v-if="diceToss" id="dice-row">
+            <v-col class="background-image">
+              <img class="mr-2" v-bind:src="diceImage1" width="80">
+              <!-- <v-spacer></v-spacer> -->
+              <img v-bind:src="diceImage2" width="80">
+            </v-col>
+          </v-row>
+
           <v-row v-for="i in 6" :key="i" no-gutters>
             <v-col v-for="j in 6" :key="j" no-gutters>
                 <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
@@ -112,10 +120,6 @@
           </v-btn>
           </v-col>
         </v-row>
-        <v-card v-if="diceToss" id="dice">
-          <img v-bind:src="diceImage1" width="60">
-          <img v-bind:src="diceImage2" width="60">
-        </v-card>
         </v-card>
       </v-row>
   </v-container>
@@ -304,5 +308,11 @@ export default {
 .background-image {
   background-position: right 64% top 85%;
   background-image: url("../assets/logotnsi.png");
+}
+
+#dice-row {
+  position: absolute;
+  margin-top: 399px;
+  margin-left: 205px;
 }
 </style>

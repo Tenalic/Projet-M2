@@ -22,7 +22,7 @@
                 </v-row>
                 <v-row justify="start">
                   <v-col>
-                    <v-btn :disabled="!valid" color="success" class="mr-2" @click="onSignIn">Se connecter</v-btn>
+                    <v-btn :disabled="!valid" :loading="loading" color="success" class="mr-2" @click="onSignIn">Se connecter</v-btn>
                     <v-btn color="error" class="mx-2" @click="reset">Annuler</v-btn>
                   </v-col>
                 </v-row>

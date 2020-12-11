@@ -22,6 +22,25 @@
                 </v-row>
               </v-container>
               <!-- list prizes container -->
+                <v-container v-if="isListPrize" >
+                <v-card class="text--centered">
+                  <v-row align="center" justify="center">
+                    <v-col md='6' align="center" >
+                      <v-icon size="120" color="green">mdi-check</v-icon>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col md="8" align="center">
+                      <v-card-text class="text--centered">Vous avez gagné 1 dé</v-card-text>
+                    </v-col>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <v-col style="color: gray" align="center" md="4">
+                      <v-card-text>Total {{finalPrize.nbDice}}</v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-container>
               <!-- just won in GREEN -->
               <v-container v-if="isListPrize" >
                 <v-card class="text--centered">
@@ -66,7 +85,7 @@
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col md="8" align="center">
-                      <v-card-text class="text--centered">Vous avez gagné 1 lancer</v-card-text>
+                      <v-card-text class="text--centered">Vous avez gagné 1 dé</v-card-text>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
@@ -89,7 +108,7 @@
                   </v-row>
                   <v-row align="center" justify="center">
                     <v-col md="8" align="center">
-                      <v-card-text class="text--centered">Vous avez gagné 1 lancer</v-card-text>
+                      <v-card-text class="text--centered">Vous avez gagné 1 dé</v-card-text>
                     </v-col>
                   </v-row>
                   <v-row align="center" justify="center">
@@ -124,13 +143,13 @@
               <v-container v-if="isErrorPrize" >
                 <v-card >
                   <v-row align="center" justify="center">
-                    <v-col md='6' align="center" >
+                    <v-col md='12' align="center" >
                       <v-icon size="120" color="red">mdi-close</v-icon>
                     </v-col>
                   </v-row>
                   <v-row >
-                    <v-col align="center" md="4">
-                      <v-card-text>{{finalPrize.message}}</v-card-text>
+                    <v-col align="center" md="12">
+                      <v-card-text class="text-center">{{finalPrize.message}}</v-card-text>
                     </v-col>
                   </v-row>
                 </v-card>
@@ -216,7 +235,7 @@ export default {
       console.log('ERROR')
       this.isErrorPrize = true
 
-      var text = this.finalPrize.message
+      var text = decodeURIComponent(escape(this.finalPrize.message))
       this.finalPrize.message = text.split(':')[1]
     },
     get_prizes () {
@@ -261,7 +280,7 @@ export default {
           if (obj.credit != null) this.user.credit = obj.credit
           this.$store.dispatch('updateUser', this.user)
         })
-        .catch(err => console.log('error delphin', err.message))
+        .catch(err => console.log('error', err.message))
     }
   }
 }

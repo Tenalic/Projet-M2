@@ -66,11 +66,17 @@ export const store = new Vuex.Store({
         })
           .then((response) => {
             if (response.data.message) {
-              reject(response.data)
+              var str = decodeURIComponent(escape(response.data.message))
+              const error = { message: str }
+              reject(error)
             } else {
               commit('setUser', response.data)
               resolve()
             }
+            //             var decoder = new TextDecoder('utf-8'),
+            //     decodedMessage;
+
+            // decodedMessage = decoder.decode(message.data);
           })
       })
     },
