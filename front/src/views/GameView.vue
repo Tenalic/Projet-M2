@@ -1,5 +1,6 @@
 <template>
-  <v-container v-if="!loading">
+  <v-container v-if="!loading" fluid fill-height>
+
     <!-- POP UP GAIN DE PRIX -->
     <v-dialog v-model="prizeAlert" max-width="500px">
       <v-card>
@@ -13,62 +14,64 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-      <v-row justify="center">
-        <!-- CARTE D'INFOS SUR LA RUE -->
-      <v-card
-      v-if="showStreetCard"
-      width="150"
-      height="300">
-      <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
-      <v-card-title>
-        {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
-      </v-card-title>
-      <v-card-subtitle>
-        Valeur : {{ board[account.indexSquare].cost }}€
-      </v-card-subtitle>
-      <v-row>
-        <!-- BOUTON ACHETER -->
-        <v-tooltip :disabled="canBuy" bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <div v-on="on" >
-              <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
-            </div>
-          </template>
-          <span>Vous n'avez pas assez d'argent</span>
-        </v-tooltip>
-        <!-- BOUTON REFUSER -->
-      <v-btn @click="refuseToBuy">Refuser</v-btn>
-      </v-row>
-      </v-card>
-        <!-- PLATEAU -->
-        <v-sheet v-if="board" color="#EAEDED" class="background-image" elevation="20" height="600" width="600" rounded>
-            <v-row v-for="i in 6" :key="i" no-gutters>
-              <v-col v-for="j in 6" :key="j" no-gutters>
-                  <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
-                        on affiche les coordonnées de la rue -->
-                  <v-card v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
-                    {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
-                    {{displayBoard[i-1][j-1].streetName}}<br>
-                    {{displayBoard[i-1][j-1].cost}}€
-                    <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
-                    <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)">fas fa-chess-pawn</v-icon>
-                  </v-card>
-              </v-col>
-            </v-row>
-        </v-sheet>
-        <!-- INFOS JOUEURS -->
-        <v-card>
-          <v-card-title>
-            {{ account.firstname}} {{ account.lastname }}
-          </v-card-title>
+
+    <v-row justify="center">
+      <!-- CARTE D'INFOS SUR LA RUE -->
+      <v-card v-if="showStreetCard" width="150" height="300">
+        <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
+        <v-card-title>
+          {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
+        </v-card-title>
         <v-card-subtitle>
-          @{{ account.nickname }}<br>
-          Argent : {{account.credit}}€
+          Valeur : {{ board[account.indexSquare].cost }}€
         </v-card-subtitle>
+        <v-row>
+          <!-- BOUTON ACHETER -->
+          <v-tooltip :disabled="canBuy" bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <div v-on="on" >
+                <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
+              </div>
+            </template>
+            <span>Vous n'avez pas assez d'argent</span>
+          </v-tooltip>
+          <!-- BOUTON REFUSER -->
+          <v-btn @click="refuseToBuy">Refuser</v-btn>
+        </v-row>
+      </v-card>
+      <!-- PLATEAU -->
+      <v-sheet v-if="board" color="#EAEDED" class="background-image" elevation="20" height="600" width="600" rounded>
+          <v-row v-for="i in 6" :key="i" no-gutters>
+            <v-col v-for="j in 6" :key="j" no-gutters>
+                <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
+                      on affiche les coordonnées de la rue -->
+                <v-card v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
+                  {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
+                  {{displayBoard[i-1][j-1].streetName}}<br>
+                  {{displayBoard[i-1][j-1].cost}}€
+                  <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
+                  <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)">fas fa-chess-pawn</v-icon>
+                </v-card>
+            </v-col>
+          </v-row>
+      </v-sheet>
+      <!-- INFOS JOUEURS -->
+      <v-card>
+        <!-- <v-card-text>Account</v-card-text> -->
+        <!-- <v-divider></v-divider> -->
+        <v-card-text>
+          <p class="text-h6">Compte</p>
+          Name: <b>{{ account.firstname}} {{ account.lastname }}</b>
+          <br>
+          Pseudo: <b>{{ account.nickname }}</b>
+          <br>
+          Argent : <b>{{account.credit}}€</b>
+        </v-card-text>
         <v-divider></v-divider>
+
         <!-- LISTE DES PROPRIETES -->
         <v-list>
-          <v-subheader>Propriétés</v-subheader>
+          <v-subheader class="text-h6">Propriétés</v-subheader>
           <v-list-item v-for="i in account.indexSquarePurchased" :key = "account.indexSquarePurchased[i]">
             <v-list-item-content>
               <v-progress-linear value="100" :color="board[i].color"/>
@@ -78,6 +81,7 @@
         </v-list>
         <v-row>
           <!-- BOUTON LANCER DE DES -->
+          <v-col cols="12">
           <v-tooltip :disabled="hasDices==true" bottom>
             <template v-slot:activator="{ on, attrs }">
               <div v-on="on" >
@@ -93,6 +97,7 @@
           <v-btn to="EnterCode">
             Entrer un code
           </v-btn>
+          </v-col>
         </v-row>
         <v-card v-if="diceToss" id="dice">
           <img v-bind:src="diceImage1" width="60">
