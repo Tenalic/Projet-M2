@@ -196,23 +196,41 @@ public class AccountController {
             JSONObject jsonError = new JSONObject();
             try {
                 JSONObject accountJson = (JSONObject) parser.parse(updateAccountBody);
-                String lastname = (String) accountJson.get("lastname");
-                String firstname = (String) accountJson.get("firstname");
-                String nickname = (String) accountJson.get("nickname");
+                String lastname = null;
+                String firstname = null;
+                String nickname = null;
+                if(accountJson.containsKey("lastname")){
+                    lastname = (String) accountJson.get("lastname");
+                }
+                if(accountJson.containsKey("firstname")){
+                    firstname = (String) accountJson.get("firstname");
+                }
+                if(accountJson.containsKey("nickname")){
+                    nickname = (String) accountJson.get("nickname");
+                }
+
                 HashMap<String, String> listModifyValue = new HashMap<>();
 
-                if(lastname.isBlank() || firstname.isBlank() || nickname.isBlank()) {
+                if((lastname != null && lastname.isBlank()) || (firstname != null && firstname.isBlank()) ||
+                        (nickname != null && nickname.isBlank())) {
                     jsonError.put("message", "Error: Un des champs est vide");
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
+                if(lastname != null)
+                    listModifyValue.put("lastname", lastname);
+                if(firstname != null)
+                    listModifyValue.put("firstname", firstname);
+                if(nickname != null){
+                    if(iaccountService.getNicknameById(id).equals(nickname)){
+                        listModifyValue.put("message", "Error: Votre pseudo est identique.");
+                    } else {
+                        if (!iaccountService.accountExistsByNickname(nickname))
+                            listModifyValue.put("nickname", nickname);
+                        else {
+                            listModifyValue.put("message", "Error: Pseudo déjà utilisé");
+                        }
+                    }
 
-                listModifyValue.put("lastname", lastname);
-                listModifyValue.put("firstname", firstname);
-                if (!iaccountService.accountExistsByNickname(nickname))
-                    listModifyValue.put("nickname", nickname);
-                else {
-                    jsonError.put("message", "Error: Pseudo déjà utilisé");
-                    listModifyValue.put("message", "Error: Pseudo déjà utilisé");
                 }
 
                 Account account = iaccountService.modifyValue(listModifyValue, id);

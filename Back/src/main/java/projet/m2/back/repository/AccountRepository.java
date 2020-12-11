@@ -22,4 +22,7 @@ public interface AccountRepository extends CrudRepository<Account, Long>, Accoun
 
     boolean existsAccountByNickname(String nickname);
 
+    @Query("select a.nickname from Account a where a.id = ?1")
+    String findNicknameAccountById(long id);
+
 }

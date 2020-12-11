@@ -107,4 +107,11 @@ public interface IAccountService {
      * @return la liste des prix gagnée ou null
      */
     String checkSquareColorWinner(long idAccount);
+
+    /**
+     * Permet de récupérer le nickname avec l'id du compte
+     * @param idAccount l'id du compte
+     * @return le nickname, si le compte existe, null sinon
+     */
+    String getNicknameById(long idAccount);
 }

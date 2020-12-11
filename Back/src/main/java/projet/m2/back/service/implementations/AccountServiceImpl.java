@@ -268,5 +268,17 @@ public class AccountServiceImpl implements IAccountService {
         return null;
     }
 
+    /**
+     * Permet de récupérer le nickname avec l'id du compte
+     * @param idAccount l'id du compte
+     * @return le nickname, si le compte existe, null sinon
+     */
+    public String getNicknameById(long idAccount){
+        if(accountRepository.existsAccountById(idAccount)){
+            return accountRepository.findNicknameAccountById(idAccount);
+        }
+        return null;
+    }
+
 
 }
