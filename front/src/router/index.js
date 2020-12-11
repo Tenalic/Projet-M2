@@ -94,6 +94,14 @@ const routes = [
     }
   },
   {
+    path: '/history',
+    name: 'History',
+    component: () => import('@/views/History'),
+    meta: {
+      title: 'Historique des cadeaux'
+    }
+  },
+  {
     path: '*',
     name: 'Error404',
     component: () => import('@/views/Error404'),

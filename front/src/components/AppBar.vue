@@ -73,6 +73,7 @@ export default {
     return {
       items: [
         { icon: 'mdi-account-circle', title: 'Profil', click: () => router.push('/profile') },
+        { icon: 'mdi-text-box-check', title: 'Historique des cadeaux', click: () => router.push('/history') },
         { icon: 'mdi-exit-to-app', title: 'Se déconnecter', click: () => store.commit('clearUser') }
       ]
     }
