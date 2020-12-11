@@ -14,7 +14,7 @@
           </v-card-title>
           <p class="welcome pt-3">Merci de nous rejoindre!</p>
           <v-card-actions class="justify-center">
-            <v-btn outlined color="primary" @click="goToPath('/')">Commencer l'aventure</v-btn>
+            <v-btn outlined color="primary" to="/">Commencer l'aventure</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

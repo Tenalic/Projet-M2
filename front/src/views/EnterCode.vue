@@ -184,6 +184,7 @@ export default {
   name: 'EnterCode',
   data () {
     return {
+      user: null,
       label: 'Votre coupon',
       couponNonValide: false,
       validCod: true,
@@ -222,6 +223,9 @@ export default {
       isErrorPrize: false
     }
   },
+  mounted () {
+    this.user = this.$store.getters.user
+  },
   methods: {
     set_prizes_fale () {
       this.isSimplePrize = false
@@ -256,7 +260,7 @@ export default {
       // code 9702578 or 400
       var config = {
         headers: {
-          IdAccount: 307
+          IdAccount: this.user.id
         }
       }
       var data = {

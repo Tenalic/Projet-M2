@@ -10,7 +10,7 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      title: 'Monopolight'
+      title: 'Bienvenue sur Monopolight'
     }
   },
   {
@@ -18,7 +18,7 @@ const routes = [
     name: 'Profile',
     component: () => import('@/views/Profile'),
     meta: {
-      title: 'My profile'
+      title: 'Monopolight - Profil'
     }
   },
   {
@@ -26,7 +26,7 @@ const routes = [
     name: 'GameView',
     component: () => import('@/views/GameView'),
     meta: {
-      title: 'Game view'
+      title: 'Monopolight - Jeu'
     }
   },
   {
@@ -34,7 +34,7 @@ const routes = [
     name: 'About',
     component: () => import('@/views/About'),
     meta: {
-      title: 'About us'
+      title: 'Monopolight - À propos'
     }
   },
   {
@@ -42,7 +42,7 @@ const routes = [
     name: 'Login',
     component: () => import('@/views/Login'),
     meta: {
-      title: 'Login'
+      title: 'Monopolight - Connexion'
     }
   },
   {
@@ -50,7 +50,7 @@ const routes = [
     name: 'Signup',
     component: () => import('@/views/Signup'),
     meta: {
-      title: 'Sign up'
+      title: 'Monopolight - Inscription'
     }
   },
   {
@@ -66,7 +66,7 @@ const routes = [
     name: 'ContactUs',
     component: () => import('@/views/ContactUs'),
     meta: {
-      title: 'Contact us'
+      title: 'Monopolight - Nous contacter'
     }
   },
   {
@@ -74,7 +74,7 @@ const routes = [
     name: 'Welcome',
     component: () => import('@/views/Welcome'),
     meta: {
-      title: 'Bienvenue'
+      title: 'Monopolight - Bienvenue'
     }
   },
   {
@@ -82,7 +82,7 @@ const routes = [
     name: 'EnterCode',
     component: () => import('@/views/EnterCode'),
     meta: {
-      title: 'Entrer un code'
+      title: 'Monopolight - Entrer un code'
     }
   },
   {
