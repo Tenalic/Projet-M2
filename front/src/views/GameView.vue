@@ -54,7 +54,7 @@
                   <!-- {{displayBoard[i-1][j-1].index}}  id pour se repérer, à enlever plus tard -->
                   <div class="pt-2">
                   {{displayBoard[i-1][j-1].streetName}}<br>
-                  <b>{{displayBoard[i-1][j-1].cost}}€</b>
+                  <span v-if="displayBoard[i-1][j-1].cost > 0"><b>{{displayBoard[i-1][j-1].cost}}€</b></span>
                   </div>
                   <v-card-actions>
                     <v-spacer></v-spacer>
