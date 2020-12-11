@@ -54,39 +54,6 @@
                   </v-col>
                 </v-row>
               </v-container>
-
-              <v-container v-if="isListPrize" fluid mt-5>
-                  <v-row align="center" justify="center">
-                    <v-card color="green" width="40%">
-                      <v-card-title>
-                        {{ finalPrize.prizeWin }}
-                      </v-card-title>
-                    </v-card>
-                    <v-col md="6">
-                    </v-col>
-                  </v-row>
-              </v-container>
-
-              <v-container v-if="isListPrize" fluid mt-5>
-                <v-row align="center" justify="center" v-for="p in this.finalPrize.prize" :key="p.MenuSelected">
-                  <v-col md="6">
-                    <v-hover v-slot:default="{ hover }">
-                    <v-card
-                    color="#d75838"
-                    :elevation="hover ? 16 : 2"
-                    class="menuTitle"
-                    width="60%"
-                    >
-                      <v-card-title primary-title class="layout justify-center">
-                      <!-- <v-card-text> -->
-                        <div> {{p}} </div>
-                      <!-- </v-card-text> -->
-                      </v-card-title>
-                    </v-card>
-                    </v-hover>
-                  </v-col>
-                </v-row>
-              </v-container>
               <!-- list prizes container END-->
 
               <!-- simple prize container -->

@@ -14,7 +14,7 @@
       <div class="d-flex align-center">
         <!-- Entrer un code -->
         <v-btn color="primary"
-        to="EnterCode"
+        to="/enter-code"
         elevation = 0>
             <span class="btn">Entrer un code</span>
         </v-btn>
