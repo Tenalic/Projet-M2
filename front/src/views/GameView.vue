@@ -15,9 +15,9 @@
       </v-card>
     </v-dialog>
 
-    <v-row justify="center">
+    <v-row justify="center" align="center">
       <!-- CARTE D'INFOS SUR LA RUE -->
-      <v-card v-if="showStreetCard" width="150" height="300">
+      <v-card justify="center" align="center" v-if="showStreetCard" width="150" height="300">
         <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
         <v-card-title>
           {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
@@ -27,16 +27,21 @@
         </v-card-subtitle>
         <v-row>
           <!-- BOUTON ACHETER -->
+          <v-col cols=12>
           <v-tooltip :disabled="canBuy" bottom>
             <template v-slot:activator="{ on, attrs }">
               <div v-on="on" >
-                <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs">Acheter</v-btn>
+                <v-btn @click="buy" :disabled="!canBuy" v-bind="attrs" class="primary">Acheter</v-btn>
               </div>
             </template>
             <span>Vous n'avez pas assez d'argent</span>
           </v-tooltip>
+          </v-col>
+          <v-col cols="12">
+
           <!-- BOUTON REFUSER -->
-          <v-btn @click="refuseToBuy">Refuser</v-btn>
+          <v-btn class="primary_additional_light" @click="refuseToBuy">Refuser</v-btn>
+          </v-col>
         </v-row>
       </v-card>
       <!-- PLATEAU -->
@@ -45,12 +50,19 @@
             <v-col v-for="j in 6" :key="j" no-gutters>
                 <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
                       on affiche les coordonnées de la rue -->
-                <v-card v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
-                  {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
+                <v-card class="text-center white--text" v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
+                  <!-- {{displayBoard[i-1][j-1].index}}  id pour se repérer, à enlever plus tard -->
+                  <div class="pt-2">
                   {{displayBoard[i-1][j-1].streetName}}<br>
-                  {{displayBoard[i-1][j-1].cost}}€
-                  <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
-                  <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)" class="white--text">fas fa-chess-pawn</v-icon>
+                  <b>{{displayBoard[i-1][j-1].cost}}€</b>
+                  </div>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-icon class="black--text" v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
+                  <v-spacer></v-spacer>
+                    <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)" class="white--text">fas fa-chess-pawn</v-icon>
+                  <v-spacer></v-spacer>
+                  </v-card-actions>
                 </v-card>
             </v-col>
           </v-row>
@@ -81,20 +93,21 @@
         </v-list>
         <v-row>
           <!-- BOUTON LANCER DE DES -->
-          <v-col cols="12">
+          <v-col justify="center" align="center" cols="12">
           <v-tooltip :disabled="hasDices==true" bottom>
             <template v-slot:activator="{ on, attrs }">
               <div v-on="on" >
-                <v-btn id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
-                  <v-icon small>fas fa-dice-five</v-icon>{{account.nbDice}}
-                  <span>Lancez vos dés</span>
+                <v-btn class="primary" id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
+                  <v-icon small class="mr-2">fas fa-dice-five</v-icon>
+                  {{account.nbDice}}
+                  <span class="pl-2">Lancez vos dés</span>
                 </v-btn>
               </div>
             </template>
             <span>Vous n'avez pas assez de dés</span>
           </v-tooltip>
           <!-- BOUTON ENTRER UN CODE -->
-          <v-btn to="/enter-code">
+          <v-btn block class="primary mt-3" to="/enter-code">
             Entrer un code
           </v-btn>
           </v-col>

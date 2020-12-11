@@ -3,6 +3,7 @@
     <v-row align="center" justify="center">
       <v-col md="6">
         <v-card outlined>
+          <app-alert-error v-if="error" class="mb-0" @dismissed="onDismissed" :text="error.message"></app-alert-error>
           <v-card-title>
             S'inscrire
           </v-card-title>
@@ -67,6 +68,7 @@
 <script>
 import { store } from '@/store'
 import router from '@/router'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Signup',
@@ -87,7 +89,13 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['error'])
+  },
   methods: {
+    onDismissed () {
+      store.commit('clearError')
+    },
     submit () {
       if (this.$refs.form.validate()) {
         const userDetails = {
@@ -104,7 +112,7 @@ export default {
           })
           .catch(err => {
             this.isLoading = false
-            store.commit('seterror', err)
+            store.commit('setError', err)
           })
       }
     },
