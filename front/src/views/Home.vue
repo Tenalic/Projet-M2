@@ -13,6 +13,7 @@
   </v-carousel>
 <v-container fluid>
       <v-row align="center" justify="center" class="mt-10">
+        <v-col cols="12" md="4">
          <v-card
           width="340"
           height="340">
@@ -21,12 +22,13 @@
           height="200"
           >
           </v-img>
-          <v-car-title> Restaurant Tnsi </v-car-title>
+          <v-card-title> Restaurant Tnsi </v-card-title>
           <v-card-subtitle>
           Bientôt de nouveaux restaurants proche de chez vous :)
           </v-card-subtitle>
           </v-card>
-        <v-col md="6">
+        </v-col>
+        <v-col cols="12" md="4">
           <v-row v-for="select in team" :key="select.link" align="center" justify="center" class="mt-10">
           <v-hover v-slot:default="{ hover }">
           <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle white--text" width="45%" :to="select.link">
@@ -39,6 +41,7 @@
           </v-hover>
           </v-row>
         </v-col>
+        <v-col cols="12" md="4">
          <v-card
           width="340"
           height="340">
@@ -47,12 +50,13 @@
           height="200"
           >
           </v-img>
-          <v-car-title> La sécurité de tous </v-car-title>
+          <v-card-title> La sécurité de tous </v-card-title>
           <v-card-subtitle>
           Port du masque obligatoire, gel hydroalcoolique dans tous nos restaurants, respect de la distanciation sociale.
           Faites attention à vous, prenez soin de votre entourage :)
           </v-card-subtitle>
           </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>
