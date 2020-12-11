@@ -21,7 +21,7 @@
           height="200"
           >
           </v-img>
-          <v-car-title> Restaurant Tnsi </v-car-title>
+          <v-card-title> Restaurant Tnsi </v-card-title>
           <v-card-subtitle>
           Bientôt de nouveaux restaurants proche de chez vous :)
           </v-card-subtitle>
@@ -47,7 +47,7 @@
           height="200"
           >
           </v-img>
-          <v-car-title> La sécurité de tous </v-car-title>
+          <v-card-title> La sécurité de tous </v-card-title>
           <v-card-subtitle>
           Port du masque obligatoire, gel hydroalcoolique dans tous nos restaurants, respect de la distanciation sociale.
           Faites attention à vous, prenez soin de votre entourage :)
