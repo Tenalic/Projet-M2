@@ -22,6 +22,14 @@ const routes = [
     }
   },
   {
+    path: '/EnterCode',
+    name: 'EnterCode',
+    component: () => import('@/views/EnterCode'),
+    meta: {
+      title: 'Entrer le code'
+    }
+  },
+  {
     path: '/game',
     name: 'GameView',
     component: () => import('@/views/GameView'),
