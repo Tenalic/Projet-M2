@@ -25,13 +25,12 @@
         <div v-if="isUserAuthenticated == true">
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-              color="primary"
-              elevation = 0
-              v-bind="attrs"
-              v-on="on"
-              >
-                <span class="btn">{{ user.firstname }}</span>
+              <v-btn icon color="primary" elevation = 0 v-bind="attrs" v-on="on" >
+              <v-avatar class="avatar white primary--text">
+               {{ user.firstname | firstChar }}
+               {{ user.lastname | firstChar }}
+              </v-avatar>
+                <!-- <span class="btn">{{ user.firstname }}</span> -->
               </v-btn>
             </template>
             <v-list class="primary_light">
@@ -86,6 +85,13 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       )
+    }
+  },
+  filters: {
+    firstChar (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase()
     }
   }
 }
