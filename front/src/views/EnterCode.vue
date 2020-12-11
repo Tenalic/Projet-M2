@@ -286,6 +286,13 @@ export default {
           if (!('credit' in obj) && !('prize' in obj) && !('message' in obj)) {
             this.render_simple()
           }
+          /*
+          * Màj de l'utilisateur dans le store
+          */
+          this.user.nbDice = obj.nbDice
+          if (obj.prize != null) this.user.prize = obj.prize
+          if (obj.credit != null) this.user.credit = obj.credit
+          this.$store.dispatch('updateUser', this.user)
         })
         .catch(err => console.log('error delphin', err.message))
     }

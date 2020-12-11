@@ -79,6 +79,10 @@ export const store = new Vuex.Store({
         console.log('payload: ', payload)
         resolve()
       })
+    },
+    // Met à jour l'user dans le state
+    updateUser ({ commit }, payload) {
+      commit('setUser', payload)
     }
   },
   modules: {
