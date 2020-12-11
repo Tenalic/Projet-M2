@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import router from '@/router'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -28,6 +28,7 @@ export const store = new Vuex.Store({
       state.user = null
       // delete user data from localStorage
       window.localStorage.clear()
+      router.push('/')
     }
   },
   actions: {

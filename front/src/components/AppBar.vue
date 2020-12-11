@@ -35,7 +35,7 @@
               </v-btn>
             </template>
             <v-list class="primary_light">
-              <v-list-item v-for="item in items" :key="item.title" router :to="item.link">
+              <v-list-item v-for="item in items" :key="item.title" router @click="item.click">
                 <v-list-item-title class="white--text"><v-icon class="white--text mr-2"> {{ item.icon }}</v-icon>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -65,14 +65,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import router from '@/router'
+import { store } from '@/store'
 
 export default {
   name: 'AppBar',
   data () {
     return {
       items: [
-        { icon: 'mdi-account-circle', title: 'Profil', link: '/profile' },
-        { icon: 'mdi-exit-to-app', title: 'Se déconnecter', link: '/' }
+        { icon: 'mdi-account-circle', title: 'Profil', click: () => router.push('/profile') },
+        { icon: 'mdi-exit-to-app', title: 'Se déconnecter', click: () => store.commit('clearUser') }
       ]
     }
   },
