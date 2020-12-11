@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:theme="@style/Theme.Design.NoActionBar"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d75838">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:text="Monopolight"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25sp"
+            android:layout_marginTop="75sp"
+            android:text="Ajouter coupons" />
+
+        <Button
+            android:id="@+id/listprizes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25sp"
+
+            android:text="Liste cadeaux" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/top"
+        android:background="#e5d5d1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="23sp"
+            android:layout_marginVertical="43dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/plateau"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="25sp"
+            android:layout_marginVertical="45dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/plateau"
+            >
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <RelativeLayout
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:id="@+id/coinhautgauche1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/premierhaut"
+                    android:background="@drawable/white_background"
+                    >
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/premierhaut"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/coinhautgauche1"
+                    app:layout_constraintEnd_toStartOf="@id/deuxiemehaut"
+                    android:background="@drawable/blue_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion11"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home11"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/deuxiemehaut"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/premierhaut"
+                    app:layout_constraintEnd_toStartOf="@id/troisiemehaut"
+                    android:background="@drawable/orange_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion12"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home12"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/troisiemehaut"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/deuxiemehaut"
+                    app:layout_constraintEnd_toStartOf="@id/quatriemehaut"
+                    android:background="@drawable/red_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion13"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home13"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/quatriemehaut"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/troisiemehaut"
+                    app:layout_constraintEnd_toStartOf="@id/coinhautdroite1"
+                    android:background="@drawable/brown_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion14"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home14"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/coinhautdroite1"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:layout_constraintStart_toEndOf="@id/quatriemehaut"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/white_background"
+                    >
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
+
+                <RelativeLayout
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:id="@+id/coinbasgauche1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/premierbas"
+                    android:background="@drawable/white_background"
+                    >
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/premierbas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/coinbasgauche1"
+                    app:layout_constraintEnd_toStartOf="@id/deuxiemebas"
+                    android:background="@drawable/red_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home4"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/deuxiemebas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/premierbas"
+                    app:layout_constraintEnd_toStartOf="@id/troisiemebas"
+                    android:background="@drawable/green_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home3"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/troisiemebas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/deuxiemebas"
+                    app:layout_constraintEnd_toStartOf="@id/quatriemebas"
+                    android:background="@drawable/blue_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home2"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/quatriemebas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/troisiemebas"
+                    app:layout_constraintEnd_toStartOf="@id/coinbasdroite1"
+                    android:background="@drawable/grey_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/coinbasdroite1"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:layout_constraintStart_toEndOf="@id/quatriemebas"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/white_background"
+                    >
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/coinhautgauche2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/premiergauche"
+                    android:background="@drawable/white_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion10"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home10"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/premiergauche"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/coinhautgauche2"
+                    app:layout_constraintBottom_toTopOf="@id/deuxiemegauche"
+                    android:background="@drawable/orange_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion9"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home9"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/deuxiemegauche"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/premiergauche"
+                    app:layout_constraintBottom_toTopOf="@id/troisiemegauche"
+                    android:background="@drawable/yellow_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion8"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home8"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/troisiemegauche"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deuxiemegauche"
+                    app:layout_constraintBottom_toTopOf="@id/quatriemegauche"
+                    android:background="@drawable/brown_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion7"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home7"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/quatriemegauche"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/troisiemegauche"
+                    app:layout_constraintBottom_toTopOf="@id/coinbasgauche2"
+                    android:background="@drawable/purple_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home6"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/coinbasgauche2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quatriemegauche"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/white_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home5"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:id="@+id/coinhautdroite2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/premierdroite"
+                    android:background="@drawable/white_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion15"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home15"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/premierdroite"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/coinhautdroite2"
+                    app:layout_constraintBottom_toTopOf="@id/deuxiemedroite"
+                    android:background="@drawable/yellow_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion16"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home16"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/deuxiemedroite"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/premierdroite"
+                    app:layout_constraintBottom_toTopOf="@id/troisiemedroite"
+                    android:background="@drawable/grey_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion17"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home17"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/troisiemedroite"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deuxiemedroite"
+                    app:layout_constraintBottom_toTopOf="@id/quatriemedroite"
+                    android:background="@drawable/green_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion18"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home18"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/quatriemedroite"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/troisiemedroite"
+                    app:layout_constraintBottom_toTopOf="@id/coinbasdroite2"
+                    android:background="@drawable/purple_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion19"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home19"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/coinbasdroite2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quatriemedroite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/white_background"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/pion0"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/home0"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/home"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginStart="0dp"
+                        android:gravity="center"
+                        android:textSize="12dp"/>
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="#d75838">
+
+        <Button
+            android:id="@+id/btndice"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Lancer de dés"
+            android:layout_centerInParent="true"
+            android:layout_marginVertical="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="35sp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:text="Porte-monnaie :"/>
+
+            <TextView
+                android:id="@+id/credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="25dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/test">
+
+            </ImageView>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="15sp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:text="Nombre de dés :"/>
+
+            <TextView
+                android:id="@+id/nbdice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/dice"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
