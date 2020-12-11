@@ -232,7 +232,7 @@ export default {
       }
       var data = {
       }
-      var url = 'http://monopolym2tnsi.hopto.org:8080/code/use/' + this.code
+      var url = 'https://monopolym2tnsi.hopto.org:8443/code/use/' + this.code
       axios.post(url, data, config)
         .then(res => {
           console.log('post.then ', res.data)

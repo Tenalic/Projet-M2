@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
     // Données de l'utilisateur
     user: null,
     error: null,
-    API_URL: 'http://monopolym2tnsi.hopto.org:8080'
+    API_URL: 'https://monopolym2tnsi.hopto.org:8443'
   },
   mutations: {
     setError (state, payload) {

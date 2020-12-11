@@ -75,7 +75,7 @@
           <v-list-item v-for="i in account.indexSquarePurchased" :key = "account.indexSquarePurchased[i]">
             <v-list-item-content>
               <v-progress-linear value="100" :color="board[i].color"/>
-              <v-list-item-text v-text = board[i].streetName></v-list-item-text>
+              <v-list-item-subtitle v-text = board[i].streetName></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -115,6 +115,7 @@ export default {
   name: 'GameView',
   data () {
     return {
+      API_URL: 'https://monopolym2tnsi.hopto.org:8443',
       // Utilisateur
       account: null,
       board: null,
@@ -139,7 +140,6 @@ export default {
   },
   mounted () {
     this.account = this.$store.getters.user
-    console.log('user: ', this.account)
     this.getBoard()
   },
   methods: {
@@ -149,7 +149,7 @@ export default {
     // Réception du plateau depuis l'API
     getBoard () {
       axios
-        .get('http://monopolym2tnsi.hopto.org:8080/board')
+        .get(this.API_URL + '/board')
         .then(response => { this.board = response.data.board; this.setDiplayBoard() })
         .catch(error => console.log(error))
     },
@@ -216,7 +216,7 @@ export default {
     // Lance les 2 dés
     async rollTheDices () {
       await axios
-        .post('http://monopolym2tnsi.hopto.org:8080/account/dice',
+        .post(this.API_URL + '/account/dice',
           {},
           { headers: { IdAccount: this.account.id } })
         .then(response => {
@@ -233,7 +233,7 @@ export default {
     // Fonction achat
     async buy () {
       await axios
-        .post('http://monopolym2tnsi.hopto.org:8080/account/buy',
+        .post(this.API_URL + '/account/buy',
           {},
           { headers: { IdAccount: this.account.id } })
         .then(response => {
