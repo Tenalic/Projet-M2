@@ -45,10 +45,16 @@
             <v-col v-for="j in 6" :key="j" no-gutters>
                 <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
                       on affiche les coordonnées de la rue -->
-                <v-card v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
-                  {{displayBoard[i-1][j-1].index}}  <!-- id pour se repérer, à enlever plus tard -->
-                  {{displayBoard[i-1][j-1].streetName}}<br>
-                  {{displayBoard[i-1][j-1].cost}}€
+                <v-card v-if="displayBoard[i-1][j-1] != null"
+                tile
+                outlined
+                height="100"
+                width="100"
+                v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}"
+                v-bind:id = displayBoard[i-1][j-1].index
+                >
+                    {{displayBoard[i-1][j-1].streetName}}<br>
+                    <span v-if="displayBoard[i-1][j-1].cost > 0">{{displayBoard[i-1][j-1].cost}}€</span>
                   <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
                   <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)" class="white--text">fas fa-chess-pawn</v-icon>
                 </v-card>
