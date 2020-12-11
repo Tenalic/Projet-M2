@@ -14,6 +14,8 @@ public interface AccountRepository extends CrudRepository<Account, Long>, Accoun
 
     boolean existsAccountByEmailOrNickname(String email, String nickname);
 
+    boolean existsAccountByEmail(String email);
+
     void deleteAccountById(long id);
 
     boolean existsAccountById(long id);

@@ -99,12 +99,24 @@ public class AccountController {
                 String nickname = (String) accountJson.get("nickname");
                 String email = (String) accountJson.get("email");
                 String password = (String) accountJson.get("password");
-                Account account = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
-                if (account != null) {
+                Object response = iaccountService.creationAccount(email, lastname, firstname, nickname, password);
+                if(response instanceof Account) {
+                    Account account = (Account) response;
                     return ResponseEntity.status(201).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(account);
                 } else {
+                    int codeErreur = (int) response;
                     JSONObject jsonError = new JSONObject();
-                    jsonError.put("message", "Error: erreur de création du compte");
+                    switch(codeErreur) {
+                        case 1 :
+                            jsonError.put("message", "Error: erreur de création du compte, email déjà utilisé");
+                            break;
+                        case 2 :
+                            jsonError.put("message", "Error: erreur, pseudo déjà utilisé");
+                            break;
+                        default:
+                            jsonError.put("message", "Error: erreur inconue de création du compte");
+                            break;
+                    }
                     return ResponseEntity.status(200).contentType(MediaType.valueOf(Constant.MEDIATYPE_JSON)).body(jsonError);
                 }
             } catch (ParseException ex) {

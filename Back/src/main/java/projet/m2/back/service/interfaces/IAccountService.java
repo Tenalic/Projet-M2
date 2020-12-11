@@ -24,9 +24,9 @@ public interface IAccountService {
      * @param firstname : prénom
      * @param nickname  : pseudo
      * @param password  : mot de passe
-     * @return Compte qui viens d'être crée
+     * @return Compte qui viens d'être crée ou 1 : email déja utilisé, 2 pseudo déja utilisé
      */
-    Account creationAccount(final String email, final String lastname, final String firstname, final String nickname, final String password);
+    Object creationAccount(final String email, final String lastname, final String firstname, final String nickname, final String password);
 
     /**
      * Retourne un compte

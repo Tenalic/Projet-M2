@@ -63,18 +63,23 @@ public class AccountServiceImpl implements IAccountService {
      * @param firstname : prénom
      * @param nickname  : pseudo
      * @param password  : mot de passe
-     * @return Compte qui viens d'être crée
+     * @return Compte qui viens d'être crée ou 1 : email déja utilisé, 2 pseudo déja utilisé
      */
     @Override
     @Transactional
-    public Account creationAccount(String email, String lastname, String firstname, String nickname, String password) {
-        if (!accountRepository.existsAccountByEmailOrNickname(email, nickname)) {
-            String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-            Account a = new Account(lastname, firstname, nickname, email, hashedPassword);
-            accountRepository.save(a);
-            return a;
+    public Object creationAccount(String email, String lastname, String firstname, String nickname, String password) {
+        if (!accountRepository.existsAccountByEmail(email)) {
+            if(!accountRepository.existsAccountByNickname(nickname)) {
+                String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+                Account a = new Account(lastname, firstname, nickname, email, hashedPassword);
+                accountRepository.save(a);
+                return a;
+            } else {
+                return 2;
+            }
+        } else {
+            return 1;
         }
-        return null;
     }
 
     /**
