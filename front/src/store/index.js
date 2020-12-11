@@ -91,17 +91,31 @@ export const store = new Vuex.Store({
       commit('clearError')
       return new Promise((resolve, reject) => {
         const url = getters.API_URL
+        const user = getters.user
         console.log(payload)
         axios({
           method: 'put',
           url: `${url}/account/update`,
           data: payload,
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            IdAccount: this.account.id
+            // 'Access-Control-Allow-Origin': '*',
+            IdAccount: user.id
           }
         })
           .then((response) => {
+            console.log(response)
+            if (response.data.message) {
+              // var str = decodeURIComponent(escape(response.data.message))
+              const error = { message: response.data.message }
+              reject(error)
+            } else {
+              user.nickname = response.data.nickname
+              user.lastname = response.data.lastname
+              user.firstname = response.data.firstname
+              commit('setUser', user)
+
+              resolve()
+            }
             // commit('setUser', response.data)
             console.log(response.data)
             resolve()

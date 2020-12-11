@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="12" md="6" offset-md="3">
         <v-card color="grey lighten-4" class="pa-4">
+          <app-alert-error v-if="error" class="mb-0" @dismissed="onDismissed" :text="error.message"></app-alert-error>
           <v-row>
             <v-col cols="6">
               <v-avatar class="avatar primary white--text">
@@ -20,12 +21,12 @@
           <div v-if="!edit">
             <v-row>
               <v-col cols="12" >
-                <div class="grey--text darken-4">Nickname</div>
+                <div class="grey--text darken-4">Pseudonyme</div>
                 <span class="mr-3">{{user.nickname}}</span>
 
-                <div class="grey--text darken-4 mt-3">Name</div>
-                <span class="mr-3">{{user.firstname}}</span>
-                <span>{{user.lastname}}</span>
+                <div class="grey--text darken-4 mt-3">Nom Prénom</div>
+                <span class="mr-3">{{user.lastname}}</span>
+                <span >{{user.firstname}}</span>
 
                 <div class="grey--text darken-4 mt-3">E-mail</div>
                 <span class="mr-3">{{user.email}}</span>
@@ -35,19 +36,19 @@
           <v-form v-else @submit.prevent="onUpdateProfile" ref="form" v-model="valid" class="mt-3">
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="user.nickname" label="Nickname" outlined dense required></v-text-field>
+                <v-text-field v-model="user.nickname" label="Pseudonyme" outlined dense required></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field v-model="user.firstname" label="First Name" outlined dense required></v-text-field>
+                <v-text-field v-model="user.firstname" label="Prénom" outlined dense required></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field v-model="user.lastname" label="Last Name" outlined dense required></v-text-field>
+                <v-text-field v-model="user.lastname" label="Nom" outlined dense required></v-text-field>
               </v-col>
             </v-row>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn class="grey darken-2" dark @click="edit = false" depressed>Annuler</v-btn>
-              <v-btn class="primary" depressed type="submit">Sauvegarder</v-btn>
+              <v-btn class="primary" depressed type="submit" :loading="loading">Sauvegarder</v-btn>
             </v-card-actions>
           </v-form>
         </v-card>
@@ -64,18 +65,21 @@ export default {
   data () {
     return {
       valid: true,
-      edit: false
+      edit: false,
+      loading: false
     }
   },
 
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'error'])
   },
 
   methods: {
+    onDismissed () {
+      store.commit('clearError')
+    },
     onUpdateProfile () {
       if (this.$refs.form.validate()) {
-        console.log(this.user)
         const userDetails = {
           nickname: this.user.nickname,
           lastname: this.user.lastname,
@@ -84,6 +88,7 @@ export default {
         store.dispatch('updateUserProfile', userDetails)
           .then(() => {
             this.loading = false
+            this.edit = false
           })
           .catch(err => {
             this.loading = false

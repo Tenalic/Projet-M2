@@ -17,11 +17,10 @@
 
     <v-row justify="center" align="center">
       <!-- CARTE D'INFOS SUR LA RUE -->
-      <v-card justify="center" align="center" v-if="showStreetCard" width="150" height="300">
-        <v-progress-linear value="100" :color="board[account.indexSquare].color"/>
-        <v-card-title>
-          {{ board[account.indexSquare].index }} {{ board[account.indexSquare].streetName }}
-        </v-card-title>
+      <v-card justify="center" align="center" v-if="showStreetCard" width="150" height="300" class="mr-3 card-account font-weight-bold black--text">
+        <v-card-text class="text-center text-h6">
+          {{ board[account.indexSquare].streetName }}
+        </v-card-text>
         <v-card-subtitle>
           Valeur : {{ board[account.indexSquare].cost }}€
         </v-card-subtitle>
@@ -45,7 +44,7 @@
         </v-row>
       </v-card>
       <!-- PLATEAU -->
-      <v-sheet v-if="board" color="#EAEDED" class="background-image" elevation="20" height="600" width="600" rounded>
+      <v-sheet v-if="board" color="#EAEDED" class="background-image" height="600" width="600" rounded>
           <v-row v-if="diceToss" id="dice-row">
             <v-col class="background-image">
               <img class="mr-2" v-bind:src="diceImage1" width="80">
@@ -58,7 +57,7 @@
             <v-col v-for="j in 6" :key="j" no-gutters>
                 <!-- Si le contenu de displayBoard à l'index i,j n'est pas nul,
                       on affiche les coordonnées de la rue -->
-                <v-card class="text-center white--text" v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
+                <v-card class="text-center white--text card-board" v-if="displayBoard[i-1][j-1] != null" tile outlined v-bind:style="{'background-color' : displayBoard[i-1][j-1].color}" v-bind:id = displayBoard[i-1][j-1].index height="100" width="100">
                   <!-- {{displayBoard[i-1][j-1].index}}  id pour se repérer, à enlever plus tard -->
                   <div class="pt-2">
                   {{displayBoard[i-1][j-1].streetName}}<br>
@@ -76,7 +75,7 @@
           </v-row>
       </v-sheet>
       <!-- INFOS JOUEURS -->
-      <v-card>
+      <v-card class="ml-3 card-account">
         <!-- <v-card-text>Account</v-card-text> -->
         <!-- <v-divider></v-divider> -->
         <v-card-text>
@@ -105,7 +104,7 @@
           <v-tooltip :disabled="hasDices==true" bottom>
             <template v-slot:activator="{ on, attrs }">
               <div v-on="on" >
-                <v-btn class="primary" id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
+                <v-btn class="primary mx-3" id="diceToss" @click="rollTheDices" :disabled="!hasDices" v-bind="attrs">
                   <v-icon small class="mr-2">fas fa-dice-five</v-icon>
                   {{account.nbDice}}
                   <span class="pl-2">Lancez vos dés</span>
@@ -115,7 +114,7 @@
             <span>Vous n'avez pas assez de dés</span>
           </v-tooltip>
           <!-- BOUTON ENTRER UN CODE -->
-          <v-btn block class="primary mt-3" to="/enter-code">
+        <v-btn class="primary mt-3" to="/enter-code">
             Entrer un code
           </v-btn>
           </v-col>
@@ -314,5 +313,13 @@ export default {
   position: absolute;
   margin-top: 399px;
   margin-left: 205px;
+}
+
+.card-account {
+  border: 2px solid #d75838;
+}
+
+.card-board {
+  border: 2px solid white;
 }
 </style>

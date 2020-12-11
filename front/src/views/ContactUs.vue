@@ -1,5 +1,18 @@
 <template>
   <v-container fluid fill-height>
+    <!-- POP UP GAIN DE PRIX -->
+    <v-dialog v-model="dialog" max-width="500px">
+      <v-card>
+        <v-card-title class="primary white--text">
+          <h4>Merci de votre message !</h4>
+          <v-spacer></v-spacer>
+          <v-icon class="font-weight-black white--text" @click="goToHome">mdi-window-close</v-icon>
+        </v-card-title>
+        <v-card-text class="mt-4">
+          <h3>Notre équipe prend en charge votre demande 😘</h3>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-row no-gutters>
       <v-col cols="12" sm="8" offset-sm="2" md="5" offset-md="2">
         <v-card rounded class="mt-1">
@@ -76,19 +89,19 @@
 <script>
 import { mapGetters } from 'vuex'
 import { store } from '@/store'
-// import router from '@/router'
+import router from '@/router'
 
 export default {
   name: 'ContactUs',
   data: () => ({
     loading: false,
+    dialog: false,
     valid: true,
     firstname: '',
     lastname: '',
     email: '',
     phoneNumber: '',
-    message: '',
-    dialog: false
+    message: ''
   }),
   watch: {
     dialog (val) {
@@ -108,35 +121,17 @@ export default {
     }
   },
   methods: {
+    goToHome () {
+      this.dialog = false
+      router.push('/')
+    },
     onDismissed () {
       store.commit('clearError')
     },
     onSend () {
-      this.loading = true
-
-      if (!this.$refs.form.validate()) {
-        this.loading = false
-        return
+      if (this.$refs.form.validate()) {
+        this.dialog = true
       }
-
-      const contactUsForm = {
-        firstname: this.firstname,
-        lastname: this.lastname,
-        email: this.email,
-        phoneNumber: this.phoneNumber,
-        message: this.message
-      }
-
-      store.dispatch('onContactUs', contactUsForm)
-        .then(() => {
-          this.loading = false
-          console.log(contactUsForm)
-          // router.push('/message-sent')
-        })
-        .catch((err) => {
-          this.loading = false
-          store.commit('setError', err)
-        })
     }
   }
 }
