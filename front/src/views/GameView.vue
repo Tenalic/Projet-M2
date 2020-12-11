@@ -226,6 +226,7 @@ export default {
           this.account.indexSquare = response.data.indexSquare
           this.diceToss = response.data.diceResult
           this.setShowStreetCard()
+          this.$store.dispatch('updateUser', this.account)
         })
         .catch(error => console.log(error))
     },
@@ -243,6 +244,7 @@ export default {
             this.prizeWin = response.data.prizeWin
             this.prizeAlert = true
           }
+          this.$store.dispatch('updateUser', this.account)
         })
     }
   },
