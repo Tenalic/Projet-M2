@@ -6,11 +6,12 @@
     <v-row justify="center" align="center" no-gutters>
       <v-col md="6">
         <v-card flat color="mainBackground transparent">
+            <h1 style="text-decoration:underline; color: #b52225"> Règles du jeu </h1>
+             <li style="font-size: 24px; color: #b52225"> Acheter 2 cases de la même couleur pour obtenir un prix </li>
+             <li style="font-size: 24px; color: #b52225"> Faire des achats pour obtenir des crédits ou des codes utilisables sur le site ou l'application mobile </li>
+             <li style="font-size: 24px; color: #b52225"> Entrer les codes pour obtenir des crédits, des lancers de dés ou des prix </li>
+             <br/> <br/>
           <p style="font-size: 24px; color: #b52225">
-            Monopolight est un projet réalisé par les étudiants de seconde année
-            de Master TNSI FI à l'Université Polytechnique des Hauts-de-France. Entrez vos
-            codes sur ce site web, jouez, et remportez des prix ! <br><br>
-            Egalement disponible sur mobile ! <br><br>
             Amusez-vous bien !
           </p>
         </v-card>
