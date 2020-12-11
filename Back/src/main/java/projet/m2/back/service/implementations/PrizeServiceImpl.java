@@ -102,7 +102,7 @@ public class PrizeServiceImpl implements IPrizeService {
     public String randomPrize (Account account)  //choice comporte le resultat de gain
     {
             Random r = new Random();
-            account.setNbDice(account.getNbDice() + 1);
+            //account.setNbDice(account.getNbDice() + 1);
             Iterable<Prize> tmp = getAllPrize(); //tout les prize
             ArrayList<Prize> listPrize = new ArrayList<>();//convertir en ArrayList que ceux qui ont de la quantité
             for(Prize p : tmp)

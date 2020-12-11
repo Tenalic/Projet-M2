@@ -30,10 +30,10 @@ public class Main {
     public CommandLineRunner demo(IAccountService service) {
         return (args -> {
             //iCodeService.createDatasetCodeDebug();
-            //iBoardService.createBord();
+  //          iBoardService.createBord();
              //Board board = iBoardService.getBoardByName(Constant.boardName);
-
-            //  iCodeService.createDatasetCode(); //NE PAS DECOMMENTER MERCI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   //             prizeService.createDatasetPrize();
+//            iCodeService.createDatasetCode(); //NE PAS DECOMMENTER MERCI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
            //System.out.println("test");
