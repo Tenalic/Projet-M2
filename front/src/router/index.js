@@ -38,6 +38,14 @@ const routes = [
     }
   },
   {
+    path: '/rules',
+    name: 'Rules',
+    component: () => import('@/views/Rules'),
+    meta: {
+      title: 'Monopolight - Règles'
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login'),

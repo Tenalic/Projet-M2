@@ -50,7 +50,7 @@
                   {{displayBoard[i-1][j-1].streetName}}<br>
                   {{displayBoard[i-1][j-1].cost}}€
                   <v-icon v-if="isBought(displayBoard[i-1][j-1].index)">fas fa-home</v-icon>
-                  <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)">fas fa-chess-pawn</v-icon>
+                  <v-icon v-if="hasPiece(displayBoard[i-1][j-1].index)" class="white--text">fas fa-chess-pawn</v-icon>
                 </v-card>
             </v-col>
           </v-row>
