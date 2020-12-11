@@ -15,7 +15,7 @@
       <!-- PARTIE DROITE -->
       <div class="d-flex align-center">
         <!-- Entrer un code -->
-        <v-btn color="primary"
+        <v-btn v-if="isUserAuthenticated == true" color="primary"
         to="/enter-code"
         elevation = 0>
             <span class="btn">Entrer un code</span>

@@ -13,7 +13,7 @@
   </v-carousel>
 <v-container fluid>
       <v-row align="center" justify="center" class="mt-10">
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="4" class="order-1 order-md-0">
          <v-card
           width="340"
           height="340">
@@ -28,10 +28,10 @@
           </v-card-subtitle>
           </v-card>
         </v-col>
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="4" class="order-0 order-md-1">
           <v-row v-for="select in team" :key="select.link" align="center" justify="center" class="mt-10">
           <v-hover v-slot:default="{ hover }">
-          <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle white--text" width="45%" :to="select.link">
+          <v-card color="#d75838" :elevation="hover ? 16 : 2" class="menuTitle white--text" width="45%" @click="select.click">
             <v-card-title primary-title class="layout justify-center">
             <!-- <v-card-text> -->
               <div> {{select.title}} </div>
@@ -41,7 +41,7 @@
           </v-hover>
           </v-row>
         </v-col>
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="4" class="order-2 order-md-2">
          <v-card
           width="340"
           height="340">
@@ -63,13 +63,15 @@
 </template>
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex'
+import router from '@/router'
 
 export default {
   data () {
     return {
       team: [
-        { title: 'Plateau de jeu', link: '/game' },
-        { title: 'Règles du jeu', link: '/rules' }
+        { title: 'Plateau de jeu', click: () => this.user ? router.push('/game') : router.push('/Login') },
+        { title: 'Règles du jeu', click: () => router.push('/rules') }
       ],
       colors: [
         'indigo',
@@ -88,6 +90,10 @@ export default {
         'Hello World !'
       ]
     }
+  },
+
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>
