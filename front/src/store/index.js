@@ -65,11 +65,12 @@ export const store = new Vuex.Store({
           data: payload
         })
           .then((response) => {
-            commit('setUser', response.data)
-            resolve()
-          })
-          .catch((err) => {
-            reject(err)
+            if (response.data.message) {
+              reject(response.data)
+            } else {
+              commit('setUser', response.data)
+              resolve()
+            }
           })
       })
     },
@@ -78,6 +79,31 @@ export const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log('payload: ', payload)
         resolve()
+      })
+    },
+    updateUserProfile ({ commit, getters }, payload) {
+      commit('clearError')
+      return new Promise((resolve, reject) => {
+        const url = getters.API_URL
+        console.log(payload)
+        axios({
+          method: 'put',
+          url: `${url}/account/update`,
+          data: payload,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            IdAccount: this.account.id
+          }
+        })
+          .then((response) => {
+            // commit('setUser', response.data)
+            console.log(response.data)
+            resolve()
+          })
+          .catch((err) => {
+            console.log(err)
+            reject(err)
+          })
       })
     },
     // Met à jour l'user dans le state

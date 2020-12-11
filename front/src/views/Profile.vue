@@ -75,18 +75,19 @@ export default {
   methods: {
     onUpdateProfile () {
       if (this.$refs.form.validate()) {
+        console.log(this.user)
         const userDetails = {
-          lastname: this.lastname,
-          firstname: this.firstname,
-          nickname: this.nickname
+          nickname: this.user.nickname,
+          lastname: this.user.lastname,
+          firstname: this.user.firstname
         }
-        store.dispatch('signUserUp', userDetails)
+        store.dispatch('updateUserProfile', userDetails)
           .then(() => {
             this.loading = false
           })
           .catch(err => {
-            this.isLoading = false
-            store.commit('seterror', err)
+            this.loading = false
+            store.commit('setError', err)
           })
       }
     }
