@@ -2,10 +2,7 @@ package com.example.monopolight;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +12,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -53,7 +49,7 @@ public class PrizeListActivity extends AppCompatActivity {
         //List<Prize> image_details = getPrizeList();
         gridView.setAdapter(new GridAdapter(this, image_details)); // utilise GridAdapter pour adapter chaque cadeau dans la liste
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = gridView.getItemAtPosition(position);
@@ -61,7 +57,7 @@ public class PrizeListActivity extends AppCompatActivity {
                 Toast.makeText(PrizeListActivity.this, "Selected :"
                         + " " + prize, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     private List<Prize> getPrizeList() throws Exception {

@@ -284,74 +284,7 @@ public class AddCoupon extends AppCompatActivity implements View.OnClickListener
             }
         };
 
-
-/*        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url2, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String msg = response.getString("message");
-                                JSONObject user = response.
-
-                                //Integer id = user.getInt("id");
-                                String title = user.getString("message");
-
-                            mTxtView.append(msg + "\n\n");
-                            mTxtView.append(msg + "\n\n");
-                            mTxtView.append(msg + "\n\n");
-                            } catch (JSONException jsonException) {
-                            jsonException.printStackTrace();
-                        }
-                    } catch (JSONException e){
-                            e.printStackTrace();
-                        }
-
-                    }
-                , new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            for (int i = 0; i < 4; i++) {
-                                JSONObject user = response.getJSONObject(i);
-
-                                Integer id = user.getInt("id");
-                                String title = user.getString("title");
-
-                                mTxtView.append(String.valueOf(id) + ", " + title + "\n\n");
-                            }
-                        } catch (JSONException e){
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });*/
-
-
-
-
         mQueue.add(request);
 
     }
-
-    /*@Override
-    public void onBackPressed()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("nbdice", nbDice);
-        intent.putExtra("credit", credit);
-        startActivity(intent);
-        return;
-    }*/
 }

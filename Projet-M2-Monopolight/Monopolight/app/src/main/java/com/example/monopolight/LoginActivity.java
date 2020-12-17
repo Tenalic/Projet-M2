@@ -1,10 +1,7 @@
 package com.example.monopolight;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 
 import android.util.Base64;
@@ -15,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -25,10 +21,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -128,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                         MainActivity.class);
                 i.putExtra("id", user.getString("id"));
                 startActivity(i);
-                finish();
                 System.out.println(response.toString());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -152,5 +145,12 @@ public class LoginActivity extends AppCompatActivity {
                         Text, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+        etEmail.setText("");
+        etPassword.setText("");
     }
 }
