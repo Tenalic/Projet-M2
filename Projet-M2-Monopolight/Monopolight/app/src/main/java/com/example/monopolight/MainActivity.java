@@ -439,10 +439,15 @@ public class MainActivity extends AppCompatActivity {
             sb.deleteCharAt(sb.length()-1);
             String[] indexSquarePurchased = sb.toString().split(",");
             int i;
-            for(i=0; i <= indexSquarePurchased.length-1; i++)
+            System.out.println(indexSquarePurchased.length);
+            if(indexSquarePurchased.length != 1)
             {
-                homes.get(Integer.parseInt(indexSquarePurchased[i])).setVisibility(View.VISIBLE);
+                for(i=0; i <= indexSquarePurchased.length-1; i++)
+                {
+                    homes.get(Integer.parseInt(indexSquarePurchased[i])).setVisibility(View.VISIBLE);
+                }
             }
+
             //
         } catch (JSONException e) {
             System.out.println(e);
@@ -796,6 +801,8 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
                 finish();
             }
         });

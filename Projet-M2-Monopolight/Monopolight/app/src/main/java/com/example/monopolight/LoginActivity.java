@@ -60,7 +60,14 @@ public class LoginActivity extends AppCompatActivity {
                 String Email = etEmail.getText().toString();
                 String Password = etPassword.getText().toString();
 
-                new LoginUser().execute(Email, Password);
+                if(Email.isEmpty() || Password.isEmpty())
+                {
+                    showToast("Champ(s) vide(s)");
+                }
+                else
+                {
+                    new LoginUser().execute(Email, Password);
+                }
             }
         });
     }
@@ -122,13 +129,13 @@ public class LoginActivity extends AppCompatActivity {
                         MainActivity.class);
                 i.putExtra("id", user.getString("id"));
                 startActivity(i);
-                System.out.println(response.toString());
+                finish();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
-                e.printStackTrace();
+                showToast("Email/Mot de passe invalide");
             }
 
             return null;

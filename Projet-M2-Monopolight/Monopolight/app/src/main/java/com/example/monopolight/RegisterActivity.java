@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etEmail, etPassword, etfirstname,etlastname,etnickname;
     Button btnRegister;
+    Button btnLogin;
 
 
     @Override
@@ -53,7 +54,22 @@ public class RegisterActivity extends AppCompatActivity {
                 String Nickname = etnickname.getText().toString();
                 String Email = etEmail.getText().toString();
 
-                new RegisterUser().execute(Firstname, Lastname, Nickname,Email,Password);
+                if(Firstname.isEmpty() || Lastname.isEmpty() || Password.isEmpty() || Nickname.isEmpty() || Email.isEmpty())
+                {
+                    showToast("Vérifier les informations renseignées.");
+                }
+                else
+                {
+                    new RegisterUser().execute(Firstname, Lastname, Nickname,Email,Password);
+                }
+            }
+        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
@@ -105,19 +121,22 @@ public class RegisterActivity extends AppCompatActivity {
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
-                    Intent i = new Intent(RegisterActivity.this,
-                            MainActivity.class);
-                    startActivity(i);
-                    finish();
                 }
+
+                JSONObject user = new JSONObject(response.toString());
+
+                Intent i = new Intent(RegisterActivity.this,
+                        MainActivity.class);
+                i.putExtra("id", user.getString("id"));
+                startActivity(i);
+                finish();
                 in.close();
-                System.out.println(response.toString());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
-                e.printStackTrace();
+                showToast("Verifiez vos informations.");
             }
             return null;
         }
